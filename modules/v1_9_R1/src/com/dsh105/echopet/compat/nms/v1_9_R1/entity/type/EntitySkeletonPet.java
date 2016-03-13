@@ -17,12 +17,8 @@
 
 package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySkeletonPet;
-import com.dsh105.echopet.compat.api.entity.type.pet.ISkeletonPet;
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
 import net.minecraft.server.v1_9_R1.*;
@@ -31,8 +27,8 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SKELETON)
 public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.b);// Skeleton Type
+	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.h);// Something for PathfinderGoalMeleeAttack
 
     public EntitySkeletonPet(World world) {
         super(world);
@@ -40,26 +36,27 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 
     public EntitySkeletonPet(World world, final IPet pet) {
         super(world, pet);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (((ISkeletonPet) pet).isWither()) {
+		// TODO: Fix
+		/*new BukkitRunnable() {
+		    @Override
+		    public void run() {
+		        if (((ISkeletonPet) pet).isWither()) {
 					setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
-                } else {
+		        } else {
 					setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.BOW));
-                }
-            }
-        }.runTaskLater(EchoPet.getPlugin(), 5L);
+		        }
+		    }
+		}.runTaskLater(EchoPet.getPlugin(), 5L);*/
     }
 
     @Override
     public void setWither(boolean flag) {
-		this.datawatcher.set(b, Boolean.valueOf(flag));
-        if (flag) {
+		this.datawatcher.set(a, flag ? 1 : 0);
+		/*if (flag) {
 			setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
-        } else {
+		} else {
 			setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.BOW));
-        }
+		}*/
     }
 
     public int getSkeletonType() {
