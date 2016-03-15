@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SHEEP)
 public class EntitySheepPet extends EntityAgeablePet implements IEntitySheepPet {
 
-	private static final DataWatcherObject<Byte> bv = DataWatcher.a(EntitySheep.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> bv = DataWatcher.a(EntitySheepPet.class, DataWatcherRegistry.a);
 
     public EntitySheepPet(World world) {
         super(world);

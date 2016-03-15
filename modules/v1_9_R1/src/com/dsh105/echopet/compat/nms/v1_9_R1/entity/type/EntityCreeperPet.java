@@ -27,9 +27,9 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.CREEPER)
 public class EntityCreeperPet extends EntityPet implements IEntityCreeperPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Boolean> c = DataWatcher.a(EntityCreeper.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> c = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);
 
     public EntityCreeperPet(World world) {
         super(world);

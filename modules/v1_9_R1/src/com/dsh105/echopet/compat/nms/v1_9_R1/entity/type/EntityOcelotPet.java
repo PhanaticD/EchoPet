@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.OCELOT)
 public class EntityOcelotPet extends EntityTameablePet implements IEntityOcelotPet{
 
-	private static final DataWatcherObject<Integer> bz = DataWatcher.a(EntityOcelot.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> bz = DataWatcher.a(EntityOcelotPet.class, DataWatcherRegistry.b);
 
     public EntityOcelotPet(World world) {
         super(world);

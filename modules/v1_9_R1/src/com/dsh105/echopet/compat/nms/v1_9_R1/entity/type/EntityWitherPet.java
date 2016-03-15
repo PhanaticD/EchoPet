@@ -27,10 +27,10 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.WITHER)
 public class EntityWitherPet extends EntityPet implements IEntityWitherPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityWither.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
     public EntityWitherPet(World world) {
         super(world);
     }

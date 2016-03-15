@@ -31,9 +31,9 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.WOLF)
 public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
 
-	private static final DataWatcherObject<Float> DATA_HEALTH = DataWatcher.a(EntityWolf.class, DataWatcherRegistry.c);
-	private static final DataWatcherObject<Boolean> bA = DataWatcher.a(EntityWolf.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Integer> bB = DataWatcher.a(EntityWolf.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Float> DATA_HEALTH = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.c);
+	private static final DataWatcherObject<Boolean> bA = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> bB = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.b);
     private boolean wet;
     private boolean shaking;
     private float shakeCount;
@@ -62,7 +62,8 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
     }
 
     public boolean isAngry() {
-		return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
+		return false;
+		// return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
     }
 
     @Override

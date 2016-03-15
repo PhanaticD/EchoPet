@@ -10,8 +10,8 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.GUARDIAN)
 public class EntityGuardianPet extends EntityPet implements IEntityGuardianPet {
 
-	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntityGuardian.class, DataWatcherRegistry.a);
-	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityGuardian.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntityGuardianPet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityGuardianPet.class, DataWatcherRegistry.b);
 
     public EntityGuardianPet(World world) {
         super(world);

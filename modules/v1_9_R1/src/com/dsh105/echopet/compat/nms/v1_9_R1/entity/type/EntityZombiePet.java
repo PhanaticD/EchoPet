@@ -30,10 +30,10 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.ZOMBIE)
 public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
-	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityZombie.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityZombie.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Boolean> bx = DataWatcher.a(EntityZombie.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Boolean> by = DataWatcher.a(EntityZombie.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Boolean> bx = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> by = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
     public EntityZombiePet(World world) {
         super(world);
     }

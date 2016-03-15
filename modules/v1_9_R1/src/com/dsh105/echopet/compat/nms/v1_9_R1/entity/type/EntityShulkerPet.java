@@ -33,9 +33,9 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SHULKER)
 public class EntityShulkerPet extends EntityPet implements IEntityShulkerPet{// TODO: spawns, find a way to move it.
 
-	protected static final DataWatcherObject<EnumDirection> a = DataWatcher.a(EntityShulker.class, DataWatcherRegistry.l);
-	protected static final DataWatcherObject<Optional<BlockPosition>> b = DataWatcher.a(EntityShulker.class, DataWatcherRegistry.k);
-	protected static final DataWatcherObject<Byte> c = DataWatcher.a(EntityShulker.class, DataWatcherRegistry.a);
+	protected static final DataWatcherObject<EnumDirection> a = DataWatcher.a(EntityShulkerPet.class, DataWatcherRegistry.l);
+	protected static final DataWatcherObject<Optional<BlockPosition>> b = DataWatcher.a(EntityShulkerPet.class, DataWatcherRegistry.k);
+	protected static final DataWatcherObject<Byte> c = DataWatcher.a(EntityShulkerPet.class, DataWatcherRegistry.a);
 
 	public EntityShulkerPet(World world){
 		super(world);

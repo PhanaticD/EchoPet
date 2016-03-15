@@ -28,7 +28,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SLIME)
 public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
 
-	private static final DataWatcherObject<Integer> bt = DataWatcher.a(EntitySlime.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> bt = DataWatcher.a(EntitySlimePet.class, DataWatcherRegistry.b);
     int jumpDelay;
 
     public EntitySlimePet(World world) {

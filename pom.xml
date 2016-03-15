@@ -55,7 +55,7 @@
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-            <version>1.2.32</version>
+            <version>1.5.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -77,10 +77,6 @@
 
     <repositories>
         <repository>
-            <id>codingforcookies-repo</id>
-            <url>http://repo.codingforcookies.com/</url>
-        </repository>
-        <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
@@ -94,7 +90,7 @@
         </repository>
         <repository>
             <id>vault-repo</id>
-            <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+            <url>http://nexus.theyeticave.net/content/repositories/pub_releases/</url>
         </repository>
         <repository>
             <id>dmulloy2-repo</id>

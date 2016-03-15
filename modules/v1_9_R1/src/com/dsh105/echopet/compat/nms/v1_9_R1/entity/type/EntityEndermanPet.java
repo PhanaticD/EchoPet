@@ -28,8 +28,8 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.ENDERMAN)
 public class EntityEndermanPet extends EntityPet implements IEntityEndermanPet {
 
-	private static final DataWatcherObject<Optional<IBlockData>> bv = DataWatcher.a(EntityEnderman.class, DataWatcherRegistry.g);
-	private static final DataWatcherObject<Boolean> bw = DataWatcher.a(EntityEnderman.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Optional<IBlockData>> bv = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.g);
+	private static final DataWatcherObject<Boolean> bw = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.h);
 
     public EntityEndermanPet(World world) {
         super(world);

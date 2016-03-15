@@ -27,8 +27,8 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SKELETON)
 public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.b);// Skeleton Type
-	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntitySkeleton.class, DataWatcherRegistry.h);// Something for PathfinderGoalMeleeAttack
+	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntitySkeletonPet.class, DataWatcherRegistry.b);// Skeleton Type
+	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntitySkeletonPet.class, DataWatcherRegistry.h);// Something for PathfinderGoalMeleeAttack
 
     public EntitySkeletonPet(World world) {
         super(world);

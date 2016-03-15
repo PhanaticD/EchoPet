@@ -20,11 +20,14 @@ package com.dsh105.echopet.compat.nms.v1_9_R1.entity;
 import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.entity.SizeCategory;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 public abstract class EntityAgeablePet extends EntityPet {
 
-	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityAgeable.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityAgeablePet.class, DataWatcherRegistry.h);
 	protected int age;
     private boolean ageLocked = true;
 

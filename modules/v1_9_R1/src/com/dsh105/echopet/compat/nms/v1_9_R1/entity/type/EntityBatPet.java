@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.BAT)
 public class EntityBatPet extends EntityPet implements IEntityBatPet {
 
-	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntityBat.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntityBatPet.class, DataWatcherRegistry.a);
 
     public EntityBatPet(World world) {
         super(world);

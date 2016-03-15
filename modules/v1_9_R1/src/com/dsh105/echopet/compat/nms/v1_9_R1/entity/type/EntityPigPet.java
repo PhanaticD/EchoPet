@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.PIG)
 public class EntityPigPet extends EntityAgeablePet implements IEntityPigPet {
 
-	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityPig.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityPigPet.class, DataWatcherRegistry.h);
 
     public EntityPigPet(World world) {
         super(world);

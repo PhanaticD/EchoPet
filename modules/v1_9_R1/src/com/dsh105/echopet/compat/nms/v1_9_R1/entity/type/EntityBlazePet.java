@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.BLAZE)
 public class EntityBlazePet extends EntityPet implements IEntityBlazePet {
 
-	private static final DataWatcherObject<Byte> c = DataWatcher.a(EntityBlaze.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> c = DataWatcher.a(EntityBlazePet.class, DataWatcherRegistry.a);
 
     public EntityBlazePet(World world) {
         super(world);

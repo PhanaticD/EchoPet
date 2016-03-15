@@ -33,8 +33,8 @@ import net.minecraft.server.v1_9_R1.*;
 // These are not actually tameable and only here to add missing datawatchers
 public class EntityTameablePet extends EntityAgeablePet implements IEntityTameablePet{
 
-	protected static final DataWatcherObject<Byte> bv = DataWatcher.a(EntityTameableAnimal.class, DataWatcherRegistry.a);
-	protected static final DataWatcherObject<Optional<UUID>> bw = DataWatcher.a(EntityTameableAnimal.class, DataWatcherRegistry.m);// Owner
+	protected static final DataWatcherObject<Byte> bv = DataWatcher.a(EntityTameablePet.class, DataWatcherRegistry.a);
+	protected static final DataWatcherObject<Optional<UUID>> bw = DataWatcher.a(EntityTameablePet.class, DataWatcherRegistry.m);// Owner
 
 	public EntityTameablePet(World world){
 		super(world);
@@ -44,8 +44,8 @@ public class EntityTameablePet extends EntityAgeablePet implements IEntityTameab
 		super(world, pet);
 	}
 
-	protected void i(){
-		super.i();
+	protected void initDatawatcher(){
+		super.initDatawatcher();
 		this.datawatcher.register(bv, Byte.valueOf((byte) 0));
 		this.datawatcher.register(bw, Optional.absent());
 	}

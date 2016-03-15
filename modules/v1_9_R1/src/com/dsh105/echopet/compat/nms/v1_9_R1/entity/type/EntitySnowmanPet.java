@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SNOWMAN)
 public class EntitySnowmanPet extends EntityPet implements IEntitySnowmanPet {
 
-	private static final DataWatcherObject<Byte> sheared = DataWatcher.a(EntitySnowman.class, DataWatcherRegistry.a);// Sheared(Removes pumpkin)
+	private static final DataWatcherObject<Byte> sheared = DataWatcher.a(EntitySnowmanPet.class, DataWatcherRegistry.a);// Sheared(Removes pumpkin)
 
     public EntitySnowmanPet(World world) {
         super(world);

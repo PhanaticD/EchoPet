@@ -15,7 +15,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.RABBIT)
 public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPet {
 
-	private static final DataWatcherObject<Integer> bv = DataWatcher.a(EntityRabbit.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> bv = DataWatcher.a(EntityRabbitPet.class, DataWatcherRegistry.b);
     private int jumpDelay;
 
     public EntityRabbitPet(World world) {
