@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.kitteh</groupId>
             <artifactId>VanishNoPacket</artifactId>
-            <version>3.18.7</version>
+            <version>3.20</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -76,6 +76,10 @@
     </dependencies>
 
     <repositories>
+    	<repository>
+    		<id>codingforcookies-repo</id>
+    		<url>http://repo.codingforcookies.com/</url>
+    	</repository>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -83,10 +87,6 @@
         <repository>
             <id>hawk-repo</id>
             <url>http://ci.hawkfalcon.com/plugin/repository/everything/</url>
-        </repository>
-        <repository>
-            <id>kitteh-repo</id>
-            <url>http://repo.kitteh.org/content/groups/public</url>
         </repository>
         <repository>
             <id>vault-repo</id>
