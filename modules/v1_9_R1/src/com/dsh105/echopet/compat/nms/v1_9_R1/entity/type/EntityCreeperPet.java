@@ -27,9 +27,9 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.CREEPER)
 public class EntityCreeperPet extends EntityPet implements IEntityCreeperPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Boolean> c = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.b);// No clue
+	private static final DataWatcherObject<Boolean> POWERED = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> IGNITED = DataWatcher.a(EntityCreeperPet.class, DataWatcherRegistry.h);// What is this?
 
     public EntityCreeperPet(World world) {
         super(world);
@@ -41,20 +41,20 @@ public class EntityCreeperPet extends EntityPet implements IEntityCreeperPet {
 
     
     public void setPowered(boolean flag) {
-		this.datawatcher.set(b, Boolean.valueOf(true));
+		this.datawatcher.set(POWERED, Boolean.valueOf(true));
 	}
 
     
     public void setIgnited(boolean flag) {
-		this.datawatcher.set(c, Boolean.valueOf(true));
+		this.datawatcher.set(IGNITED, Boolean.valueOf(true));
     }
 
     
     protected void initDatawatcher() {
         super.initDatawatcher();
 		this.datawatcher.register(a, Integer.valueOf(-1));
-		this.datawatcher.register(b, Boolean.valueOf(false));
-		this.datawatcher.register(c, Boolean.valueOf(false));
+		this.datawatcher.register(POWERED, Boolean.valueOf(false));
+		this.datawatcher.register(IGNITED, Boolean.valueOf(false));
     }
 
     

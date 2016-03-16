@@ -15,7 +15,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.RABBIT)
 public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPet {
 
-	private static final DataWatcherObject<Integer> bv = DataWatcher.a(EntityRabbitPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityRabbitPet.class, DataWatcherRegistry.b);
     private int jumpDelay;
 
     public EntityRabbitPet(World world) {
@@ -39,18 +39,18 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 
     @Override
     public Rabbit.Type getRabbitType() {
-		return TypeMapping.fromMagic(((Integer) this.datawatcher.get(bv)).intValue());
+		return TypeMapping.fromMagic(((Integer) this.datawatcher.get(TYPE)).intValue());
     }
     
     @Override
     public void setRabbitType(Rabbit.Type type) {
-		this.datawatcher.set(bv, Integer.valueOf(type.ordinal()));
+		this.datawatcher.set(TYPE, Integer.valueOf(type.ordinal()));
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bv, Integer.valueOf(0));
+		this.datawatcher.register(TYPE, Integer.valueOf(0));
     }
     
     @Override

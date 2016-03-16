@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SNOWMAN)
 public class EntitySnowmanPet extends EntityPet implements IEntitySnowmanPet {
 
-	private static final DataWatcherObject<Byte> sheared = DataWatcher.a(EntitySnowmanPet.class, DataWatcherRegistry.a);// Sheared(Removes pumpkin)
+	private static final DataWatcherObject<Byte> SHEARED = DataWatcher.a(EntitySnowmanPet.class, DataWatcherRegistry.a);// SHEARED(Removes pumpkin)
 
     public EntitySnowmanPet(World world) {
         super(world);
@@ -39,7 +39,7 @@ public class EntitySnowmanPet extends EntityPet implements IEntitySnowmanPet {
 
 	protected void initDatawatcher(){
 		super.initDatawatcher();
-		this.datawatcher.register(sheared, Byte.valueOf((byte) 0));
+		this.datawatcher.register(SHEARED, Byte.valueOf((byte) 0));
 	}
 
     @Override
@@ -58,11 +58,11 @@ public class EntitySnowmanPet extends EntityPet implements IEntitySnowmanPet {
     }
 
 	public void setSheared(boolean flag){
-		byte b0 = ((Byte) this.datawatcher.get(sheared)).byteValue();
+		byte b0 = ((Byte) this.datawatcher.get(SHEARED)).byteValue();
 		if(flag){
-			this.datawatcher.set(sheared, Byte.valueOf((byte) (b0 | 0x10)));
+			this.datawatcher.set(SHEARED, Byte.valueOf((byte) (b0 | 0x10)));
 		}else{
-			this.datawatcher.set(sheared, Byte.valueOf((byte) (b0 & 0xFFFFFFEF)));
+			this.datawatcher.set(SHEARED, Byte.valueOf((byte) (b0 & 0xFFFFFFEF)));
 		}
 	}
 }

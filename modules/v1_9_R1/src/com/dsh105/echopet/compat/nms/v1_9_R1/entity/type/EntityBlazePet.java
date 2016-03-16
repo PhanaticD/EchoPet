@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.BLAZE)
 public class EntityBlazePet extends EntityPet implements IEntityBlazePet {
 
-	private static final DataWatcherObject<Byte> c = DataWatcher.a(EntityBlazePet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> ANGERED = DataWatcher.a(EntityBlazePet.class, DataWatcherRegistry.a);
 
     public EntityBlazePet(World world) {
         super(world);
@@ -39,19 +39,19 @@ public class EntityBlazePet extends EntityPet implements IEntityBlazePet {
 
 
     public void setOnFire(boolean flag) {
-		byte b1 = ((Byte) this.datawatcher.get(c)).byteValue();
+		byte b1 = ((Byte) this.datawatcher.get(ANGERED)).byteValue();
 		if(flag){
 			b1 = (byte) (b1 | 0x1);
 		}else{
 			b1 = (byte) (b1 & 0xFFFFFFFE);
 		}
-		this.datawatcher.set(c, Byte.valueOf(b1));
+		this.datawatcher.set(ANGERED, Byte.valueOf(b1));
     }
 
 
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(c, Byte.valueOf((byte) 0));
+		this.datawatcher.register(ANGERED, Byte.valueOf((byte) 0));
     }
 
 

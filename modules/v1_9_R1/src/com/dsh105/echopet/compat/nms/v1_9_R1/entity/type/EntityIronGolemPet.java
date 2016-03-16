@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.IRONGOLEM)
 public class EntityIronGolemPet extends EntityPet implements IEntityIronGolemPet{
 
-	protected static final DataWatcherObject<Byte> a = DataWatcher.a(EntityIronGolemPet.class, DataWatcherRegistry.a);
+	protected static final DataWatcherObject<Byte> PLAYER_CREATED = DataWatcher.a(EntityIronGolemPet.class, DataWatcherRegistry.a);
     public EntityIronGolemPet(World world) {
         super(world);
     }
@@ -39,7 +39,7 @@ public class EntityIronGolemPet extends EntityPet implements IEntityIronGolemPet
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(a, Byte.valueOf((byte) 0));
+		this.datawatcher.register(PLAYER_CREATED, Byte.valueOf((byte) 0));
     }
 
     @Override

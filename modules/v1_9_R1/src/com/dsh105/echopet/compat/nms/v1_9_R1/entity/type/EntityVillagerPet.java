@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.VILLAGER)
 public class EntityVillagerPet extends EntityAgeablePet implements IEntityVillagerPet {
 
-	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityVillagerPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> PROFESSION = DataWatcher.a(EntityVillagerPet.class, DataWatcherRegistry.b);
     public EntityVillagerPet(World world) {
         super(world);
     }
@@ -41,7 +41,7 @@ public class EntityVillagerPet extends EntityAgeablePet implements IEntityVillag
 
     @Override
     public void setProfession(int i) {
-		this.datawatcher.set(bw, Integer.valueOf(i));
+		this.datawatcher.set(PROFESSION, Integer.valueOf(i));
     }
 
     @Override
@@ -57,6 +57,6 @@ public class EntityVillagerPet extends EntityAgeablePet implements IEntityVillag
     @Override
     public void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bw, Integer.valueOf(0));
+		this.datawatcher.register(PROFESSION, Integer.valueOf(0));
     }
 }

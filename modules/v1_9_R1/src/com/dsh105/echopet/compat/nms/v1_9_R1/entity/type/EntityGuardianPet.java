@@ -10,7 +10,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.GUARDIAN)
 public class EntityGuardianPet extends EntityPet implements IEntityGuardianPet {
 
-	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntityGuardianPet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> ELDER = DataWatcher.a(EntityGuardianPet.class, DataWatcherRegistry.a);
 	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityGuardianPet.class, DataWatcherRegistry.b);
 
     public EntityGuardianPet(World world) {
@@ -41,7 +41,7 @@ public class EntityGuardianPet extends EntityPet implements IEntityGuardianPet {
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(a, Byte.valueOf((byte) 0));
+		this.datawatcher.register(ELDER, Byte.valueOf((byte) 0));
 		this.datawatcher.register(b, Integer.valueOf(0));
     }
 
@@ -61,15 +61,15 @@ public class EntityGuardianPet extends EntityPet implements IEntityGuardianPet {
     }
 
 	private boolean a(int paramInt){
-		return (((Byte) this.datawatcher.get(a)).byteValue() & paramInt) != 0;
+		return (((Byte) this.datawatcher.get(ELDER)).byteValue() & paramInt) != 0;
 	}
 
 	private void a(int paramInt, boolean paramBoolean){
-		int i = ((Byte) this.datawatcher.get(a)).byteValue();
+		int i = ((Byte) this.datawatcher.get(ELDER)).byteValue();
 		if(paramBoolean){
-			this.datawatcher.set(a, Byte.valueOf((byte) (i | paramInt)));
+			this.datawatcher.set(ELDER, Byte.valueOf((byte) (i | paramInt)));
 		}else{
-			this.datawatcher.set(a, Byte.valueOf((byte) (i & (paramInt ^ 0xFFFFFFFF))));
+			this.datawatcher.set(ELDER, Byte.valueOf((byte) (i & (paramInt ^ 0xFFFFFFFF))));
 		}
 	}
 }

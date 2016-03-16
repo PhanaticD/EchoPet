@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SKELETON)
 public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 
-	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntitySkeletonPet.class, DataWatcherRegistry.b);// Skeleton Type
+	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntitySkeletonPet.class, DataWatcherRegistry.b);// Skeleton Type
 	private static final DataWatcherObject<Boolean> b = DataWatcher.a(EntitySkeletonPet.class, DataWatcherRegistry.h);// Something for PathfinderGoalMeleeAttack
 
     public EntitySkeletonPet(World world) {
@@ -51,7 +51,7 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 
     @Override
     public void setWither(boolean flag) {
-		this.datawatcher.set(a, flag ? 1 : 0);
+		this.datawatcher.set(TYPE, flag ? 1 : 0);
 		/*if (flag) {
 			setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
 		} else {
@@ -60,13 +60,13 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
     }
 
     public int getSkeletonType() {
-		return ((Integer) this.datawatcher.get(a)).intValue();
+		return ((Integer) this.datawatcher.get(TYPE)).intValue();
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(a, Integer.valueOf(0));
+		this.datawatcher.register(TYPE, Integer.valueOf(0));
 		this.datawatcher.register(b, Boolean.valueOf(false));
     }
 

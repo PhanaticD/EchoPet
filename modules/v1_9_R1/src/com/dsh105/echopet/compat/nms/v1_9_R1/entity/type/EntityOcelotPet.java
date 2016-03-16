@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.OCELOT)
 public class EntityOcelotPet extends EntityTameablePet implements IEntityOcelotPet{
 
-	private static final DataWatcherObject<Integer> bz = DataWatcher.a(EntityOcelotPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityOcelotPet.class, DataWatcherRegistry.b);
 
     public EntityOcelotPet(World world) {
         super(world);
@@ -41,18 +41,18 @@ public class EntityOcelotPet extends EntityTameablePet implements IEntityOcelotP
     }
 
     public int getCatType() {
-		return ((Integer) this.datawatcher.get(bz)).intValue();
+		return ((Integer) this.datawatcher.get(TYPE)).intValue();
     }
 
     @Override
     public void setCatType(int i) {
-		this.datawatcher.set(bz, Integer.valueOf(i));
+		this.datawatcher.set(TYPE, Integer.valueOf(i));
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bz, Integer.valueOf(0));
+		this.datawatcher.register(TYPE, Integer.valueOf(0));
     }
 
     @Override

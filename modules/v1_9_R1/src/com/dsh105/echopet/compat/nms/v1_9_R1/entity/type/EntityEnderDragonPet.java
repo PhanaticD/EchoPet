@@ -40,7 +40,7 @@ public class EntityEnderDragonPet extends EntityNoClipPet implements IComplex, I
 
     // TODO: ugly :(
 
-	public static final DataWatcherObject<Integer> phase = DataWatcher.a(EntityEnderDragonPet.class, DataWatcherRegistry.b);
+	public static final DataWatcherObject<Integer> PHASE = DataWatcher.a(EntityEnderDragonPet.class, DataWatcherRegistry.b);
     private double a;
     private double b;
     private double c;
@@ -74,7 +74,7 @@ public class EntityEnderDragonPet extends EntityNoClipPet implements IComplex, I
 
 	protected void initDatawatcher(){
 		super.initDatawatcher();
-		getDataWatcher().register(phase, Integer.valueOf(DragonControllerPhase.k.b()));
+		getDataWatcher().register(PHASE, Integer.valueOf(DragonControllerPhase.k.b()));
 	}
 
     @Override

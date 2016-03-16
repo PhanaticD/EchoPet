@@ -27,7 +27,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SPIDER)
 public class EntitySpiderPet extends EntityPet implements IEntitySpiderPet {
 
-	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntitySpiderPet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> a = DataWatcher.a(EntitySpiderPet.class, DataWatcherRegistry.a);// Some position changed or shit..
 
     public EntitySpiderPet(World world) {
         super(world);

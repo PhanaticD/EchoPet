@@ -19,6 +19,7 @@ package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityEndermanPet;
+import com.dsh105.echopet.compat.api.entity.type.pet.IEndermanPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 import com.google.common.base.Optional;
 
@@ -28,8 +29,8 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.ENDERMAN)
 public class EntityEndermanPet extends EntityPet implements IEntityEndermanPet {
 
-	private static final DataWatcherObject<Optional<IBlockData>> bv = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.g);
-	private static final DataWatcherObject<Boolean> bw = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Optional<IBlockData>> BLOCK = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.g);
+	private static final DataWatcherObject<Boolean> SCREAMING = DataWatcher.a(EntityEndermanPet.class, DataWatcherRegistry.h);
 
     public EntityEndermanPet(World world) {
         super(world);
@@ -41,31 +42,31 @@ public class EntityEndermanPet extends EntityPet implements IEntityEndermanPet {
 
     @Override
     public void setScreaming(boolean flag) {
-		this.datawatcher.set(bw, Boolean.valueOf(flag));
+		this.datawatcher.set(SCREAMING, Boolean.valueOf(flag));
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bv, Optional.absent());
-		this.datawatcher.register(bw, Boolean.valueOf(false));
+		this.datawatcher.register(BLOCK, Optional.absent());
+		this.datawatcher.register(SCREAMING, Boolean.valueOf(false));
     }
 
     @Override
 	protected SoundEffect getIdleSound(){
-		return isScreaming() ? SoundEffects.aX : SoundEffects.aU;
+		return ((IEndermanPet) pet).isScreaming() ? SoundEffects.aX : SoundEffects.aU;
     }
 
     public boolean isScreaming() {
-		return ((Boolean) this.datawatcher.get(bw)).booleanValue();
+		return this.datawatcher.get(SCREAMING);
     }
 
 	public void setCarried(IBlockData iblockdata){
-		this.datawatcher.set(bv, Optional.fromNullable(iblockdata));
+		this.datawatcher.set(BLOCK, Optional.fromNullable(iblockdata));
     }
 
 	public IBlockData getCarried(){
-		return (IBlockData) ((Optional<IBlockData>) this.datawatcher.get(bv)).orNull();
+		return (IBlockData) ((Optional<IBlockData>) this.datawatcher.get(BLOCK)).orNull();
     }
 
     @Override

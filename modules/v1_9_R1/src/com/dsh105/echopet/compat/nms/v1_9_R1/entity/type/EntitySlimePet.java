@@ -28,7 +28,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SLIME)
 public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
 
-	private static final DataWatcherObject<Integer> bt = DataWatcher.a(EntitySlimePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> SIZE = DataWatcher.a(EntitySlimePet.class, DataWatcherRegistry.b);
     int jumpDelay;
 
     public EntitySlimePet(World world) {
@@ -51,7 +51,7 @@ public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
 
     @Override
     public void setSize(int i) {
-		this.datawatcher.set(bt, Integer.valueOf(i));
+		this.datawatcher.set(SIZE, Integer.valueOf(i));
         EntitySize es = this.getClass().getAnnotation(EntitySize.class);
         this.a(es.width() * (float) i, es.height() * (float) i);
         this.setPosition(this.locX, this.locY, this.locZ);
@@ -59,13 +59,13 @@ public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
     }
 
     public int getSize() {
-		return ((Integer) this.datawatcher.get(bt)).intValue();
+		return ((Integer) this.datawatcher.get(SIZE)).intValue();
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bt, Integer.valueOf(1));
+		this.datawatcher.register(SIZE, Integer.valueOf(1));
     }
 
     @Override

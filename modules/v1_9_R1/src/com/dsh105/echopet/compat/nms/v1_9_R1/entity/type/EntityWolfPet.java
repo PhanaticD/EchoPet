@@ -32,8 +32,8 @@ import net.minecraft.server.v1_9_R1.*;
 public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
 
 	private static final DataWatcherObject<Float> DATA_HEALTH = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.c);
-	private static final DataWatcherObject<Boolean> bA = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Integer> bB = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Boolean> bA = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.h);// ??
+	private static final DataWatcherObject<Integer> COLLAR_COLOR = DataWatcher.a(EntityWolfPet.class, DataWatcherRegistry.b);
     private boolean wet;
     private boolean shaking;
     private float shakeCount;
@@ -68,7 +68,7 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
     @Override
 	public void setCollarColor(DyeColor dc){
         if (((IWolfPet) pet).isTamed()) {
-			this.datawatcher.set(bB, Integer.valueOf(EnumColor.fromColorIndex(dc.getWoolData()).getInvColorIndex()));
+			this.datawatcher.set(COLLAR_COLOR, Integer.valueOf(EnumColor.fromColorIndex(dc.getWoolData()).getInvColorIndex()));
         }
     }
 
@@ -120,7 +120,7 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
         super.initDatawatcher();
 		this.datawatcher.register(DATA_HEALTH, Float.valueOf(getHealth()));
 		this.datawatcher.register(bA, Boolean.valueOf(false));
-		this.datawatcher.register(bB, Integer.valueOf(EnumColor.RED.getInvColorIndex()));
+		this.datawatcher.register(COLLAR_COLOR, Integer.valueOf(EnumColor.RED.getInvColorIndex()));
     }
 
 }

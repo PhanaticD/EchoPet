@@ -27,10 +27,11 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.WITHER)
 public class EntityWitherPet extends EntityPet implements IEntityWitherPet {
 
+	// a,b,c are in an array.. and are used for shit.. too lazy to figure out
 	private static final DataWatcherObject<Integer> a = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
 	private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
 	private static final DataWatcherObject<Integer> c = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> SHIELDED = DataWatcher.a(EntityWitherPet.class, DataWatcherRegistry.b);
     public EntityWitherPet(World world) {
         super(world);
     }
@@ -45,11 +46,11 @@ public class EntityWitherPet extends EntityPet implements IEntityWitherPet {
 		this.datawatcher.register(a, Integer.valueOf(0));
 		this.datawatcher.register(b, Integer.valueOf(0));
 		this.datawatcher.register(c, Integer.valueOf(0));
-		this.datawatcher.register(bw, Integer.valueOf(0));
+		this.datawatcher.register(SHIELDED, Integer.valueOf(0));
     }
 
     public void setShielded(boolean flag) {
-		this.datawatcher.set(bw, Integer.valueOf(flag ? 1 : 0));
+		this.datawatcher.set(SHIELDED, Integer.valueOf(flag ? 1 : 0));
         this.setHealth((float) (flag ? 150 : 300));
     }
 

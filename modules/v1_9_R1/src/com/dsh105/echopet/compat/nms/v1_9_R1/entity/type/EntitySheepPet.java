@@ -30,7 +30,7 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.SHEEP)
 public class EntitySheepPet extends EntityAgeablePet implements IEntitySheepPet {
 
-	private static final DataWatcherObject<Byte> bv = DataWatcher.a(EntitySheepPet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Byte> COLOR_SHEARED = DataWatcher.a(EntitySheepPet.class, DataWatcherRegistry.a);// Fuck you mojang for doing two values in one byte
 
     public EntitySheepPet(World world) {
         super(world);
@@ -41,33 +41,33 @@ public class EntitySheepPet extends EntityAgeablePet implements IEntitySheepPet 
     }
 
     public int getColor() {
-		return ((Byte) this.datawatcher.get(bv)).byteValue() & 0xF;
+		return ((Byte) this.datawatcher.get(COLOR_SHEARED)).byteValue() & 0xF;
     }
 
     @Override
     public void setColor(int i) {
-		byte b0 = ((Byte) this.datawatcher.get(bv)).byteValue();
-		this.datawatcher.set(bv, Byte.valueOf((byte) (b0 & 0xF0 | i & 0xF)));
+		byte b0 = ((Byte) this.datawatcher.get(COLOR_SHEARED)).byteValue();
+		this.datawatcher.set(COLOR_SHEARED, Byte.valueOf((byte) (b0 & 0xF0 | i & 0xF)));
     }
 
     public boolean isSheared() {
-		return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x10) != 0;
+		return (((Byte) this.datawatcher.get(COLOR_SHEARED)).byteValue() & 0x10) != 0;
     }
 
     @Override
     public void setSheared(boolean flag) {
-		byte b0 = ((Byte) this.datawatcher.get(bv)).byteValue();
+		byte b0 = ((Byte) this.datawatcher.get(COLOR_SHEARED)).byteValue();
         if (flag) {
-			this.datawatcher.set(bv, Byte.valueOf((byte) (b0 | 0x10)));
+			this.datawatcher.set(COLOR_SHEARED, Byte.valueOf((byte) (b0 | 0x10)));
         } else {
-			this.datawatcher.set(bv, Byte.valueOf((byte) (b0 & 0xFFFFFFEF)));
+			this.datawatcher.set(COLOR_SHEARED, Byte.valueOf((byte) (b0 & 0xFFFFFFEF)));
         }
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bv, Byte.valueOf((byte) 0));
+		this.datawatcher.register(COLOR_SHEARED, Byte.valueOf((byte) 0));
     }
 
     @Override

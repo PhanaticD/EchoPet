@@ -30,11 +30,11 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.HORSE)
 public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet {
 
-	private static final DataWatcherObject<Byte> bE = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.a);// Visual??
-	private static final DataWatcherObject<Integer> bF = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// type
-	private static final DataWatcherObject<Integer> bG = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// variant
-	private static final DataWatcherObject<Optional<UUID>> bH = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.m);
-	private static final DataWatcherObject<Integer> bI = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// armor
+	private static final DataWatcherObject<Byte> VISUAL = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.a);
+	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> VARIANT = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Optional<UUID>> OWNER = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.m);
+	private static final DataWatcherObject<Integer> ARMOR = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
     private int rearingCounter = 0;
     int stepSoundCount = 0;
 
@@ -56,17 +56,17 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
         if (t != HorseType.NORMAL) {
             this.setArmour(HorseArmour.NONE);
         }
-		this.datawatcher.set(bF, Integer.valueOf(t.getId()));
+		this.datawatcher.set(TYPE, Integer.valueOf(t.getId()));
     }
 
     @Override
     public void setVariant(HorseVariant v, HorseMarking m) {
-		this.datawatcher.set(bG, m.getId(v));
+		this.datawatcher.set(VARIANT, m.getId(v));
     }
 
     @Override
     public void setArmour(HorseArmour a) {
-		this.datawatcher.set(bI, Integer.valueOf(a.getId()));
+		this.datawatcher.set(ARMOR, Integer.valueOf(a.getId()));
     }
 
     @Override
@@ -89,17 +89,17 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
     }
 
 	public EnumHorseType getType(){
-		return EnumHorseType.a(((Integer) this.datawatcher.get(bF)).intValue());
+		return EnumHorseType.a(((Integer) this.datawatcher.get(TYPE)).intValue());
     }
 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(bE, Byte.valueOf((byte) 0));
-		this.datawatcher.register(bF, Integer.valueOf(EnumHorseType.HORSE.k()));
-		this.datawatcher.register(bG, Integer.valueOf(0));
-		this.datawatcher.register(bH, Optional.absent());
-		this.datawatcher.register(bI, Integer.valueOf(EnumHorseArmor.NONE.a()));
+		this.datawatcher.register(VISUAL, Byte.valueOf((byte) 0));
+		this.datawatcher.register(TYPE, Integer.valueOf(EnumHorseType.HORSE.k()));
+		this.datawatcher.register(VARIANT, Integer.valueOf(0));
+		this.datawatcher.register(OWNER, Optional.absent());
+		this.datawatcher.register(ARMOR, Integer.valueOf(EnumHorseArmor.NONE.a()));
     }
 
     @Override
@@ -182,7 +182,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 	 * 128: Mouth open
 	 */
 	private boolean getHorseVisual(int i){
-		return (((Byte) this.datawatcher.get(bE)).byteValue() & i) != 0;
+		return (((Byte) this.datawatcher.get(VISUAL)).byteValue() & i) != 0;
 	}
 	
 	/**
@@ -195,11 +195,11 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 	 * 128: Mouth open
 	 */
 	private void setHorseVisual(int i, boolean flag){
-		byte b0 = ((Byte) this.datawatcher.get(bE)).byteValue();
+		byte b0 = ((Byte) this.datawatcher.get(VISUAL)).byteValue();
 		if(flag){
-			this.datawatcher.set(bE, Byte.valueOf((byte) (b0 | i)));
+			this.datawatcher.set(VISUAL, Byte.valueOf((byte) (b0 | i)));
 		}else{
-			this.datawatcher.set(bE, Byte.valueOf((byte) (b0 & (i ^ 0xFFFFFFFF))));
+			this.datawatcher.set(VISUAL, Byte.valueOf((byte) (b0 & (i ^ 0xFFFFFFFF))));
 		}
 	}
 }

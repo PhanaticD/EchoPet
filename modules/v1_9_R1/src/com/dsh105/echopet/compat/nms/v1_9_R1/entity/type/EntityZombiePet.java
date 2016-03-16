@@ -30,10 +30,10 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.ZOMBIE)
 public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
-	private static final DataWatcherObject<Boolean> bv = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Integer> bw = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Boolean> bx = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
-	private static final DataWatcherObject<Boolean> by = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Boolean> BABY = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);
+	private static final DataWatcherObject<Integer> VILLAGER_PROFESSION = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.b);// Villager profession to convert to
+	private static final DataWatcherObject<Boolean> CONVERTING = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);// if converting from zombie villager > villager
+	private static final DataWatcherObject<Boolean> by = DataWatcher.a(EntityZombiePet.class, DataWatcherRegistry.h);// ? has a setter but no getter
     public EntityZombiePet(World world) {
         super(world);
     }
@@ -50,12 +50,12 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
     @Override
     public void setBaby(boolean flag) {
-		getDataWatcher().set(bv, Boolean.valueOf(flag));
+		getDataWatcher().set(BABY, Boolean.valueOf(flag));
     }
 
     @Override
 	public void setVillagerType(int i){
-		getDataWatcher().set(bw, Integer.valueOf(i + 1));
+		getDataWatcher().set(VILLAGER_PROFESSION, Integer.valueOf(i + 1));
     }
 
 	public boolean isVillager(){
@@ -65,9 +65,9 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		getDataWatcher().register(bv, Boolean.valueOf(false));
-		getDataWatcher().register(bw, Integer.valueOf(0));
-		getDataWatcher().register(bx, Boolean.valueOf(false));
+		getDataWatcher().register(BABY, Boolean.valueOf(false));
+		getDataWatcher().register(VILLAGER_PROFESSION, Integer.valueOf(0));
+		getDataWatcher().register(CONVERTING, Boolean.valueOf(false));
 		getDataWatcher().register(by, Boolean.valueOf(false));
     }
 
@@ -87,7 +87,7 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
     @Override
     public boolean isBaby() {
-		return ((Boolean) getDataWatcher().get(bv)).booleanValue();
+		return ((Boolean) getDataWatcher().get(BABY)).booleanValue();
     }
 
     @Override
