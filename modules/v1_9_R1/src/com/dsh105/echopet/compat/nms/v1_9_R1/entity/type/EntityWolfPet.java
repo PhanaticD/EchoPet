@@ -62,14 +62,13 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
     }
 
     public boolean isAngry() {
-		return false;
-		// return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
+		return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
     }
 
     @Override
 	public void setCollarColor(DyeColor dc){
         if (((IWolfPet) pet).isTamed()) {
-			this.datawatcher.set(bB, Integer.valueOf(dc.getWoolData()));
+			this.datawatcher.set(bB, Integer.valueOf(EnumColor.fromColorIndex(dc.getWoolData()).getInvColorIndex()));
         }
     }
 
