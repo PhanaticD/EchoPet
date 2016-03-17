@@ -16,19 +16,13 @@
  */
 package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
-import com.dsh105.echopet.compat.api.entity.*;
-import com.dsh105.echopet.compat.api.entity.type.nms.IEntityShulkerPet;
-import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
-import com.google.common.base.Optional;
-
-import net.minecraft.server.v1_9_R1.*;
-
 /**
  * @Author Borlea
  * @Github https://github.com/borlea/
  * @Website http://codingforcookies.com/
  * @since Mar 7, 2016
  */
+/*
 @EntitySize(width = 1.0F, height = 1.0F)
 @EntityPetType(petType = PetType.SHULKER)
 public class EntityShulkerPet extends EntityPet implements IEntityShulkerPet{// TODO: spawns, find a way to move it.
@@ -67,3 +61,4 @@ public class EntityShulkerPet extends EntityPet implements IEntityShulkerPet{// 
 		return SizeCategory.REGULAR;
 	}
 }
+*/

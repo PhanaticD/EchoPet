@@ -45,7 +45,7 @@ public enum PetItem {
 	PIGZOMBIE(PetType.PIGZOMBIE, Material.MONSTER_EGG, "PigZombie Pet", "pigzombie"),
 	RABBIT(PetType.RABBIT, Material.MONSTER_EGG, "Rabbit Pet", "rabbit"),
 	SHEEP(PetType.SHEEP, Material.MONSTER_EGG, "Sheep Pet", "sheep"),
-	SHULKER(PetType.SHULKER, Material.MONSTER_EGG, "Shulker Pet", "shulker"),
+	// SHULKER(PetType.SHULKER, Material.MONSTER_EGG, "Shulker Pet", "shulker"),
 	SILVERFISH(PetType.SILVERFISH, Material.MONSTER_EGG, "Silverfish Pet", "silverfish"),
 	SKELETON(PetType.SKELETON, Material.MONSTER_EGG, "Skeleton Pet", "skeleton"),
 	SLIME(PetType.SLIME, Material.MONSTER_EGG, "Slime Pet", "slime"),

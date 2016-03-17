@@ -41,7 +41,7 @@ public enum PetType {
     GUARDIAN("Guardian", 68, "Guardian Pet", 20D, 10D, "GUARDIAN", PetData.ELDER),
     MAGMACUBE("MagmaCube", 62, "Magma Cube Pet", 20D, 5D, "MAGMA_CUBE", PetData.SMALL, PetData.MEDIUM, PetData.LARGE),
     PIGZOMBIE("PigZombie", 57, "Pig Zombie Pet", 20D, 6D, "PIG_ZOMBIE", PetData.BABY),
-	SHULKER("Shulker", 69, "Shulker Pet", 30D, 4D, "SHULKER"),
+	// SHULKER("Shulker", 69, "Shulker Pet", 30D, 4D, "SHULKER"),
     SILVERFISH("Silverfish", 60, "Silverfish Pet", 8D, 4D, "SILVERFISH"),
     SKELETON("Skeleton", 51, "Skeleton Pet", 20D, 5D, "SKELETON", PetData.WITHER),
     SLIME("Slime", 55, "Slime Pet", 20D, 4D, "SLIME", PetData.SMALL, PetData.MEDIUM, PetData.LARGE),

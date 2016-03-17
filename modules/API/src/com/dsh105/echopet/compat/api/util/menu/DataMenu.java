@@ -17,13 +17,14 @@
 
 package com.dsh105.echopet.compat.api.util.menu;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+
 import com.dsh105.commodus.StringUtil;
 import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.event.PetMenuOpenEvent;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
 public class DataMenu {
 
@@ -70,7 +71,7 @@ public class DataMenu {
         HORSE_TYPE,
         HORSE_VARIANT,
         HORSE_MARKING,
-        HORSE_ARMOUR,
-        RABBIT_TYPE
+		HORSE_ARMOUR,
+		RABBIT_TYPE
     }
 }

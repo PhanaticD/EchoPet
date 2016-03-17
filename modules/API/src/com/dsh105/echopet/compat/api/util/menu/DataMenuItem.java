@@ -17,15 +17,16 @@
 
 package com.dsh105.echopet.compat.api.util.menu;
 
-import com.dsh105.echopet.compat.api.entity.PetData;
-import com.dsh105.echopet.compat.api.util.menu.DataMenu.DataMenuType;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.dsh105.echopet.compat.api.entity.PetData;
+import com.dsh105.echopet.compat.api.util.menu.DataMenu.DataMenuType;
 
 public enum DataMenuItem {
     BOOLEAN_TRUE(DataMenuType.BOOLEAN, null, Material.getMaterial(76), 1, (short) 0, "True", "Turns the feature on."),
@@ -90,7 +91,7 @@ public enum DataMenuItem {
 
     BROWN_RABBIT(DataMenuType.RABBIT_TYPE, PetData.BROWN, Material.WOOL, 1, (short) 12, "Brown", "Bunny type"),
     WHITE_RABBIT(DataMenuType.RABBIT_TYPE, PetData.WHITE, Material.WOOL, 1, (short) 0, "White", "Bunny type"),
-    BLACK_RABBIT(DataMenuType.HORSE_ARMOUR, PetData.BLACK, Material.WOOL, 1, (short) 15, "Black", "Bunny type"),
+	BLACK_RABBIT(DataMenuType.RABBIT_TYPE, PetData.BLACK, Material.WOOL, 1, (short) 15, "Black", "Bunny type"),
     BLACK_AND_WHITE_RABBIT(DataMenuType.RABBIT_TYPE, PetData.BLACK_AND_WHITE, Material.WOOL, 1, (short) 7, "Black and White", "Bunny type"),
     SALT_AND_PEPPER_RABBIT(DataMenuType.RABBIT_TYPE, PetData.SALT_AND_PEPPER, Material.WOOL, 1, (short) 4, "Salt and Pepper", "Bunny type"),
     KILLER_BUNNY(DataMenuType.RABBIT_TYPE, PetData.THE_KILLER_BUNNY, Material.WOOL, 1, (short) 14, "Killer Bunny", "Bunny type"),
