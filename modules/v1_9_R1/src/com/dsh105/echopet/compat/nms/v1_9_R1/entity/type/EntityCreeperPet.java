@@ -41,12 +41,12 @@ public class EntityCreeperPet extends EntityPet implements IEntityCreeperPet {
 
     
     public void setPowered(boolean flag) {
-		this.datawatcher.set(POWERED, Boolean.valueOf(true));
+		this.datawatcher.set(POWERED, flag);
 	}
 
     
     public void setIgnited(boolean flag) {
-		this.datawatcher.set(IGNITED, Boolean.valueOf(true));
+		this.datawatcher.set(IGNITED, flag);
     }
 
     
