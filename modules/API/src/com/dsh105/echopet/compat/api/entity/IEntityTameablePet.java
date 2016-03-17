@@ -23,4 +23,7 @@ package com.dsh105.echopet.compat.api.entity;
  * @Website http://codingforcookies.com/
  * @since Mar 7, 2016
  */
-public interface IEntityTameablePet extends IEntityPet{}
+public interface IEntityTameablePet extends IEntityAgeablePet{
+
+	public void setTamed(boolean flag);
+}

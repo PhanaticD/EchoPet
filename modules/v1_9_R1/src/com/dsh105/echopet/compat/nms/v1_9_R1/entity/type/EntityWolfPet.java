@@ -61,6 +61,14 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
         }
     }
 
+	public void setTamed(boolean flag){
+		if(isAngry() && flag){
+			this.getPet().getPetData().remove(PetData.ANGRY);
+			setAngry(false);
+		}
+		super.setTamed(flag);
+	}
+
     public boolean isAngry() {
 		return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
     }
