@@ -17,11 +17,9 @@
 
 package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityZombiePet;
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.entity.type.pet.IZombiePet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
 import net.minecraft.server.v1_9_R1.*;
@@ -40,12 +38,13 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
     public EntityZombiePet(World world, IPet pet) {
         super(world, pet);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
+		// TODO: Broken
+		/*new BukkitRunnable() {
+		    @Override
+		    public void run() {
 				setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
-            }
-        }.runTaskLater(EchoPet.getPlugin(), 5L);
+		    }
+		}.runTaskLater(EchoPet.getPlugin(), 5L);*/
     }
 
     @Override
@@ -55,12 +54,8 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
     @Override
 	public void setVillagerType(int i){
-		getDataWatcher().set(VILLAGER_PROFESSION, Integer.valueOf(i + 1));
+		getDataWatcher().set(VILLAGER_PROFESSION, Integer.valueOf(i));
     }
-
-	public boolean isVillager(){
-		return false;
-	}
 
     @Override
     protected void initDatawatcher() {
@@ -70,6 +65,10 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 		getDataWatcher().register(CONVERTING, Boolean.valueOf(false));
 		getDataWatcher().register(by, Boolean.valueOf(false));
     }
+
+	public boolean isVillager(){
+		return ((IZombiePet) pet).isVillager();
+	}
 
     @Override
 	protected SoundEffect getIdleSound(){
