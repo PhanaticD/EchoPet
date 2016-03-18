@@ -67,7 +67,8 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
     }
 
 	public boolean isVillager(){
-		return ((IZombiePet) pet).isVillager();
+		if(this instanceof EntityGiantPet) return false;
+		else return ((IZombiePet) pet).isVillager();
 	}
 
     @Override
