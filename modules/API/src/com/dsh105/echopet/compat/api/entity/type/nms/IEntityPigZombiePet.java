@@ -17,11 +17,6 @@
 
 package com.dsh105.echopet.compat.api.entity.type.nms;
 
-import com.dsh105.echopet.compat.api.entity.IEntityAgeablePet;
+public interface IEntityPigZombiePet extends IEntityZombiePet{
 
-public interface IEntityPigZombiePet extends IEntityAgeablePet {
-
-    public void setBaby(boolean flag);
-
-	public void setVillagerType(int type);
 }
