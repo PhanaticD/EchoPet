@@ -113,7 +113,7 @@ public class PetGoalFollowOwner extends APetGoalFollowOwner {
         //https://github.com/Bukkit/mc-dev/blob/master/net/minecraft/server/PathfinderGoalFollowOwner.java#L57
         EntityPlayer owner = ((CraftPlayer) this.pet.getPlayerOwner()).getHandle();
 		// 1.9: this.d.getControllerLook().a(this.e, 10.0F, this.d.N());
-		if(this.pet.getPet() == null || this.pet.getPet().getCraftPet() == null) return;
+		if(this.pet.getPet() == null || this.pet.getPet().getEntityPet() == null) return;
 		this.pet.getControllerLook().a(owner, 10.0F, (float) this.pet.N());
         if (--this.timer <= 0) {
             this.timer = 10;
