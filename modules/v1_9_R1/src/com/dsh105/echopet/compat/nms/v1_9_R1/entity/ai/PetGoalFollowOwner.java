@@ -87,9 +87,7 @@ public class PetGoalFollowOwner extends APetGoalFollowOwner {
             return false;
         } else if (this.pet.h(((CraftPlayer) this.pet.getPlayerOwner()).getHandle()) <= this.stopDistance) {
             return false;
-		}else if(this.pet.getPet().getEntityPet() == null){
-			return false;
-        }
+		}
         //PetGoalMeleeAttack attackGoal = (PetGoalMeleeAttack) this.pet.petGoalSelector.getGoal("Attack");
         //return !(attackGoal != null && attackGoal.isActive);
         return true;
@@ -113,7 +111,6 @@ public class PetGoalFollowOwner extends APetGoalFollowOwner {
         //https://github.com/Bukkit/mc-dev/blob/master/net/minecraft/server/PathfinderGoalFollowOwner.java#L57
         EntityPlayer owner = ((CraftPlayer) this.pet.getPlayerOwner()).getHandle();
 		// 1.9: this.d.getControllerLook().a(this.e, 10.0F, this.d.N());
-		if(this.pet.getPet() == null || this.pet.getPet().getEntityPet() == null) return;
 		this.pet.getControllerLook().a(owner, 10.0F, (float) this.pet.N());
         if (--this.timer <= 0) {
             this.timer = 10;
