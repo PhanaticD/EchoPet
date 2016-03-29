@@ -359,23 +359,24 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 	public void g(float sideMot, float forwMot){// Look at EntityHorse for shit
 		// bu() is passenger shit. Minecraft changed it from 1 passenger to a list
 		if(bu().isEmpty() || !(this.bu().get(0) instanceof EntityHuman)){
-            super.g(sideMot, forwMot);
 			this.P = 0.5F;
+			this.aQ = 0.02F;
+            super.g(sideMot, forwMot);
             return;
         }
 		Entity passenger = this.bu().get(0);
-		if(((EntityHuman) bu().get(0)).getBukkitEntity() != this.getPlayerOwner().getPlayer()){
-            super.g(sideMot, forwMot);
+		if(((EntityHuman) passenger).getBukkitEntity() != this.getPlayerOwner().getPlayer()){
 			this.P = 0.5F;
+			this.aQ = 0.02F;
+            super.g(sideMot, forwMot);
             return;
         }
-
-		this.P = 1.0F;
 
 		this.lastYaw = this.yaw = passenger.yaw;
 		this.pitch = passenger.pitch * 0.5F;
         this.setYawPitch(this.yaw, this.pitch);
-        this.aI = this.aG = this.yaw;
+		this.aO = this.aM = this.yaw;
+		this.P = 1.0F;
 
 		sideMot = ((EntityLiving) passenger).bd * 0.5F;
 		forwMot = ((EntityLiving) passenger).be;
@@ -466,13 +467,14 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	public void m(){// Search for "entityBaseTick" the method calling the method its in uses it
 		super.m();
-        onLive();
-        
-        if (this.petGoalSelector == null) {
-            this.remove(false);
-            return;
+		if(!justCreated){
+			onLive();
+			if(this.petGoalSelector == null){
+				this.remove(false);
+				return;
+			}
+			this.petGoalSelector.updateGoals();
         }
-        this.petGoalSelector.updateGoals();
     }
 
 	protected void i(){// Registers all the values into datawatcher
