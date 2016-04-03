@@ -21,8 +21,6 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityGhastPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.SoundEffect;
-import net.minecraft.server.v1_9_R1.SoundEffects;
 import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 4.0F, height = 4.0F)
@@ -35,16 +33,6 @@ public class EntityGhastPet extends EntityPet implements IEntityGhastPet {
 
     public EntityGhastPet(World world, IPet pet) {
         super(world, pet);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.bJ;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.bK;
     }
 
     @Override

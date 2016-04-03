@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityWitherPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.9F, height = 4.0F)
 @EntityPetType(petType = PetType.WITHER)
@@ -52,16 +55,6 @@ public class EntityWitherPet extends EntityPet implements IEntityWitherPet {
     public void setShielded(boolean flag) {
 		this.datawatcher.set(SHIELDED, Integer.valueOf(flag ? 1 : 0));
         this.setHealth((float) (flag ? 150 : 300));
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.gE;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.gG;
     }
 
     @Override

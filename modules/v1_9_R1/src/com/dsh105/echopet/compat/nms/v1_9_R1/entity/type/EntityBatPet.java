@@ -52,11 +52,10 @@ public class EntityBatPet extends EntityPet implements IEntityBatPet {
 		this.datawatcher.register(a, Byte.valueOf((byte) 0));
     }
 
-	protected SoundEffect getIdleSound(){
+	protected String getIdleSound(){
 		if((!isStartled()) && (this.random.nextInt(4) != 0)){ return null; }
-		return SoundEffects.w;
+		return "entity.bat.ambient";
 	}
-
 
     public void onLive() {
         super.onLive();
@@ -71,12 +70,6 @@ public class EntityBatPet extends EntityPet implements IEntityBatPet {
     public boolean isStartled() {
 		return (((Byte) this.datawatcher.get(a)).byteValue() & 0x1) != 0;
     }
-
-
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.x;
-    }
-
 
     public SizeCategory getSizeCategory() {
         return SizeCategory.TINY;

@@ -283,7 +283,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
             bukkitEntity.remove();
         }
         if (makeSound) {
-			SoundEffect sound = this.getDeathSound();
+			SoundEffect sound = bS();// getDeathSound
             if (sound != null) {
 				a(sound, 1.0F, 1.0F);// was makeSound in 1.8
 				/*
@@ -443,22 +443,45 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
         }
     }
 
-    // EntityInsentient
-
 	protected SoundEffect G(){
-        return this.getIdleSound();
+		return getSoundFromString(getIdleSound());
     }
-
-    // EntityInsentient
 
 	protected SoundEffect bS(){
-        return this.getDeathSound();
+		return getSoundFromString(getDeathSound());
     }
 
-	protected abstract SoundEffect getIdleSound(); // idle sound
+	protected void a(BlockPosition blockposition, Block block){
+		makeStepSound();
+	}
 
-	protected abstract SoundEffect getDeathSound(); // death sound
+	protected void makeStepSound(BlockPosition pos, Block block){
+		a(getSoundFromString(getStepSound()), 0.15F, 1.0F);
+	}
 
+	public void makeSound(String soundEffect, float f, float f1){
+		a(getSoundFromString(soundEffect), f, f1);
+	}
+
+	public SoundEffect getSoundFromString(String soundName){
+		return soundName != null ? SoundEffect.a.get(new MinecraftKey(soundName)) : null;
+	}
+
+	protected String getIdleSound(){
+		return "entity." + getFixedEntityName() + ".ambient";
+	}
+
+	protected String getDeathSound(){
+		return "entity." + getFixedEntityName() + ".death";
+	}
+
+	protected String getStepSound(){
+		return "entity." + getFixedEntityName() + ".step";
+	}
+
+	private String getFixedEntityName(){
+		return pet.getPetType().getClassIdentifier().toLowerCase().replace("cavespider", "spider");
+	}
 
     public abstract SizeCategory getSizeCategory();
 
@@ -467,7 +490,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	public void m(){// Search for "entityBaseTick" the method calling the method its in uses it
 		super.m();
-		if(!justCreated){
+		if(!justCreated && co() && !cf()){
 			onLive();
 			if(this.petGoalSelector == null){
 				this.remove(false);
@@ -481,22 +504,6 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 		super.i();
 		initDatawatcher();
 		// We don't need datawatcher stuff from EntityCreature, EntityInsentinent, or EntityLiving.
-    }
-
-    // Entity
-
-    protected void a(BlockPosition blockposition, Block block) {
-        super.a(blockposition, block);
-        this.a(blockposition.getX(), blockposition.getY(), blockposition.getZ(), block);
-    }
-
-    protected void a(int i, int j, int k, Block block) {
-        super.a(new BlockPosition(i, j, k), block);
-        makeStepSound(i, j, k, block);
-    }
-
-    protected void makeStepSound(int i, int j, int k, Block block) {
-        this.makeStepSound();
     }
 
 	protected void initDatawatcher(){}

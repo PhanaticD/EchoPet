@@ -171,7 +171,7 @@ public class EntityEnderDragonPet extends EntityNoClipPet implements IComplex, I
             f = MathHelper.cos(this.bv * 3.1415927F * 2.0F);
             f1 = MathHelper.cos(this.bu * 3.1415927F * 2.0F);
 			if(f1 <= -0.3F && f >= -0.3F && !this.ad()){
-				this.world.a(this.locX, this.locY, this.locZ, SoundEffects.aP, bz(), 5.0F, 0.8F + this.random.nextFloat() * 0.3F, false);
+				this.world.a(this.locX, this.locY, this.locZ, getSoundFromString("entity.enderdragon.flap"), bz(), 5.0F, 0.8F + this.random.nextFloat() * 0.3F, false);
             }
         }
 
@@ -440,16 +440,9 @@ public class EntityEnderDragonPet extends EntityNoClipPet implements IComplex, I
         return true;
     }
 
-    @Override
-	protected SoundEffect getDeathSound(){
-		// return SoundEffects.aR;
+	public String getDeathSound(){
 		return null;
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.aM;
-    }
+	}
 
     @Override
     public SizeCategory getSizeCategory() {

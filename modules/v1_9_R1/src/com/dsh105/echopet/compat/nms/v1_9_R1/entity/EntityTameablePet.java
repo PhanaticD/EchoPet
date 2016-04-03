@@ -22,7 +22,10 @@ import com.dsh105.echopet.compat.api.entity.IEntityTameablePet;
 import com.dsh105.echopet.compat.api.entity.IPet;
 import com.google.common.base.Optional;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 /**
  * @Author Borlea
@@ -48,16 +51,6 @@ public class EntityTameablePet extends EntityAgeablePet implements IEntityTameab
 		super.initDatawatcher();
 		this.datawatcher.register(bv, Byte.valueOf((byte) 0));
 		this.datawatcher.register(bw, Optional.absent());
-	}
-
-	@Override
-	protected SoundEffect getIdleSound(){// wolf sounds
-		return SoundEffects.gP;
-	}
-
-	@Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.gL;
 	}
 
 	// These are all useless

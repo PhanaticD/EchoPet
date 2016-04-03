@@ -24,7 +24,10 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityOcelotPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityTameablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 0.8F)
 @EntityPetType(petType = PetType.OCELOT)
@@ -56,12 +59,12 @@ public class EntityOcelotPet extends EntityTameablePet implements IEntityOcelotP
     }
 
     @Override
-	protected SoundEffect getIdleSound(){
-		return(this.random.nextInt(4) == 0 ? SoundEffects.U : SoundEffects.P);
+	protected String getIdleSound(){
+		return(this.random.nextInt(4) == 0 ? "entity.cat.purreow" : null);
     }
 
     @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.Q;
+	protected String getDeathSound(){
+		return "entity.cat.death";
     }
 }

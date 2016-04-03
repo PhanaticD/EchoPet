@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySkeletonPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.9F)
 @EntityPetType(petType = PetType.SKELETON)
@@ -68,21 +71,6 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
         super.initDatawatcher();
 		this.datawatcher.register(TYPE, Integer.valueOf(0));
 		this.datawatcher.register(b, Boolean.valueOf(false));
-    }
-
-    @Override
-    protected SoundEffect getIdleSound() {
-        return SoundEffects.fh;
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.fo, 0.15F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-        return SoundEffects.fi;
     }
 
     @Override

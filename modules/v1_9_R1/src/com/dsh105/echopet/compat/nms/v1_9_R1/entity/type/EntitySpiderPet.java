@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySpiderPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 1.4F, height = 0.9F)
 @EntityPetType(petType = PetType.SPIDER)
@@ -41,21 +44,6 @@ public class EntitySpiderPet extends EntityPet implements IEntitySpiderPet {
     protected void initDatawatcher() {
         super.initDatawatcher();
 		this.datawatcher.register(a, Byte.valueOf((byte) 0));
-    }
-
-	/*@Override
-	protected void makeStepSound() {
-	    makeSound("mob.spider.step", 0.15F, 1.0F);
-	}*/
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.fQ;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.fR;
     }
 
     @Override

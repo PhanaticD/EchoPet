@@ -84,6 +84,7 @@ public enum PetType {
 
     HUMAN("Human", 54, "Human Pet", 20D, 6D, "UNKNOWN");
 
+	private String classIdentifier;
     private Class<? extends IEntityPet> entityClass;
     private Class<? extends IPet> petClass;
     private String defaultName;
@@ -94,7 +95,8 @@ public enum PetType {
     private int id;
 
     PetType(String classIdentifier, int registrationId, String defaultName, double maxHealth, double attackDamage, String entityTypeName, PetData... allowedData) {
-        try {
+		this.classIdentifier = classIdentifier;
+		try{
             this.entityClass = (Class<? extends IEntityPet>) Class.forName(ReflectionUtil.COMPAT_NMS_PATH + ".entity.type.Entity" + classIdentifier + "Pet");
         } catch (ClassNotFoundException e) {
             // do nothing
@@ -107,6 +109,10 @@ public enum PetType {
         this.entityTypeWrapper = new WrappedEntityType(entityTypeName);
         this.defaultName = defaultName;
     }
+
+	public String getClassIdentifier(){
+		return classIdentifier;
+	}
 
     public int getRegistrationId() {
         return this.id;

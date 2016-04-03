@@ -89,7 +89,7 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
             this.shakeCount = 0.0F;
         } else if ((this.wet || this.shaking) && this.shaking) {
             if (this.shakeCount == 0.0F) {
-				a(SoundEffects.gQ, cd(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				makeSound("entity.wolf.shake", cd(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             }
 
             this.shakeCount += 0.05F;
@@ -114,13 +114,8 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
     }
 
     @Override
-	protected SoundEffect getIdleSound(){
-		return this.random.nextInt(3) == 0 ? SoundEffects.gP : (isTamed()) && (((Float) this.datawatcher.get(DATA_HEALTH)).floatValue() < 10.0F) ? SoundEffects.gS : isAngry() ? SoundEffects.gM : SoundEffects.gK;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.gL;
+	protected String getIdleSound(){
+		return this.random.nextInt(3) == 0 ? "entity.wolf.pant" : (isTamed()) && (((Float) this.datawatcher.get(DATA_HEALTH)).floatValue() < 10.0F) ? "entity.wolf.whine" : isAngry() ? "entity.wolf.growl" : "entity.wolf.ambient";
     }
 
     @Override

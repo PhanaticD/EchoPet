@@ -24,7 +24,10 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySheepPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.9F, height = 1.3F)
 @EntityPetType(petType = PetType.SHEEP)
@@ -70,18 +73,4 @@ public class EntitySheepPet extends EntityAgeablePet implements IEntitySheepPet 
 		this.datawatcher.register(COLOR_SHEARED, Byte.valueOf((byte) 0));
     }
 
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.eP, 0.15F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.eL;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.eM;
-    }
 }

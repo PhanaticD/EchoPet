@@ -23,7 +23,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityPigZombiePet;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.EnumItemSlot;
+import net.minecraft.server.v1_9_R1.ItemStack;
+import net.minecraft.server.v1_9_R1.Items;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.8F)
 @EntityPetType(petType = PetType.PIGZOMBIE)
@@ -47,17 +50,6 @@ public class EntityPigZombiePet extends EntityZombiePet implements IEntityPigZom
     protected void initDatawatcher() {
         super.initDatawatcher();
     }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.hq;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.hs;
-    }
-
 
     @Override
     public SizeCategory getSizeCategory() {

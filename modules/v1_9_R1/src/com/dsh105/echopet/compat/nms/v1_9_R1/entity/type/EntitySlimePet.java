@@ -22,7 +22,10 @@ import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySlimePet;
 import com.dsh105.echopet.compat.api.util.Perm;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 0.6F)
 @EntityPetType(petType = PetType.SLIME)
@@ -69,13 +72,13 @@ public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
     }
 
     @Override
-	protected SoundEffect getIdleSound(){
-		return db() ? SoundEffects.fD : SoundEffects.fu;
+	protected String getIdleSound(){
+		return db() ? "entity.small_slime.squish" : "entity.slime.squish";
     }
 
     @Override
-	protected SoundEffect getDeathSound(){
-		return db() ? SoundEffects.fF : SoundEffects.fx;
+	protected String getDeathSound(){
+		return db() ? "entity.small_slime.death" : "entity.slime.death";
     }
 
 	public boolean db(){
@@ -88,7 +91,7 @@ public class EntitySlimePet extends EntityPet implements IEntitySlimePet {
 
         if (this.onGround && this.jumpDelay-- <= 0) {
             this.jumpDelay = this.random.nextInt(15) + 10;
-			a(SoundEffects.fp, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			makeSound("entity.slime.attack", 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             getControllerJump().a();
         }
     }

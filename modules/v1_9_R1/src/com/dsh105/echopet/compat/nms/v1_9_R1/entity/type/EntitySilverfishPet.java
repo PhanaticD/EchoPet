@@ -21,7 +21,7 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySilverfishPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.3F, height = 0.7F)
 @EntityPetType(petType = PetType.SILVERFISH)
@@ -33,21 +33,6 @@ public class EntitySilverfishPet extends EntityPet implements IEntitySilverfishP
 
     public EntitySilverfishPet(World world, IPet pet) {
         super(world, pet);
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.fg, 0.15F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.fd;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.fe;
     }
 
     @Override

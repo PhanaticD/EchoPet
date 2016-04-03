@@ -19,6 +19,8 @@ package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
 import java.util.UUID;
 
+import org.bukkit.entity.Horse;
+
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityHorsePet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
@@ -51,18 +53,59 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 		this.setHorseVisual(4, flag);
     }
 
-    @Override
-    public void setType(HorseType t) {
-        if (t != HorseType.NORMAL) {
-            this.setArmour(HorseArmour.NONE);
-        }
-		this.datawatcher.set(TYPE, Integer.valueOf(t.getId()));
-    }
+	public EnumHorseType getType(){
+		return EnumHorseType.a(this.datawatcher.get(TYPE));
+	}
 
-    @Override
-    public void setVariant(HorseVariant v, HorseMarking m) {
+	public void setType(HorseType ht){
+		setVariant(ht.getBukkitVariant());
+	}
+
+	public void setVariant(Horse.Variant variant){
+		if(variant != Horse.Variant.HORSE){
+			this.setArmour(HorseArmour.NONE);
+		}
+		this.datawatcher.set(TYPE, Integer.valueOf(EnumHorseType.values()[variant.ordinal()].k()));
+	}
+
+	public int getVariant(){
+		return this.datawatcher.get(VARIANT);
+	}
+
+	public void setVariant(HorseVariant v, HorseMarking m){
+		setColor(v.getBukkitColour());
+		setStyle(m.getBukkitStyle());
+	}
+
+	public void setColor(Horse.Color color){
+		this.datawatcher.set(VARIANT, (color.ordinal() & 0xFF | getStyle().ordinal() << 8));
+	}
+
+	public void setStyle(Horse.Style style){
+		this.datawatcher.set(VARIANT, getColor().ordinal() & 0xFF | style.ordinal() << 8);
+	}
+
+	public Horse.Style getStyle(){
+		return Horse.Style.values()[(getVariant() >>> 8)];
+	}
+
+	public Horse.Color getColor(){
+		return Horse.Color.values()[(getVariant() & 0xFF)];
+	}
+
+	/*
+	@Override
+	public void setType(HorseType t) {
+	    if (t != HorseType.NORMAL) {
+	        this.setArmour(HorseArmour.NONE);
+	    }
+			this.datawatcher.set(TYPE, Integer.valueOf(t.getId()));
+	}
+	
+	@Override
+	public void setVariant(HorseVariant v, HorseMarking m) {
 		this.datawatcher.set(VARIANT, m.getId(v));
-    }
+	}*/
 
     @Override
     public void setArmour(HorseArmour a) {
@@ -80,16 +123,12 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
         if (flag) {
 			setHorseVisual(64, true);
 			if(getType().g()){
-				this.a(SoundEffects.co, 1.0F, 1.0F);
+				makeSound("entity.horse.angry", 1.0F, 1.0F);
 			}else{
-				this.a(SoundEffects.ay, 1.0F, 1.0F);
+				makeSound("entity.donkey.angry", 1.0F, 1.0F);
 			}
         }
         return flag;
-    }
-
-	public EnumHorseType getType(){
-		return EnumHorseType.a(((Integer) this.datawatcher.get(TYPE)).intValue());
     }
 
     @Override
@@ -103,15 +142,10 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
     }
 
     @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.cn;
-    }
-
-    @Override
-    protected void makeStepSound(int i, int j, int k, Block block) {
+	protected void makeStepSound(BlockPosition pos, Block block){
 		SoundEffectType soundeffecttype = block.w();
 
-        if (this.world.getType(new BlockPosition(i, j + 1, k)) == Blocks.SNOW) {
+		if(this.world.getType(pos) == Blocks.SNOW){
 			soundeffecttype = Blocks.SNOW_LAYER.w();
         }
 
@@ -120,17 +154,17 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 			if((isVehicle()) && (!enumhorsetype.g())){
 				this.stepSoundCount += 1;
 				if((this.stepSoundCount > 5) && (this.stepSoundCount % 3 == 0)){
-					a(SoundEffects.ct, soundeffecttype.a() * 0.15F, soundeffecttype.b());
+					makeSound("entity.horse.gallop", soundeffecttype.a() * 0.15F, soundeffecttype.b());
 					if((enumhorsetype == EnumHorseType.HORSE) && (this.random.nextInt(10) == 0)){
-						a(SoundEffects.cq, soundeffecttype.a() * 0.6F, soundeffecttype.b());
+						makeSound("entity.horse.breathe", soundeffecttype.a() * 0.6F, soundeffecttype.b());
 					}
 				}else if(this.stepSoundCount <= 5){
-					a(SoundEffects.cz, soundeffecttype.a() * 0.15F, soundeffecttype.b());
+					makeSound("entity.horse.step_wood", soundeffecttype.a() * 0.15F, soundeffecttype.b());
 				}
 			}else if(soundeffecttype == SoundEffectType.a){
-				a(SoundEffects.cz, soundeffecttype.a() * 0.15F, soundeffecttype.b());
+				makeSound("entity.horse.step_wood", soundeffecttype.a() * 0.15F, soundeffecttype.b());
 			}else{
-				a(SoundEffects.cy, soundeffecttype.a() * 0.15F, soundeffecttype.b());
+				makeSound("entity.horse.step", soundeffecttype.a() * 0.15F, soundeffecttype.b());
 			}
         }
     }
@@ -141,11 +175,6 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
         if (forwMot <= 0.0F) {
             this.stepSoundCount = 0;
         }
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.cr;
     }
 
     @Override
@@ -167,7 +196,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 
     @Override
     protected void doJumpAnimation() {
-		this.a(SoundEffects.cu, 0.4F, 1.0F);
+		makeSound("entity.horse.gallop", 0.4F, 1.0F);
         this.rearingCounter = 1;
 		setHorseVisual(64, true);
     }

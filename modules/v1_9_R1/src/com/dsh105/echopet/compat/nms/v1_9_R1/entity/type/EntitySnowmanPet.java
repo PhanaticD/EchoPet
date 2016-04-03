@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySnowmanPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.4F, height = 1.8F)
 @EntityPetType(petType = PetType.SNOWMAN)
@@ -41,16 +44,6 @@ public class EntitySnowmanPet extends EntityPet implements IEntitySnowmanPet {
 		super.initDatawatcher();
 		this.datawatcher.register(SHEARED, Byte.valueOf((byte) 0));
 	}
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.fH;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.fI;
-    }
 
     @Override
     public SizeCategory getSizeCategory() {

@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityBlazePet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.7F)
 @EntityPetType(petType = PetType.BLAZE)
@@ -55,13 +58,13 @@ public class EntityBlazePet extends EntityPet implements IEntityBlazePet {
     }
 
 
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.B;
+	protected String getIdleSound(){
+		return "entity.blaze.ambient";
     }
 
 
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.D;
+	protected String getDeathSound(){
+		return "entity.blaze.death";
     }
 
 

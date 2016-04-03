@@ -52,11 +52,6 @@ public class EntityEndermanPet extends EntityPet implements IEntityEndermanPet {
 		this.datawatcher.register(SCREAMING, Boolean.valueOf(false));
     }
 
-    @Override
-	protected SoundEffect getIdleSound(){
-		return ((IEndermanPet) pet).isScreaming() ? SoundEffects.aX : SoundEffects.aU;
-    }
-
     public boolean isScreaming() {
 		return this.datawatcher.get(SCREAMING);
     }
@@ -70,9 +65,9 @@ public class EntityEndermanPet extends EntityPet implements IEntityEndermanPet {
     }
 
     @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.aV;
-    }
+	protected String getIdleSound(){
+		return ((IEndermanPet) pet).isScreaming() ? "entity.endermen.scream" : "entity.endermen.ambient";
+	}
 
     @Override
     public SizeCategory getSizeCategory() {

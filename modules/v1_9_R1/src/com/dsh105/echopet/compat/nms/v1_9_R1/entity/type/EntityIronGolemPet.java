@@ -48,24 +48,9 @@ public class EntityIronGolemPet extends EntityPet implements IEntityIronGolemPet
         if (flag) {
             this.world.broadcastEntityEffect(this, (byte) 4);
             entity.motY = 0.4000000059604645D;
-			a(SoundEffects.cG, 1.0F, 1.0F);
+			makeSound("entity.irongolem.step", 1.0F, 1.0F);
         }
         return flag;
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.cJ, 1.0F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.cI;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.cH;
     }
 
     @Override

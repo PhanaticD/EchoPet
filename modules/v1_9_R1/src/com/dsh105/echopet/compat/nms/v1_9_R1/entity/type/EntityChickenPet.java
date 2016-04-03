@@ -24,7 +24,7 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityChickenPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.3F, height = 0.7F)
 @EntityPetType(petType = PetType.CHICKEN)
@@ -36,20 +36,5 @@ public class EntityChickenPet extends EntityAgeablePet implements IEntityChicken
 
     public EntityChickenPet(World world, IPet pet) {
         super(world, pet);
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.ac, 0.15F, 1.0F);
-    }
-
-    @Override
-    protected SoundEffect getIdleSound() {
-		return SoundEffects.Y;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.Z;
     }
 }

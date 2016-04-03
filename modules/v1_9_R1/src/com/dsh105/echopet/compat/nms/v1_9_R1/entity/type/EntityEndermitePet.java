@@ -4,7 +4,8 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityEndermitePet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.EnumParticle;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.4F, height = 0.3F)
 @EntityPetType(petType = PetType.ENDERMITE)
@@ -21,21 +22,6 @@ public class EntityEndermitePet extends EntityPet implements IEntityEndermitePet
     @Override
     public SizeCategory getSizeCategory() {
         return SizeCategory.TINY;
-    }
-    
-    @Override
-	protected void a(BlockPosition paramBlockPosition, Block paramBlock){
-		a(SoundEffects.bd, 0.15F, 1.0F);
-    }
-    
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.ba;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.bb;
     }
 
     @Override

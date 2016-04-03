@@ -24,7 +24,7 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityCowPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.9F, height = 1.3F)
 @EntityPetType(petType = PetType.COW)
@@ -36,20 +36,5 @@ public class EntityCowPet extends EntityAgeablePet implements IEntityCowPet {
 
     public EntityCowPet(World world, IPet pet) {
         super(world, pet);
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.aq, 0.15F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.am;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.an;
     }
 }

@@ -21,8 +21,6 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityWitchPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.SoundEffect;
-import net.minecraft.server.v1_9_R1.SoundEffects;
 import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.9F)
@@ -35,16 +33,6 @@ public class EntityWitchPet extends EntityPet implements IEntityWitchPet {
 
     public EntityWitchPet(World world, IPet pet) {
         super(world, pet);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.gz;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.gA;
     }
 
     @Override

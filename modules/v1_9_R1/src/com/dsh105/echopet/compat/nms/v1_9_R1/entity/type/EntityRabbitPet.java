@@ -9,7 +9,10 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityRabbitPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 0.7F)
 @EntityPetType(petType = PetType.RABBIT)
@@ -24,17 +27,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 
     public EntityRabbitPet(World world, IPet pet) {
         super(world, pet);
-        this.jumpDelay = this.random.nextInt(15) + 10;
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.eo;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.eq;
+		this.jumpDelay = this.random.nextInt(45) + 30;
     }
 
     @Override
@@ -59,7 +52,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
         // same as the slime
         if (this.onGround && this.jumpDelay-- <= 0) {
             getControllerJump().a();
-            this.jumpDelay = this.random.nextInt(15) + 10;
+			this.jumpDelay = this.random.nextInt(45) + 30;
             this.world.broadcastEntityEffect(this, (byte) 1);
         }
     }

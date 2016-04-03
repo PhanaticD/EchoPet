@@ -24,7 +24,10 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityPigPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.9F, height = 0.9F)
 @EntityPetType(petType = PetType.PIG)
@@ -53,20 +56,5 @@ public class EntityPigPet extends EntityAgeablePet implements IEntityPigPet {
     protected void initDatawatcher() {
         super.initDatawatcher();
 		this.datawatcher.register(SADDLE, Boolean.valueOf(false));
-    }
-
-    @Override
-	protected void a(BlockPosition blockposition, Block block){
-		a(SoundEffects.dT, 0.15F, 1.0F);
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.dP;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.dQ;
     }
 }

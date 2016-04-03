@@ -24,7 +24,10 @@ import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityVillagerPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.8F)
 @EntityPetType(petType = PetType.VILLAGER)
@@ -42,16 +45,6 @@ public class EntityVillagerPet extends EntityAgeablePet implements IEntityVillag
     @Override
     public void setProfession(int i) {
 		this.datawatcher.set(PROFESSION, Integer.valueOf(i));
-    }
-
-    @Override
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.gp;
-    }
-
-    @Override
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.gq;
     }
 
     @Override

@@ -72,17 +72,17 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 	}
 
     @Override
-	protected SoundEffect getIdleSound(){
-		return isVillager() ? SoundEffects.hv : SoundEffects.hg;
+	protected String getIdleSound(){
+		return isVillager() ? "entity.zombie_villager.ambient" : "entity.zombie.ambient";
     }
 
-	protected void a(BlockPosition blockposition, Block block){
-		a(isVillager() ? SoundEffects.hA : SoundEffects.hu, 0.15F, 1.0F);
+	protected void makeStepSound(BlockPosition blockposition, Block block){
+		makeSound(isVillager() ? "entity.zombie_villager.step" : "entity.zombie.step", 0.15F, 1.0F);
     }
 
     @Override
-	protected SoundEffect getDeathSound(){
-		return isVillager() ? SoundEffects.hy : SoundEffects.hk;
+	protected String getDeathSound(){
+		return isVillager() ? "entity.zombie_villager.death" : "entity.zombie.death";
     }
 
     @Override

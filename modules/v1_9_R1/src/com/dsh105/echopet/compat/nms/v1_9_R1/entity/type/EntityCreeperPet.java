@@ -21,7 +21,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityCreeperPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 
-import net.minecraft.server.v1_9_R1.*;
+import net.minecraft.server.v1_9_R1.DataWatcher;
+import net.minecraft.server.v1_9_R1.DataWatcherObject;
+import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
+import net.minecraft.server.v1_9_R1.World;
 
 @EntitySize(width = 0.6F, height = 1.9F)
 @EntityPetType(petType = PetType.CREEPER)
@@ -56,17 +59,6 @@ public class EntityCreeperPet extends EntityPet implements IEntityCreeperPet {
 		this.datawatcher.register(POWERED, Boolean.valueOf(false));
 		this.datawatcher.register(IGNITED, Boolean.valueOf(false));
     }
-
-    
-	protected SoundEffect getIdleSound(){
-		return SoundEffects.as;
-    }
-
-    
-	protected SoundEffect getDeathSound(){
-		return SoundEffects.ar;
-    }
-
     
     public SizeCategory getSizeCategory() {
         return SizeCategory.REGULAR;
