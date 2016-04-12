@@ -459,12 +459,15 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 		makeStepSound(blockposition, block);
 	}
 
-	protected void makeStepSound(BlockPosition blockposition, Block block){// Allows the ability to override and change the step sound
+	protected void makeStepSound(BlockPosition blockposition, Block block){//Allows the ability to override and change the step sound
 		makeSound(getStepSound(), 0.15F, 1.0F);
 	}
 
 	public void makeSound(String soundEffect, float f, float f1){
-		a(getSoundFromString(soundEffect), f, f1);
+		SoundEffect se = getSoundFromString(soundEffect);
+		if(se != null) a(getSoundFromString(soundEffect), f, f1);
+		// Minecraft doesn't actually do a null check in the method.. we have to do one for them.
+		// But minecraft does do a null check on entity SoundEffects(ambient, hurt, death)
 	}
 
 	public SoundEffect getSoundFromString(String soundName){
@@ -520,19 +523,6 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 
 
-    public void b(NBTTagCompound nbttagcompound) {
-        // Do nothing with NBT
-        // Pets should not be stored to world save files
-    }
-
-
-    public boolean c(NBTTagCompound nbttagcompound) {
-        // Do nothing with NBT
-        // Pets should not be stored to world save files
-        return false;
-    }
-
-
     public void a(NBTTagCompound nbttagcompound) {
         // Do nothing with NBT
         // Pets should not be stored to world save files
@@ -549,16 +539,29 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
         }*/
     }
 
+	public void b(NBTTagCompound nbttagcompound){
+		// Do nothing with NBT
+		// Pets should not be stored to world save files
+	}
 
-    public boolean d(NBTTagCompound nbttagcompound) {
+	public boolean c(NBTTagCompound nbttagcompound){// Calls e
+		// Do nothing with NBT
+		// Pets should not be stored to world save files
+		return false;
+	}
+
+	public boolean d(NBTTagCompound nbttagcompound){// Calls e
         // Do nothing with NBT
         // Pets should not be stored to world save files
         return false;
     }
 
-
-    public void e(NBTTagCompound nbttagcompound) {
+	public void e(NBTTagCompound nbttagcompound){// Saving
         // Do nothing with NBT
         // Pets should not be stored to world save files
     }
+
+	public void f(NBTTagCompound nbttagcompound){// Loading
+		//
+	}
 }
