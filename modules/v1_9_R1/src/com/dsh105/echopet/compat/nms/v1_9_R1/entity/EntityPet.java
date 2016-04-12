@@ -447,16 +447,20 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 		return getSoundFromString(getIdleSound());
     }
 
+	protected SoundEffect bR(){
+		return getSoundFromString(getHurtSound());
+	}
+
 	protected SoundEffect bS(){
 		return getSoundFromString(getDeathSound());
     }
 
 	protected void a(BlockPosition blockposition, Block block){
-		makeStepSound();
+		makeStepSound(blockposition, block);
 	}
 
-	protected void makeStepSound(BlockPosition pos, Block block){
-		a(getSoundFromString(getStepSound()), 0.15F, 1.0F);
+	protected void makeStepSound(BlockPosition blockposition, Block block){// Allows the ability to override and change the step sound
+		makeSound(getStepSound(), 0.15F, 1.0F);
 	}
 
 	public void makeSound(String soundEffect, float f, float f1){
@@ -469,6 +473,10 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	protected String getIdleSound(){
 		return "entity." + getFixedEntityName() + ".ambient";
+	}
+
+	protected String getHurtSound(){
+		return "entity." + getFixedEntityName() + ".hurt";
 	}
 
 	protected String getDeathSound(){
@@ -507,8 +515,6 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
     }
 
 	protected void initDatawatcher(){}
-
-	protected void makeStepSound(){}
 
 	protected void doJumpAnimation(){}
 
