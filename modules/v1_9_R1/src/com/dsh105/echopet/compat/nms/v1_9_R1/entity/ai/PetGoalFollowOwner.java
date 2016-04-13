@@ -144,4 +144,8 @@ public class PetGoalFollowOwner extends APetGoalFollowOwner {
             }
         }
     }
+
+	public Navigation getNavigation(){
+		return nav;
+	}
 }

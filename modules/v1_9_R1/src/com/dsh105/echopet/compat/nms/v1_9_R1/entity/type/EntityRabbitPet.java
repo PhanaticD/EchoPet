@@ -8,26 +8,26 @@ import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityRabbitPet;
 import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityAgeablePet;
+import com.dsh105.echopet.compat.nms.v1_9_R1.entity.ai.PetGoalFollowOwner;
 
-import net.minecraft.server.v1_9_R1.DataWatcher;
-import net.minecraft.server.v1_9_R1.DataWatcherObject;
-import net.minecraft.server.v1_9_R1.DataWatcherRegistry;
-import net.minecraft.server.v1_9_R1.World;
+import net.minecraft.server.v1_9_R1.*;
 
 @EntitySize(width = 0.6F, height = 0.7F)
 @EntityPetType(petType = PetType.RABBIT)
 public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPet {
 
 	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityRabbitPet.class, DataWatcherRegistry.b);
-    private int jumpDelay;
+	private boolean onGroundLastTick = false;
+	private int delay = 0;
 
     public EntityRabbitPet(World world) {
         super(world);
+		this.g = new ControllerJumpRabbit(this);
     }
 
     public EntityRabbitPet(World world, IPet pet) {
         super(world, pet);
-		this.jumpDelay = this.random.nextInt(45) + 30;
+		this.g = new ControllerJumpRabbit(this);
     }
 
     @Override
@@ -49,14 +49,79 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
     @Override
     public void onLive() {
         super.onLive();
-        // same as the slime
-        if (this.onGround && this.jumpDelay-- <= 0) {
-            getControllerJump().a();
-			this.jumpDelay = this.random.nextInt(45) + 30;
-            this.world.broadcastEntityEffect(this, (byte) 1);
+		if(this.onGround){
+			if(!this.onGroundLastTick){
+				k(false);
+				dj();
+			}
+			ControllerJumpRabbit jumpController = (ControllerJumpRabbit) this.g;
+			if(!jumpController.c()){
+				if(this.delay == 0){
+					PathEntity pathentity = ((PetGoalFollowOwner) petGoalSelector.getGoal("FollowOwner")).getNavigation().k();// Gets path towards the player.
+					if(pathentity != null && pathentity.e() < pathentity.d()){
+						Vec3D vec3d = pathentity.a(this);
+						a(vec3d.x, vec3d.z);
+						cZ();
+					}
+				}
+			}else if(!jumpController.d()){
+				((ControllerJumpRabbit) this.g).a(true);
+			}
         }
+		this.onGroundLastTick = this.onGround;
     }
     
+	public void M(){// Should we use m()? Idk difference.. M() is called on doTick in EntityInsentient
+		super.M();
+		if(this.delay > 0){
+			this.delay -= 1;
+		}
+	}
+
+	protected void ch(){
+		super.ch();
+		this.world.broadcastEntityEffect(this, (byte) 1);// Does leg jump animation I think
+	}
+
+	private void dj(){
+		delay = 10;
+		((ControllerJumpRabbit) g).a(false);
+	}
+
+	public void cZ(){
+		k(true);// Figure out the point of this
+	}
+
+	public class ControllerJumpRabbit extends ControllerJump{// Copied from EntityRabbit
+
+		private EntityRabbitPet c;
+		private boolean d = false;
+
+		public ControllerJumpRabbit(EntityRabbitPet entityrabbit){
+			super(entityrabbit);
+			this.c = entityrabbit;
+		}
+
+		public boolean c(){
+			return this.a;
+		}
+
+		public boolean d(){
+			return this.d;
+		}
+
+		public void a(boolean flag){
+			this.d = flag;
+		}
+
+		public void b(){
+			if(this.a){
+				this.c.cZ();
+				this.a = false;
+			}
+		}
+	}
+
     static class TypeMapping {
         
         private static final int[] NMS_TYPES = new int[Rabbit.Type.values().length];
