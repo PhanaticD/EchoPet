@@ -17,13 +17,18 @@
 
 package com.dsh105.echopet.compat.api.entity.type.pet;
 
-import com.dsh105.echopet.compat.api.entity.*;
+import org.bukkit.entity.Horse;
+
+import com.dsh105.echopet.compat.api.entity.HorseArmour;
+import com.dsh105.echopet.compat.api.entity.IAgeablePet;
 
 public interface IHorsePet extends IAgeablePet {
 
-    public void setHorseType(HorseType type);
+	public void setVariant(Horse.Variant variant);
 
-    public void setVariant(HorseVariant variant, HorseMarking marking);
+	public void setColor(Horse.Color color);
+
+	public void setStyle(Horse.Style style);
 
     public void setArmour(HorseArmour armour);
 
@@ -35,11 +40,11 @@ public interface IHorsePet extends IAgeablePet {
 
     public void setChested(boolean flag);
 
-    public HorseType getHorseType();
+	public Horse.Variant getVariant();
 
-    public HorseVariant getVariant();
+	public Horse.Color getColor();
 
-    public HorseMarking getMarking();
+	public Horse.Style getStyle();
 
     public HorseArmour getArmour();
 

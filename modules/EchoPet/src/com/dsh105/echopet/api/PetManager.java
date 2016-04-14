@@ -24,6 +24,7 @@ import java.util.ListIterator;
 import org.bukkit.DyeColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Villager.Profession;
@@ -563,50 +564,38 @@ public class PetManager implements IPetManager {
                     ((IHorsePet) pet).setChested(b);
                 }
 
-                if (pd.isType(PetData.Type.HORSE_TYPE)) {
+				if(pd.isType(PetData.Type.HORSE_VARIANT)){
                     try {
-                        HorseType h = HorseType.valueOf(pd.toString());
+						Horse.Variant h = Horse.Variant.valueOf(pd.toString());
                         if (h != null) {
-                            ((IHorsePet) pet).setHorseType(h);
+							((IHorsePet) pet).setVariant(h);
                         }
                     } catch (Exception e) {
                         Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Type.", e, true);
                     }
                 }
 
-                if (pd.isType(PetData.Type.HORSE_VARIANT)) {
+				if(pd.isType(PetData.Type.HORSE_COLOR)){
                     try {
-                        HorseVariant v = HorseVariant.valueOf(pd.toString());
+						Horse.Color v = Horse.Color.valueOf(pd.toString());
                         if (v != null) {
-                            HorseMarking m = ((IHorsePet) pet).getMarking();
-                            if (m == null) {
-                                m = HorseMarking.NONE;
-                            }
-                            ((IHorsePet) pet).setVariant(v, m);
+							((IHorsePet) pet).setColor(v);
                         }
                     } catch (Exception e) {
                         Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Variant.", e, true);
                     }
                 }
 
-                if (pd.isType(PetData.Type.HORSE_MARKING)) {
+				if(pd.isType(PetData.Type.HORSE_STYLE)){
                     try {
-                        HorseMarking m;
-                        if (pd == PetData.WHITEPATCH) {
-                            m = HorseMarking.WHITE_PATCH;
-                        } else if (pd == PetData.WHITESPOT) {
-                            m = HorseMarking.WHITE_SPOTS;
-                        } else if (pd == PetData.BLACKSPOT) {
-                            m = HorseMarking.BLACK_SPOTS;
-                        } else {
-                            m = HorseMarking.valueOf(pd.toString());
-                        }
+						Horse.Style m;
+						if(pd.equals(PetData.WHITE_SOCKS)){
+							m = Horse.Style.WHITE;
+						}else{
+							m = Horse.Style.valueOf(pd.toString());
+						}
                         if (m != null) {
-                            HorseVariant v = ((IHorsePet) pet).getVariant();
-                            if (v == null) {
-                                v = HorseVariant.WHITE;
-                            }
-                            ((IHorsePet) pet).setVariant(v, m);
+							((IHorsePet) pet).setStyle(m);
                         }
                     } catch (Exception e) {
                         Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Marking.", e, true);

@@ -57,32 +57,25 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 		return EnumHorseType.a(this.datawatcher.get(TYPE));
 	}
 
-	public void setType(HorseType ht){
-		setVariant(ht.getBukkitVariant());
-	}
-
 	public void setVariant(Horse.Variant variant){
 		if(variant != Horse.Variant.HORSE){
-			this.setArmour(HorseArmour.NONE);
+			setArmour(HorseArmour.NONE);
 		}
-		this.datawatcher.set(TYPE, Integer.valueOf(EnumHorseType.values()[variant.ordinal()].k()));
+		System.out.println("Type: " + EnumHorseType.values()[variant.ordinal()].k());
+		System.out.println("Type2: " + Integer.valueOf(EnumHorseType.values()[variant.ordinal()].k()));
+		datawatcher.set(TYPE, EnumHorseType.values()[variant.ordinal()].k());
 	}
 
 	public int getVariant(){
-		return this.datawatcher.get(VARIANT);
-	}
-
-	public void setVariant(HorseVariant v, HorseMarking m){
-		setColor(v.getBukkitColour());
-		setStyle(m.getBukkitStyle());
+		return datawatcher.get(VARIANT);
 	}
 
 	public void setColor(Horse.Color color){
-		this.datawatcher.set(VARIANT, (color.ordinal() & 0xFF | getStyle().ordinal() << 8));
+		datawatcher.set(VARIANT, (color.ordinal() & 0xFF | getStyle().ordinal() << 8));
 	}
 
 	public void setStyle(Horse.Style style){
-		this.datawatcher.set(VARIANT, getColor().ordinal() & 0xFF | style.ordinal() << 8);
+		datawatcher.set(VARIANT, getColor().ordinal() & 0xFF | style.ordinal() << 8);
 	}
 
 	public Horse.Style getStyle(){
@@ -92,20 +85,6 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 	public Horse.Color getColor(){
 		return Horse.Color.values()[(getVariant() & 0xFF)];
 	}
-
-	/*
-	@Override
-	public void setType(HorseType t) {
-	    if (t != HorseType.NORMAL) {
-	        this.setArmour(HorseArmour.NONE);
-	    }
-			this.datawatcher.set(TYPE, Integer.valueOf(t.getId()));
-	}
-	
-	@Override
-	public void setVariant(HorseVariant v, HorseMarking m) {
-		this.datawatcher.set(VARIANT, m.getId(v));
-	}*/
 
     @Override
     public void setArmour(HorseArmour a) {
@@ -134,11 +113,11 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
     @Override
     protected void initDatawatcher() {
         super.initDatawatcher();
-		this.datawatcher.register(VISUAL, Byte.valueOf((byte) 0));
-		this.datawatcher.register(TYPE, Integer.valueOf(EnumHorseType.HORSE.k()));
-		this.datawatcher.register(VARIANT, Integer.valueOf(0));
+		this.datawatcher.register(VISUAL, (byte) 0);
+		this.datawatcher.register(TYPE, EnumHorseType.HORSE.k());
+		this.datawatcher.register(VARIANT, 0);
 		this.datawatcher.register(OWNER, Optional.absent());
-		this.datawatcher.register(ARMOR, Integer.valueOf(EnumHorseArmor.NONE.a()));
+		this.datawatcher.register(ARMOR, EnumHorseArmor.NONE.a());
     }
 
     @Override

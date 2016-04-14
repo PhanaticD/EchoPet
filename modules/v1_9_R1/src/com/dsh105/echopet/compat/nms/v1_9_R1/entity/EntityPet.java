@@ -465,7 +465,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	public void makeSound(String soundEffect, float f, float f1){
 		SoundEffect se = getSoundFromString(soundEffect);
-		if(se != null) a(getSoundFromString(soundEffect), f, f1);
+		if(se != null) a(se, f, f1);
 		// Minecraft doesn't actually do a null check in the method.. we have to do one for them.
 		// But minecraft does do a null check on entity SoundEffects(ambient, hurt, death)
 	}

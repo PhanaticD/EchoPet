@@ -25,24 +25,24 @@ public enum PetData {
 
     ANGRY("angry", Type.BOOLEAN),
     BABY("baby", Type.BOOLEAN),
-    BLACK("black", Type.COLOUR, Type.CAT, Type.HORSE_VARIANT, Type.RABBIT_TYPE),
+	BLACK("black", Type.COLOUR, Type.CAT, Type.HORSE_COLOR, Type.RABBIT_TYPE),
     BLACK_AND_WHITE("blackandwhite", Type.RABBIT_TYPE),
     BLACKSMITH("blacksmith", Type.PROF),
-    BLACKSPOT("blackSpot", Type.HORSE_MARKING),
+	BLACK_DOTS("blackSpot", Type.HORSE_STYLE),
     BLUE("blue", Type.COLOUR),
-    BROWN("brown", Type.COLOUR, Type.HORSE_VARIANT, Type.RABBIT_TYPE),
+	BROWN("brown", Type.COLOUR, Type.RABBIT_TYPE),
     BUTCHER("butcher", Type.PROF),
     CHESTED("chested", Type.BOOLEAN),
-    CHESTNUT("chestnut", Type.HORSE_VARIANT),
-    CREAMY("creamy", Type.HORSE_VARIANT),
+	CHESTNUT("chestnut", Type.HORSE_COLOR),
+	CREAMY("creamy", Type.HORSE_COLOR),
     CYAN("cyan", Type.COLOUR),
-    DARKBROWN("darkbrown", Type.HORSE_VARIANT),
+	DARK_BROWN("darkbrown", Type.HORSE_COLOR),
     DIAMOND("diamond", Type.HORSE_ARMOUR),
-    DONKEY("donkey", Type.HORSE_TYPE),
+	DONKEY("donkey", Type.HORSE_VARIANT),
     ELDER("elder", Type.BOOLEAN),
     FARMER("farmer", Type.PROF),
     FIRE("fire", Type.BOOLEAN),
-    GRAY("gray", Type.COLOUR, Type.HORSE_VARIANT),
+	GRAY("gray", Type.COLOUR, Type.HORSE_COLOR),
     GREEN("green", Type.COLOUR),
     GOLD("gold", Type.HORSE_ARMOUR),
     IRON("iron", Type.HORSE_ARMOUR),
@@ -53,10 +53,10 @@ public enum PetData {
     LIME("lime", Type.COLOUR),
     MAGENTA("magenta", Type.COLOUR),
     MEDIUM("medium", Type.SIZE),
-    MULE("mule", Type.HORSE_TYPE),
+	MULE("mule", Type.HORSE_VARIANT),
     NOARMOUR("noarmour", Type.HORSE_ARMOUR),
-    NONE("noMarking", Type.HORSE_MARKING),
-    NORMAL("normal", Type.HORSE_TYPE),
+	NONE("noMarking", Type.HORSE_STYLE),
+	HORSE("normal", Type.HORSE_VARIANT),
     ORANGE("orange", Type.COLOUR),
     PINK("pink", Type.COLOUR),
 	POWER("powered", Type.BOOLEAN),
@@ -70,18 +70,18 @@ public enum PetData {
     SHIELD("shield", Type.BOOLEAN),
     SIAMESE("siamese", Type.CAT),
     SILVER("silver", Type.COLOUR),
-    SKELETON("skeleton", Type.HORSE_TYPE),
+	SKELETON_HORSE("skeleton", Type.HORSE_VARIANT),
     SMALL("small", Type.SIZE),
-    SOCKS("whiteSocks", Type.HORSE_MARKING),
     TAMED("tamed", Type.BOOLEAN),
     VILLAGER("villager", Type.BOOLEAN),
-    WHITEPATCH("whitePatch", Type.HORSE_MARKING),
-    WHITESPOT("whiteSpot", Type.HORSE_MARKING),
-    WHITE("white", Type.COLOUR, Type.HORSE_VARIANT, Type.RABBIT_TYPE),
+	WHITEFIELD("whitePatch", Type.HORSE_STYLE),
+	WHITE_DOTS("whiteSpot", Type.HORSE_STYLE),
+	WHITE_SOCKS("whiteSocks", Type.HORSE_STYLE),
+	WHITE("white", Type.COLOUR, Type.HORSE_COLOR, Type.RABBIT_TYPE),
     WILD("wild", Type.CAT),
     WITHER("wither", Type.BOOLEAN),
     YELLOW("yellow", Type.COLOUR),
-    ZOMBIE("zombie", Type.HORSE_TYPE);
+	UNDEAD_HORSE("zombie", Type.HORSE_VARIANT);
 
 
     private String configOptionString;
@@ -105,6 +105,15 @@ public enum PetData {
     }
 
     public enum Type {
-        BOOLEAN, COLOUR, CAT, SIZE, PROF, HORSE_TYPE, HORSE_VARIANT, HORSE_MARKING, HORSE_ARMOUR, RABBIT_TYPE
+		BOOLEAN,
+		COLOUR,
+		CAT,
+		SIZE,
+		PROF,
+		HORSE_VARIANT,
+		HORSE_COLOR,
+		HORSE_STYLE,
+		HORSE_ARMOUR,
+		RABBIT_TYPE
     }
 }

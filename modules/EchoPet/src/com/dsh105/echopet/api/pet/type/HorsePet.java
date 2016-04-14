@@ -17,18 +17,25 @@
 
 package com.dsh105.echopet.api.pet.type;
 
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.Color;
+import org.bukkit.entity.Horse.Style;
+import org.bukkit.entity.Horse.Variant;
+import org.bukkit.entity.Player;
+
 import com.dsh105.echopet.api.pet.Pet;
-import com.dsh105.echopet.compat.api.entity.*;
+import com.dsh105.echopet.compat.api.entity.EntityPetType;
+import com.dsh105.echopet.compat.api.entity.HorseArmour;
+import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityHorsePet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IHorsePet;
-import org.bukkit.entity.Player;
 
 @EntityPetType(petType = PetType.HORSE)
 public class HorsePet extends Pet implements IHorsePet {
 
-    HorseType horseType = HorseType.NORMAL;
-    HorseVariant variant = HorseVariant.WHITE;
-    HorseMarking marking = HorseMarking.NONE;
+	Variant horseVariant = Variant.HORSE;
+	Color color = Horse.Color.WHITE;
+	Style style = Style.NONE;
     HorseArmour armour = HorseArmour.NONE;
     boolean baby = false;
     boolean chested = false;
@@ -39,16 +46,21 @@ public class HorsePet extends Pet implements IHorsePet {
     }
 
     @Override
-    public void setHorseType(HorseType type) {
-        ((IEntityHorsePet) getEntityPet()).setType(type);
-        this.horseType = type;
+	public void setVariant(Variant variant){
+		((IEntityHorsePet) getEntityPet()).setVariant(variant);;
+		this.horseVariant = variant;
     }
 
     @Override
-    public void setVariant(HorseVariant variant, HorseMarking marking) {
-        ((IEntityHorsePet) getEntityPet()).setVariant(variant, marking);
-        this.variant = variant;
-        this.marking = marking;
+	public void setColor(Color color){
+		((IEntityHorsePet) getEntityPet()).setColor(color);
+		this.color = color;
+	}
+
+	@Override
+	public void setStyle(Style style){
+		((IEntityHorsePet) getEntityPet()).setStyle(style);
+		this.style = style;
     }
 
     @Override
@@ -81,18 +93,18 @@ public class HorsePet extends Pet implements IHorsePet {
     }
 
     @Override
-    public HorseType getHorseType() {
-        return this.horseType;
+	public Variant getVariant(){
+		return this.horseVariant;
     }
 
     @Override
-    public HorseVariant getVariant() {
-        return this.variant;
+	public Color getColor(){
+		return this.color;
     }
 
     @Override
-    public HorseMarking getMarking() {
-        return this.marking;
+	public Style getStyle(){
+		return this.style;
     }
 
     @Override

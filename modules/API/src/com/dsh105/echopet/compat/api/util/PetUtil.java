@@ -17,17 +17,22 @@
 
 package com.dsh105.echopet.compat.api.util;
 
+import java.util.ArrayList;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Player;
+
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.StringUtil;
-import com.dsh105.echopet.compat.api.entity.*;
+import com.dsh105.echopet.compat.api.entity.IAgeablePet;
+import com.dsh105.echopet.compat.api.entity.IPet;
+import com.dsh105.echopet.compat.api.entity.PetData;
+import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.pet.*;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.plugin.PetStorage;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class PetUtil {
 
@@ -315,12 +320,12 @@ public class PetUtil {
             info.add(ChatColor.GOLD + " - Villager: " + ChatColor.YELLOW + ((IZombiePet) pt).isVillager());
         }
         if (pt.getPetType() == PetType.HORSE) {
-            HorseType ht = ((IHorsePet) pt).getHorseType();
+			Horse.Variant variant = ((IHorsePet) pt).getVariant();
             info.add(ChatColor.GOLD + " - Saddled: " + ChatColor.YELLOW + ((IHorsePet) pt).isSaddled());
-            info.add(ChatColor.GOLD + " - Type: " + ChatColor.YELLOW + StringUtil.capitalise(ht.toString().replace("_", " ")));
-            if (ht == HorseType.NORMAL) {
-                info.add(ChatColor.GOLD + " - Variant: " + ChatColor.YELLOW + StringUtil.capitalise(((IHorsePet) pt).getVariant().toString().replace("_", " ")));
-                info.add(ChatColor.GOLD + " - Marking: " + ChatColor.YELLOW + StringUtil.capitalise(((IHorsePet) pt).getMarking().toString().replace("_", " ")));
+			info.add(ChatColor.GOLD + " - Variant: " + ChatColor.YELLOW + StringUtil.capitalise(variant.toString().replace("_", " ")));
+			if(variant == Horse.Variant.HORSE){
+				info.add(ChatColor.GOLD + " - Color: " + ChatColor.YELLOW + StringUtil.capitalise(((IHorsePet) pt).getColor().toString().replace("_", " ")));
+				info.add(ChatColor.GOLD + " - Style: " + ChatColor.YELLOW + StringUtil.capitalise(((IHorsePet) pt).getStyle().toString().replace("_", " ")));
             }
             info.add(ChatColor.GOLD + " - Chested: " + ChatColor.YELLOW + ((IHorsePet) pt).isChested());
         }
