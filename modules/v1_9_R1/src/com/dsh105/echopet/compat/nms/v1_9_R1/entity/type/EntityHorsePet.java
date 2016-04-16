@@ -86,7 +86,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 
     @Override
     public void setArmour(HorseArmour a) {
-		this.datawatcher.set(ARMOR, Integer.valueOf(a.getId()));
+		this.datawatcher.set(ARMOR, EnumHorseArmor.values()[a.ordinal()].a());
     }
 
     @Override
