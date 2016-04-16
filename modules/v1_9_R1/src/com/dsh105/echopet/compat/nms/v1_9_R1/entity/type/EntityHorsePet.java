@@ -32,13 +32,13 @@ import net.minecraft.server.v1_9_R1.*;
 @EntityPetType(petType = PetType.HORSE)
 public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet {
 
-	private static final DataWatcherObject<Byte> VISUAL = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.a);
-	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
-	private static final DataWatcherObject<Integer> VARIANT = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Byte> VISUAL = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.a);// feet kicking, whatev
+	private static final DataWatcherObject<Integer> TYPE = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// Skeleton, normal, donkey, etc
+	private static final DataWatcherObject<Integer> STYLE = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// Pattern
 	private static final DataWatcherObject<Optional<UUID>> OWNER = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.m);
-	private static final DataWatcherObject<Integer> ARMOR = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);
+	private static final DataWatcherObject<Integer> ARMOR = DataWatcher.a(EntityHorsePet.class, DataWatcherRegistry.b);// Self explanatory.
     private int rearingCounter = 0;
-    int stepSoundCount = 0;
+	private int stepSoundCount = 0;
 
     public EntityHorsePet(World world) {
         super(world);
@@ -61,21 +61,19 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 		if(variant != Horse.Variant.HORSE){
 			setArmour(HorseArmour.NONE);
 		}
-		System.out.println("Type: " + EnumHorseType.values()[variant.ordinal()].k());
-		System.out.println("Type2: " + Integer.valueOf(EnumHorseType.values()[variant.ordinal()].k()));
 		datawatcher.set(TYPE, EnumHorseType.values()[variant.ordinal()].k());
 	}
 
 	public int getVariant(){
-		return datawatcher.get(VARIANT);
+		return datawatcher.get(TYPE);
 	}
 
 	public void setColor(Horse.Color color){
-		datawatcher.set(VARIANT, (color.ordinal() & 0xFF | getStyle().ordinal() << 8));
+		datawatcher.set(STYLE, (color.ordinal() & 0xFF | getStyle().ordinal() << 8));
 	}
 
 	public void setStyle(Horse.Style style){
-		datawatcher.set(VARIANT, getColor().ordinal() & 0xFF | style.ordinal() << 8);
+		datawatcher.set(STYLE, getColor().ordinal() & 0xFF | style.ordinal() << 8);
 	}
 
 	public Horse.Style getStyle(){
@@ -115,7 +113,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
         super.initDatawatcher();
 		this.datawatcher.register(VISUAL, (byte) 0);
 		this.datawatcher.register(TYPE, EnumHorseType.HORSE.k());
-		this.datawatcher.register(VARIANT, 0);
+		this.datawatcher.register(STYLE, 0);
 		this.datawatcher.register(OWNER, Optional.absent());
 		this.datawatcher.register(ARMOR, EnumHorseArmor.NONE.a());
     }
