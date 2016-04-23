@@ -20,6 +20,7 @@ package com.dsh105.echopet.compat.api.util.menu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 
 import com.dsh105.commodus.StringUtil;
 import com.dsh105.echopet.compat.api.entity.IPet;
@@ -46,7 +47,8 @@ public class DataMenu {
         }
         Player p = this.pet.getOwner();
         if (p != null) {
-            p.openInventory(this.inv);
+			InventoryView view = p.openInventory(this.inv);
+			pet.setInventoryView(view);
         }
     }
 

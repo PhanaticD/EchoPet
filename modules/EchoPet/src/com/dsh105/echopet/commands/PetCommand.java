@@ -17,6 +17,15 @@
 
 package com.dsh105.echopet.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.StringUtil;
 import com.dsh105.commodus.paginator.Paginator;
@@ -31,14 +40,6 @@ import com.dsh105.echopet.compat.api.util.menu.PetMenu;
 import com.dsh105.echopet.compat.api.util.menu.SelectorLayout;
 import com.dsh105.echopet.conversation.NameFactory;
 import com.dsh105.powermessage.core.PowerMessage;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PetCommand implements CommandExecutor {
 
@@ -70,53 +71,48 @@ public class PetCommand implements CommandExecutor {
 
         // Setting the pet and rider names
         // Supports colour coding
-        else if (args.length >= 1 && args[0].equalsIgnoreCase("name")) {
-            if (Perm.BASE_NAME.hasPerm(sender, true, false)) {
-                Player p = (Player) sender;
-                IPet pet = EchoPet.getManager().getPet(p);
-                if (pet == null) {
-                    Lang.sendTo(sender, Lang.NO_PET.toString());
-                    return true;
-                }
-
-                if (args.length >= 2 && args[1].equals("rider")) {
-                    if (pet.getRider() == null) {
-                        Lang.sendTo(sender, Lang.NO_RIDER.toString());
-                        return true;
-                    }
-                    if (args.length == 2) {
-                        NameFactory.askForName(p, pet.getRider(), false);
-                    } else {
-                        String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(2, args, " "));
-                        if (name.length() > 32) {
-                            Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
-                            return true;
-                        }
-                        pet.getRider().setPetName(name);
-                        Lang.sendTo(sender, Lang.NAME_RIDER.toString()
-                                .replace("%type%", StringUtil.capitalise(pet.getPetType().toString().replace("_", " ")))
-                                .replace("%name%", name));
-                    }
-                    return true;
-                } else {
-                    if (args.length == 1) {
-                        NameFactory.askForName(p, pet, false);
-                    } else {
-                        String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(1, args, " "));
-                        if (name.length() > 32) {
-                            Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
-                            return true;
-                        }
-                        pet.setPetName(name);
-                        Lang.sendTo(sender, Lang.NAME_PET.toString()
-                                .replace("%type%", StringUtil.capitalise(pet.getPetType().toString().replace("_", " ")))
-                                .replace("%name%", name));
-                    }
-                    return true;
-                }
-            } else {
-                return true;
-            }
+		else if(args.length >= 1 && args[0].equalsIgnoreCase("name")){
+			if(Perm.BASE_NAME.hasPerm(sender, true, false)){
+				Player p = (Player) sender;
+				IPet pet = EchoPet.getManager().getPet(p);
+				if(pet == null){
+					Lang.sendTo(sender, Lang.NO_PET.toString());
+					return true;
+				}
+				if(args.length >= 2 && args[1].equals("rider")){
+					if(pet.getRider() == null){
+						Lang.sendTo(sender, Lang.NO_RIDER.toString());
+						return true;
+					}
+					if(args.length == 2){
+						NameFactory.askForName(p, pet.getRider(), false);
+					}else{
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(2, args, " "));
+						if(name.length() > 32){
+							Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
+							return true;
+						}
+						pet.getRider().setPetName(name);
+						Lang.sendTo(sender, Lang.NAME_RIDER.toString().replace("%type%", StringUtil.capitalise(pet.getPetType().toString().replace("_", " "))).replace("%name%", name));
+					}
+					return true;
+				}else{
+					if(args.length == 1){
+						NameFactory.askForName(p, pet, false);
+					}else{
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(1, args, " "));
+						if(name.length() > 32){
+							Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
+							return true;
+						}
+						pet.setPetName(name);
+						Lang.sendTo(sender, Lang.NAME_PET.toString().replace("%type%", StringUtil.capitalise(pet.getPetType().toString().replace("_", " "))).replace("%name%", name));
+					}
+					return true;
+				}
+			}else{
+				return true;
+			}
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("select")) {
                 if (sender instanceof Player) {

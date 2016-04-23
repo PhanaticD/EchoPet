@@ -23,8 +23,9 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
 
-public interface IPet {
+public interface IPet{
 
     public IEntityPet getEntityPet();
 
@@ -77,4 +78,8 @@ public interface IPet {
 	public void setAsHat(boolean flag);
 
     public IPet createRider(final PetType pt, boolean sendFailMessage);
+
+	public InventoryView getInventoryView();
+
+	public void setInventoryView(InventoryView dataMenu);
 }

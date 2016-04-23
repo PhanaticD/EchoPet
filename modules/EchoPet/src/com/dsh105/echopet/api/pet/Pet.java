@@ -25,6 +25,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.captainbern.minecraft.protocol.PacketType;
@@ -39,7 +40,7 @@ import com.dsh105.echopet.compat.api.reflection.ReflectionConstants;
 import com.dsh105.echopet.compat.api.reflection.SafeMethod;
 import com.dsh105.echopet.compat.api.util.*;
 
-public abstract class Pet implements IPet {
+public abstract class Pet implements IPet{
 
     private IEntityPet entityPet;
     private PetType petType;
@@ -48,6 +49,7 @@ public abstract class Pet implements IPet {
     private Pet rider;
     private String name;
     private ArrayList<PetData> petData = new ArrayList<PetData>();
+	private InventoryView dataMenu;
 
     private boolean isRider = false;
 
@@ -411,4 +413,12 @@ public abstract class Pet implements IPet {
 
         return this.rider;
     }
+
+	public InventoryView getInventoryView(){
+		return dataMenu;
+	}
+
+	public void setInventoryView(InventoryView dataMenu){
+		this.dataMenu = dataMenu;
+	}
 }

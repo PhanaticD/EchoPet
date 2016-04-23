@@ -22,10 +22,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.particle.Particle;
@@ -72,11 +72,18 @@ public class MenuListener implements Listener {
                 return;
             }
         }
-
-        final IPet pet = EchoPet.getManager().getPet(player);
-        if (pet == null) {
+		IPet currentPet = EchoPet.getManager().getPet(player);
+		if(currentPet == null){
             return;
         }
+		if(currentPet.getRider() != null){
+			if(currentPet.getRider().getInventoryView() != null){
+				if(currentPet.getRider().getInventoryView().equals(event.getView())){
+					currentPet = currentPet.getRider();
+				}
+			}
+		}
+		final IPet pet = currentPet;
 
         int size = (title.equals("EchoPet DataMenu - Color") || pet.getPetType() == PetType.HORSE) ? 18 : 9;
 
@@ -132,40 +139,17 @@ public class MenuListener implements Listener {
                                     }
                                 }
                             } else {
-                                player.closeInventory();
-                                class OpenMenu extends BukkitRunnable {
-
-                                    MenuItem mi;
-
-                                    public OpenMenu(MenuItem mi) {
-                                        this.mi = mi;
-                                        this.runTaskLater(EchoPet.getPlugin(), 1L);
-                                    }
-
-                                    @Override
-                                    public void run() {
-                                        DataMenu dm = new DataMenu(mi, pet);
-                                        dm.open(false);
-                                    }
-
-                                }
-
-                                new OpenMenu(mi);
+								DataMenu dm = new DataMenu(mi, pet);
+								dm.open(false);
                             }
                             break;
                         }
                     }
                 } else if (title.startsWith("EchoPet DataMenu - ")) {
                     if (currentlyInSlot.equals(DataMenuItem.BACK.getItem())) {
-                        player.closeInventory();
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                int size = pet.getPetType() == PetType.HORSE ? 18 : 9;
-                                PetMenu menu = new PetMenu(pet, MenuUtil.createOptionList(pet.getPetType()), size);
-                                menu.open(false);
-                            }
-                        }.runTaskLater(EchoPet.getPlugin(), 1L);
+						size = pet.getPetType() == PetType.HORSE ? 18 : 9;
+						PetMenu menu = new PetMenu(pet, MenuUtil.createOptionList(pet.getPetType()), size);
+						menu.open(false);
                         return;
                     }
                     for (DataMenuItem dmi : DataMenuItem.values()) {
@@ -184,4 +168,15 @@ public class MenuListener implements Listener {
             }
         }
     }
+
+	@EventHandler
+	public void inventoryClose(InventoryCloseEvent e){
+		Player player = (Player) e.getPlayer();
+		if(e.getView().getTitle().startsWith("EchoPet DataMenu")){
+			IPet pet = EchoPet.getManager().getPet(player);
+			if(pet == null) return;
+			pet.setInventoryView(null);
+			if(pet.getRider() != null) pet.getRider().setInventoryView(null);
+		}
+	}
 }

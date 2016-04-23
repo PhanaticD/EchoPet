@@ -17,6 +17,12 @@
 
 package com.dsh105.echopet.compat.api.util.menu;
 
+import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.StringUtil;
 import com.dsh105.echopet.compat.api.entity.IPet;
@@ -24,10 +30,6 @@ import com.dsh105.echopet.compat.api.entity.PetData;
 import com.dsh105.echopet.compat.api.event.PetMenuOpenEvent;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.util.Lang;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
-
-import java.util.ArrayList;
 
 public class PetMenu {
 
@@ -39,7 +41,7 @@ public class PetMenu {
     public PetMenu(IPet pet, ArrayList<MenuOption> options, int size) {
         this.pet = pet;
         this.size = size;
-        this.inv = Bukkit.createInventory(pet.getOwner(), size, "EchoPet DataMenu");
+		this.inv = Bukkit.createInventory(pet.getOwner(), size, "EchoPet DataMenu");
         this.options = options;
         for (MenuOption o : this.options) {
             if (o.item.getMenuType() == DataMenu.DataMenuType.BOOLEAN) {
@@ -81,7 +83,8 @@ public class PetMenu {
         if (menuEvent.isCancelled()) {
             return;
         }
-        this.pet.getOwner().openInventory(this.inv);
+		InventoryView view = this.pet.getOwner().openInventory(this.inv);
+		pet.setInventoryView(view);
         if (sendMessage) {
             Lang.sendTo(this.pet.getOwner(), Lang.OPEN_MENU.toString().replace("%type%", StringUtil.capitalise(this.pet.getPetType().toString().replace("_", " "))));
         }
