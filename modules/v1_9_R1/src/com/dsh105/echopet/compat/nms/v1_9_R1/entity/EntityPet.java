@@ -358,14 +358,14 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	public void g(float sideMot, float forwMot){// Look at EntityHorse for shit
 		// bu() is passenger shit. Minecraft changed it from 1 passenger to a list
-		if(bu().isEmpty() || !(this.bu().get(0) instanceof EntityHuman)){
+		if(bu().isEmpty()){
 			this.P = 0.5F;
 			this.aQ = 0.02F;
-            super.g(sideMot, forwMot);
+			super.g(sideMot, forwMot);
             return;
         }
 		Entity passenger = this.bu().get(0);
-		if(((EntityHuman) passenger).getBukkitEntity() != this.getPlayerOwner().getPlayer()){
+		if(passenger == null || (passenger instanceof EntityHuman && ((EntityHuman) passenger).getBukkitEntity() != this.getPlayerOwner().getPlayer())){
 			this.P = 0.5F;
 			this.aQ = 0.02F;
             super.g(sideMot, forwMot);
@@ -507,7 +507,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 				this.remove(false);
 				return;
 			}
-			this.petGoalSelector.updateGoals();
+			if(!isPassenger() || getPet().getRider() == null) this.petGoalSelector.updateGoals();
         }
     }
 
