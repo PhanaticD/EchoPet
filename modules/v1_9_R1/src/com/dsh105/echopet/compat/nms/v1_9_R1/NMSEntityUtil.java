@@ -126,8 +126,8 @@ public class NMSEntityUtil {
      * Hacky stuff to get around doTick() becoming final
      */
     
-	protected static FieldAccessor<Set> GOALS;
-	protected static FieldAccessor<Set> ACTIVE_GOALS;
+	protected static FieldAccessor<Set<?>> GOALS;
+	protected static FieldAccessor<Set<?>> ACTIVE_GOALS;
 
     protected static MethodAccessor<Void> ADD_GOAL;
 
@@ -142,10 +142,11 @@ public class NMSEntityUtil {
         ACTIVE_GOALS.get(GOAL_SELECTOR.get(nmsEntityHandle)).clear();
     }
 
-    protected static void initializeFields() {
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	protected static void initializeFields(){
         try {
 
-            ClassTemplate goalTemplate = new Reflection().reflect(MinecraftReflection.getMinecraftClass("PathfinderGoalSelector"));
+			ClassTemplate goalTemplate = new Reflection().reflect(MinecraftReflection.getMinecraftClass("PathfinderGoalSelector"));
 
             List<SafeMethod<Void>> methodCandidates = goalTemplate.getSafeMethods(withArguments(int.class, MinecraftReflection.getMinecraftClass("PathfinderGoal")));
             if (methodCandidates.size() > 0) {
@@ -154,7 +155,7 @@ public class NMSEntityUtil {
                 throw new RuntimeException("Failed to get the addGoal method!");
             }
 
-			List<SafeField<Set>> fieldCandidates = goalTemplate.getSafeFields(withType(Set.class));
+			List<SafeField<Set<?>>> fieldCandidates = goalTemplate.getSafeFields(withType(Set.class));
             if (fieldCandidates.size() > 1) {
                 GOALS = fieldCandidates.get(0).getAccessor();
                 ACTIVE_GOALS = fieldCandidates.get(0).getAccessor();

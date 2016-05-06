@@ -231,7 +231,13 @@ public abstract class Pet implements IPet{
             this.removePet(false);
             return false;
         }
-        return this.teleport(this.getOwner().getLocation());
+		Pet rider = getRider();
+		removeRider();
+		boolean tele = teleport(this.getOwner().getLocation());
+		if(tele && rider != null){
+			createRider(rider.getPetType(), false);
+		}
+		return tele;
     }
 
     @Override

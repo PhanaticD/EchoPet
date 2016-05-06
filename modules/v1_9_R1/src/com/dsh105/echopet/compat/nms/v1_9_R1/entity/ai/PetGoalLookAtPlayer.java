@@ -24,6 +24,7 @@ import com.dsh105.echopet.compat.nms.v1_9_R1.entity.EntityPet;
 import net.minecraft.server.v1_9_R1.Entity;
 import net.minecraft.server.v1_9_R1.EntityHuman;
 
+@SuppressWarnings("rawtypes")
 public class PetGoalLookAtPlayer extends APetGoalLookAtPlayer {
 
     private EntityPet pet;
@@ -57,7 +58,8 @@ public class PetGoalLookAtPlayer extends APetGoalLookAtPlayer {
         return "LookAtPlayer";
     }
 
-    @Override
+	@SuppressWarnings("unchecked")
+	@Override
     public boolean shouldStart() {
         if (this.pet.random().nextFloat() >= this.chance) {
             return false;

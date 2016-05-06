@@ -114,10 +114,10 @@ public class PetGoalFollowOwner extends APetGoalFollowOwner {
 		this.pet.getControllerLook().a(owner, 10.0F, (float) this.pet.N());
         if (--this.timer <= 0) {
             this.timer = 10;
-            if (this.pet.getPlayerOwner().isFlying()) {
-                //Don't move pet when owner flying
-                return;
-            }
+			/*if (this.pet.getPlayerOwner().isFlying()) {
+			    //Don't move pet when owner flying
+			    return;
+			}*/
 
             double speed = 0.6F;
             if (this.pet.h(owner) > (this.teleportDistance) && ((CraftPlayer) this.pet.getPlayerOwner()).getHandle().onGround) {

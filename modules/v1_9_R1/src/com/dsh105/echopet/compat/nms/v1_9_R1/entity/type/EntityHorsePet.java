@@ -187,6 +187,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 	 * 64: Rear
 	 * 128: Mouth open
 	 */
+	@SuppressWarnings("unused")
 	private boolean getHorseVisual(int i){
 		return (((Byte) this.datawatcher.get(VISUAL)).byteValue() & i) != 0;
 	}

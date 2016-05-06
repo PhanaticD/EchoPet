@@ -73,7 +73,8 @@ public class EntityWolfPet extends EntityTameablePet implements IEntityWolfPet{
 		return (((Byte) this.datawatcher.get(bv)).byteValue() & 0x2) != 0;
     }
 
-    @Override
+	@SuppressWarnings("deprecation")
+	@Override
 	public void setCollarColor(DyeColor dc){
         if (((IWolfPet) pet).isTamed()) {
 			this.datawatcher.set(COLLAR_COLOR, Integer.valueOf(EnumColor.fromColorIndex(dc.getWoolData()).getInvColorIndex()));

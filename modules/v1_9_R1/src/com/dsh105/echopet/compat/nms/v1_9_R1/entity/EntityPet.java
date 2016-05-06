@@ -365,12 +365,12 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
             return;
         }
 		Entity passenger = this.bu().get(0);
-		if((passenger == null || !(passenger instanceof EntityHuman)) || (passenger instanceof EntityHuman && ((EntityHuman) passenger).getBukkitEntity() != this.getPlayerOwner().getPlayer())){
+		if(passenger == null || (passenger instanceof EntityHuman && ((EntityHuman) passenger).getBukkitEntity() != this.getPlayerOwner().getPlayer())){
 			this.P = 0.5F;
 			this.aQ = 0.02F;
             super.g(sideMot, forwMot);
             return;
-        }
+		}
 
 		this.lastYaw = this.yaw = passenger.yaw;
 		this.pitch = passenger.pitch * 0.5F;
