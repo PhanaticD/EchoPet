@@ -209,7 +209,7 @@ public abstract class Pet implements IPet{
     public void removeRider() {
         if (rider != null) {
             rider.removePet(true);
-            this.rider = null;
+			rider = null;
         }
     }
 
