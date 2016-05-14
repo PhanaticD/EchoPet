@@ -304,8 +304,8 @@ public abstract class Pet implements IPet{
             ownerIsMounting = false;
         } else {
 			method = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_MOUNT.getName(), ReflectionUtil.getNMSClass("Entity"), boolean.class);
-            if (this.getRider() != null) {
-                this.getRider().removePet(false);
+			if(getRider() != null){
+				getRider().removePet(false);
             }
             new BukkitRunnable() {
                 @Override
@@ -330,11 +330,11 @@ public abstract class Pet implements IPet{
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public void setAsHat(boolean flag){
-        if (this.isHat == flag) {
+		if(isHat == flag){
             return;
         }
-        if (this.ownerRiding) {
-            this.ownerRidePet(false);
+		if(ownerRiding){
+			ownerRidePet(false);
         }
         this.teleportToOwner();
 		SafeMethod mount = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_MOUNT.getName(), ReflectionUtil.getNMSClass("Entity"), boolean.class);
@@ -347,10 +347,8 @@ public abstract class Pet implements IPet{
 			packet.getIntegerArrays().write(0, new int[1]);
         } else {
 			mount.invoke(getEntityPet(), PlayerUtil.playerToEntityPlayer(this.getOwner()), false);
-			if(getOwner().getPassenger() != null){
-				int[] passengers = {getOwner().getPassenger().getEntityId()};
-				packet.getIntegerArrays().write(0, passengers);
-			}
+			int[] passengers = {getEntityPet().getBukkitEntity().getEntityId()};
+			packet.getIntegerArrays().write(0, passengers);
         }
 		PlayerUtil.sendPacket(getOwner(), packet.getHandle());
         this.getEntityPet().resizeBoundingBox(flag);

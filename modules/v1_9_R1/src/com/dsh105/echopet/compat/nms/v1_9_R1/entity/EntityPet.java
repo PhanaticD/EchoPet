@@ -521,7 +521,10 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 
 	protected void doJumpAnimation(){}
 
-
+	@Override
+	public boolean startRiding(Entity entity){
+		return false;
+	}
 
     public void a(NBTTagCompound nbttagcompound) {
         // Do nothing with NBT
