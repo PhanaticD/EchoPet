@@ -25,8 +25,8 @@
   </parent>
     
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>EchoPet-v1_9_R1</artifactId>
-  <name>EchoPet-v1_9_R1-${project.version}</name>
+  <artifactId>EchoPet-v1_9_R2</artifactId>
+  <name>EchoPet-v1_9_R2-${project.version}</name>
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.9.4-R0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -57,7 +57,7 @@
         <dependency>
         	<groupId>org.bukkit</groupId>
         	<artifactId>craftbukkit</artifactId>
-        	<version>1.9.2-R0.1-SNAPSHOT</version>
+        	<version>1.9.4-R0.1-SNAPSHOT</version>
         	<scope>provided</scope>
         </dependency>
         <dependency>

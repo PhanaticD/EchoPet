@@ -26,6 +26,7 @@
 	<module>./modules/API</module>
 	<module>./modules/v1_9_R1</module>
 	<module>./modules/EchoPet</module>
+	<module>./modules/v1_9_R2</module>
   </modules>
   
     <distributionManagement>
