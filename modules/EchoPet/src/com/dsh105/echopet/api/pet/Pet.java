@@ -343,31 +343,14 @@ public abstract class Pet implements IPet{
 		WrappedPacket packet = new WrappedPacket(PacketType.Play.Server.MOUNT);
 		packet.getIntegers().write(0, getOwner().getEntityId());
         if (!flag) {
-			/* if (this.getRider() != null) {
-				 method.invoke(this.getRider().getEntityPet());
-			
-				 method.invoke(this.getEntityPet());
-			
-				 method.invoke(this.getRider().getEntityPet(), this.getEntityPet(), false);
-			 } else {
-				 method.invoke(this.getEntityPet());
-			 }*/
 			unmount.invoke(getEntityPet());
 			packet.getIntegerArrays().write(0, new int[1]);
         } else {
 			mount.invoke(getEntityPet(), PlayerUtil.playerToEntityPlayer(this.getOwner()), false);
-			int[] passengers = {getOwner().getPassenger().getEntityId()};
-			packet.getIntegerArrays().write(0, passengers);
-			/*if(this.getRider() != null){
-			
-			 method.invoke(this.getRider().getEntityPet(), new Object[]{null});
-			
-			 method.invoke(getEntityPet(), PlayerUtil.playerToEntityPlayer(this.getOwner()), false);
-			
-			 method.invoke(this.getRider().getEntityPet(), this.getEntityPet(), false);
-			} else {
-			 method.invoke(getEntityPet(), PlayerUtil.playerToEntityPlayer(this.getOwner()), false);
-			}*/
+			if(getOwner().getPassenger() != null){
+				int[] passengers = {getOwner().getPassenger().getEntityId()};
+				packet.getIntegerArrays().write(0, passengers);
+			}
         }
 		PlayerUtil.sendPacket(getOwner(), packet.getHandle());
         this.getEntityPet().resizeBoundingBox(flag);
