@@ -65,7 +65,7 @@ public class EntityHorsePet extends EntityAgeablePet implements IEntityHorsePet 
 	}
 
 	public int getVariant(){
-		return datawatcher.get(TYPE);
+		return datawatcher.get(STYLE);
 	}
 
 	public void setColor(Horse.Color color){
