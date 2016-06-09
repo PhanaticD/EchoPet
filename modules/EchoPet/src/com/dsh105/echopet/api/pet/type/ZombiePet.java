@@ -18,6 +18,8 @@
 package com.dsh105.echopet.api.pet.type;
 
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.Villager.Profession;
 
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
@@ -29,7 +31,7 @@ import com.dsh105.echopet.compat.api.entity.type.pet.IZombiePet;
 public class ZombiePet extends Pet implements IZombiePet {
 
     boolean baby = false;
-	int villagerType = 0;
+	Profession profession = Profession.NORMAL;
 
     public ZombiePet(Player owner) {
         super(owner);
@@ -47,14 +49,14 @@ public class ZombiePet extends Pet implements IZombiePet {
     }
 
     @Override
-	public void setVillagerType(int type){
-		((IEntityZombiePet) getEntityPet()).setVillagerType(type);
-		this.villagerType = type;
+	public void setVillagerProfession(Villager.Profession profession){
+		((IEntityZombiePet) getEntityPet()).setVillagerProfession(profession);
+		this.profession = profession;
     }
 
     @Override
-    public boolean isVillager() {
-		return villagerType > 0;
+	public Villager.Profession getVillagerProfession(){
+		return profession;
     }
 
 }

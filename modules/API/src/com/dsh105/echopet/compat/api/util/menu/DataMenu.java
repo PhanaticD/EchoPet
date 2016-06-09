@@ -55,7 +55,7 @@ public class DataMenu {
     public void setItems(DataMenuType type, int size) {
         int i = 0;
         for (DataMenuItem mi : DataMenuItem.values()) {
-            if (mi.getType() == type) {
+			if(mi.getTypes().contains(type)){
                 this.inv.setItem(i, mi.getItem());
                 i++;
             }
@@ -67,7 +67,8 @@ public class DataMenu {
         BOOLEAN,
         CAT_TYPE,
         COLOR,
-        PROFESSION,
+		PROFESSION,
+		ZOMBIE_PROFESSION,
         SIZE,
         OTHER,
         HORSE_TYPE,

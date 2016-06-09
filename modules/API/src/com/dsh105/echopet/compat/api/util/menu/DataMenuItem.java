@@ -17,8 +17,7 @@
 
 package com.dsh105.echopet.compat.api.util.menu;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -41,11 +40,13 @@ public enum DataMenuItem {
     MEDIUM(DataMenuType.SIZE, PetData.MEDIUM, Material.SLIME_BALL, 2, (short) 0, "Medium", "Slime Size"),
     LARGE(DataMenuType.SIZE, PetData.LARGE, Material.SLIME_BALL, 4, (short) 0, "Large", "Slime Size"),
 
-    BLACKSMITH(DataMenuType.PROFESSION, PetData.BLACKSMITH, Material.COAL, 1, (short) 0, "Blacksmith", "Villager Profession"),
-    BUTCHER(DataMenuType.PROFESSION, PetData.BUTCHER, Material.RAW_BEEF, 1, (short) 0, "Butcher", "Villager Profession"),
-    FARMER(DataMenuType.PROFESSION, PetData.FARMER, Material.IRON_HOE, 1, (short) 0, "Farmer", "Villager Profession"),
-    LIBRARIAN(DataMenuType.PROFESSION, PetData.LIBRARIAN, Material.BOOK, 1, (short) 0, "Librarian", "Villager Profession"),
-    PRIEST(DataMenuType.PROFESSION, PetData.PRIEST, Material.PAPER, 1, (short) 0, "Priest", "Villager Profession"),
+	BLACKSMITH(new HashSet<>(Arrays.asList(DataMenuType.PROFESSION, DataMenuType.ZOMBIE_PROFESSION)), PetData.BLACKSMITH, Material.COAL, 1, (short) 0, "Blacksmith", "Villager Profession"),
+	BUTCHER(new HashSet<>(Arrays.asList(DataMenuType.PROFESSION, DataMenuType.ZOMBIE_PROFESSION)), PetData.BUTCHER, Material.RAW_BEEF, 1, (short) 0, "Butcher", "Villager Profession"),
+	FARMER(new HashSet<>(Arrays.asList(DataMenuType.PROFESSION, DataMenuType.ZOMBIE_PROFESSION)), PetData.FARMER, Material.IRON_HOE, 1, (short) 0, "Farmer", "Villager Profession"),
+	LIBRARIAN(new HashSet<>(Arrays.asList(DataMenuType.PROFESSION, DataMenuType.ZOMBIE_PROFESSION)), PetData.LIBRARIAN, Material.BOOK, 1, (short) 0, "Librarian", "Villager Profession"),
+	PRIEST(new HashSet<>(Arrays.asList(DataMenuType.PROFESSION, DataMenuType.ZOMBIE_PROFESSION)), PetData.PRIEST, Material.PAPER, 1, (short) 0, "Priest", "Villager Profession"),
+
+	HUSK(DataMenuType.ZOMBIE_PROFESSION, PetData.HUSK, Material.ROTTEN_FLESH, 1, (short) 0, "Husk", "Zombie Type"),
 
     BLACK(DataMenuType.COLOR, PetData.BLACK, Material.WOOL, 1, (short) 15, "Black", "Wool Or Collar Color"),
     BLUE(DataMenuType.COLOR, PetData.BLUE, Material.WOOL, 1, (short) 11, "Blue", "Wool Or Collar Color"),
@@ -99,7 +100,7 @@ public enum DataMenuItem {
     BACK(DataMenuType.OTHER, null, Material.BOOK, 1, (short) 0, "Back", "Return to the main menu."),
     CLOSE(DataMenuType.OTHER, null, Material.BOOK, 1, (short) 0, "Close", "Close the Pet Menu");
 
-    private DataMenuType type;
+	private Set<DataMenuType> types;
     private PetData dataLink;
     private Material mat;
     private String name;
@@ -107,8 +108,12 @@ public enum DataMenuItem {
     private int amount;
     private short data;
 
-    DataMenuItem(DataMenuType type, PetData dataLink, Material mat, int amount, short data, String name, String... lore) {
-        this.type = type;
+	private DataMenuItem(DataMenuType type, PetData dataLink, Material mat, int amount, short data, String name, String... lore){
+		this(new HashSet<>(Arrays.asList(type)), dataLink, mat, amount, data, name, lore);
+	}
+
+	private DataMenuItem(Set<DataMenuType> types, PetData dataLink, Material mat, int amount, short data, String name, String... lore){
+		this.types = types;
         this.dataLink = dataLink;
         this.mat = mat;
         this.amount = amount;
@@ -131,8 +136,8 @@ public enum DataMenuItem {
         return i;
     }
 
-    public DataMenuType getType() {
-        return this.type;
+	public Set<DataMenuType> getTypes(){
+		return this.types;
     }
 
     public PetData getDataLink() {

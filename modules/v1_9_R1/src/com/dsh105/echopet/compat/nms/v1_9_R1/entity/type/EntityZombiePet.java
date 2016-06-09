@@ -17,6 +17,8 @@
 
 package com.dsh105.echopet.compat.nms.v1_9_R1.entity.type;
 
+import org.bukkit.entity.Villager;
+
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityZombiePet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IZombiePet;
@@ -52,10 +54,10 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 		getDataWatcher().set(BABY, Boolean.valueOf(flag));
     }
 
-    @Override
-	public void setVillagerType(int i){
-		getDataWatcher().set(VILLAGER_PROFESSION, Integer.valueOf(i));
-    }
+	@Override
+	public void setVillagerProfession(Villager.Profession profession){
+		getDataWatcher().set(VILLAGER_PROFESSION, profession.ordinal());
+	}
 
     @Override
     protected void initDatawatcher() {
@@ -68,7 +70,7 @@ public class EntityZombiePet extends EntityPet implements IEntityZombiePet {
 
 	public boolean isVillager(){
 		if(this instanceof EntityGiantPet) return false;
-		else return ((IZombiePet) pet).isVillager();
+		else return(((IZombiePet) pet).getVillagerProfession().ordinal() >= 1 && ((IZombiePet) pet).getVillagerProfession().ordinal() <= 5);
 	}
 
     @Override

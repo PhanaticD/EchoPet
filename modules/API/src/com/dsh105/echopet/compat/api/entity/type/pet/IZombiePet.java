@@ -17,11 +17,13 @@
 
 package com.dsh105.echopet.compat.api.entity.type.pet;
 
+import org.bukkit.entity.Villager;
+
 import com.dsh105.echopet.compat.api.entity.IAgeablePet;
 
 public interface IZombiePet extends IAgeablePet {
 
-	public void setVillagerType(int type);
+	public void setVillagerProfession(Villager.Profession profession);
 
-    public boolean isVillager();
+	public Villager.Profession getVillagerProfession();
 }

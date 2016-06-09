@@ -48,7 +48,7 @@ public enum PetType {
     SPIDER("Spider", 52, "Spider Pet", 16D, 5D, "SPIDER"),
     WITCH("Witch", 66, "Witch Pet", 26D, 5D, "WITCH"),
     WITHER("Wither", 64, "Wither Pet", 300D, 8D, "WITHER", PetData.SHIELD),
-    ZOMBIE("Zombie", 54, "Zombie Pet", 20D, 5D, "ZOMBIE", PetData.BABY, PetData.VILLAGER),
+	ZOMBIE("Zombie", 54, "Zombie Pet", 20D, 5D, "ZOMBIE", PetData.BABY, PetData.BLACKSMITH, PetData.BUTCHER, PetData.FARMER, PetData.LIBRARIAN, PetData.PRIEST, PetData.HUSK),
 
     // Passive mobs
     BAT("Bat", 65, "Bat Pet", 6D, 3D, "BAT"),

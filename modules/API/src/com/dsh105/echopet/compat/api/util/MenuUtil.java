@@ -59,7 +59,7 @@ public class MenuUtil {
         }
         if (pt == PetType.ZOMBIE) {
             options.add(new MenuOption(i++, MenuItem.BABY));
-            options.add(new MenuOption(i++, MenuItem.VILLAGER));
+			options.add(new MenuOption(i++, MenuItem.ZOMBIE_PROFESSION));
         }
         if (pt == PetType.CHICKEN) {
             options.add(new MenuOption(i++, MenuItem.BABY));
