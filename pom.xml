@@ -24,9 +24,10 @@
   <version>1</version>
   <modules>
 	<module>./modules/API</module>
-	<module>./modules/v1_9_R1</module>
 	<module>./modules/EchoPet</module>
+	<module>./modules/v1_9_R1</module>
 	<module>./modules/v1_9_R2</module>
+	<module>./modules/v1_10_R1</module>
   </modules>
   
     <distributionManagement>
@@ -44,7 +45,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9-R0.1-SNAPSHOT</version>
+            <version>1.10-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.captainbern</groupId>
