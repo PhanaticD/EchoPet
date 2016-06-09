@@ -266,9 +266,13 @@ public class PetUtil {
             info.add(ChatColor.GOLD + " - Wool Colour: " + ChatColor.YELLOW + color);
         }
 
-        if (pt.getPetType() == PetType.VILLAGER) {
+		if(pt.getPetType() == PetType.VILLAGER || pt.getPetType() == PetType.ZOMBIE){
             String prof = "";
-            prof = ((IVillagerPet) pt).getProfession() == null ? "Farmer" : StringUtil.capitalise(((IVillagerPet) pt).getProfession().toString().replace("_", " "));
+			if(pt.getPetType() == PetType.VILLAGER){
+				prof = ((IVillagerPet) pt).getProfession() == null ? "Farmer" : StringUtil.capitalise(((IVillagerPet) pt).getProfession().toString().replace("_", " "));
+			}else{
+				prof = StringUtil.capitalise(((IZombiePet) pt).getVillagerProfession().toString().replace("_", " "));
+			}
             info.add(ChatColor.GOLD + " - Profession: " + ChatColor.YELLOW + prof);
         }
 
@@ -316,9 +320,6 @@ public class PetUtil {
             info.add(ChatColor.GOLD + " - Shielded: " + ChatColor.YELLOW + ((IWitherPet) pt).isShielded());
         }
 
-        if (pt.getPetType() == PetType.ZOMBIE) {
-            info.add(ChatColor.GOLD + " - Villager: " + ChatColor.YELLOW + ((IZombiePet) pt).isVillager());
-        }
         if (pt.getPetType() == PetType.HORSE) {
 			Horse.Variant variant = ((IHorsePet) pt).getVariant();
             info.add(ChatColor.GOLD + " - Saddled: " + ChatColor.YELLOW + ((IHorsePet) pt).isSaddled());

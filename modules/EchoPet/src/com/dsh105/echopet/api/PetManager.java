@@ -490,10 +490,14 @@ public class PetManager implements IPetManager {
                 ((IWolfPet) pet).setTamed(b);
             }
 
-            if (pd.isType(PetData.Type.PROF)) {
+			if(pd.isType(PetData.Type.PROF) || pd.isType(PetData.Type.ZOMBIE_PROFESSION)){
                 Profession p = Profession.valueOf(pd.toString());
                 if (p != null) {
-                    ((IVillagerPet) pet).setProfession(p);
+					if(petType == PetType.ZOMBIE){
+						((IZombiePet) pet).setVillagerProfession(p);
+					}else{
+						((IVillagerPet) pet).setProfession(p);
+					}
                 }
             }
 
@@ -515,12 +519,6 @@ public class PetManager implements IPetManager {
 
             if (pd == PetData.WITHER) {
                 ((ISkeletonPet) pet).setWither(b);
-            }
-
-            if (pd == PetData.VILLAGER) {
-                if (petType == PetType.ZOMBIE) {
-					((IZombiePet) pet).setVillagerType(b ? 1 : 0);
-                }
             }
 
             if (pd == PetData.FIRE) {
