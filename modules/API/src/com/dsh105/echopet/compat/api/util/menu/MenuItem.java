@@ -44,7 +44,7 @@ public enum MenuItem {
     SHIELD("GLASS", 1, (short) 0, DataMenuType.BOOLEAN, "Shield", "Wither"),
     POWER("BEACON", 1, (short) 0, DataMenuType.BOOLEAN, "Powered", "Creeper"),
     SIZE("SLIME_BALL", 1, (short) 0, DataMenuType.SIZE, "Size", "Slime", "MagmaCube"),
-    BABY("WHEAT", 1, (short) 0, DataMenuType.BOOLEAN, "Baby", "PigZombie", "Zombie", "Chicken", "Cow", "Horse", "MushroomCow", "Ocelot", "Pig", "Sheep", "Wolf", "Villager"),
+	BABY("WHEAT", 1, (short) 0, DataMenuType.BOOLEAN, "Baby", "PigZombie", "Zombie", "Chicken", "Cow", "Horse", "MushroomCow", "Ocelot", "Pig", "PolarBear", "Sheep", "Wolf", "Villager"),
     CAT_TYPE("RAW_FISH", 1, (short) 0, DataMenuType.CAT_TYPE, "Cat Type", "Ocelot"),
     ANGRY("BONE", 1, (short) 0, DataMenuType.BOOLEAN, "Angry", "Wolf"),
     TAMED("BONE", 1, (short) 0, DataMenuType.BOOLEAN, "Tamed", "Wolf"),
@@ -53,6 +53,7 @@ public enum MenuItem {
     ELDER("SEA_LANTERN", 1, (short) 0, DataMenuType.BOOLEAN, "Elder", "Guardian"),
     COLOR("WOOL", 1, (short) 0, DataMenuType.COLOR, "Color", "Sheep", "Wolf"),
 	PROFESSION("IRON_AXE", 1, (short) 0, DataMenuType.PROFESSION, "Profession", "Villager", "Zombie"),
+	STANDING_UP("RAW_FISH", 1, (short) 0, DataMenuType.BOOLEAN, "PolarBear"),
     RIDE("CARROT_STICK", 1, (short) 0, DataMenuType.BOOLEAN, "Ride Pet", "Control your pet."),
     HAT("IRON_HELMET", 1, (short) 0, DataMenuType.BOOLEAN, "Hat Pet", "Wear your pet on your head.");
 

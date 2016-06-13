@@ -25,5 +25,6 @@ import com.dsh105.echopet.compat.api.entity.IEntityAgeablePet;
  * @since Jun 9, 2016
  */
 public interface IEntityPolarBearPet extends IEntityAgeablePet{
-	//
+
+	public void setStandingUp(boolean flag);
 }

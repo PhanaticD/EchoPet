@@ -24,7 +24,7 @@ import com.google.common.collect.ImmutableList;
 public enum PetData {
 
     ANGRY("angry", Type.BOOLEAN),
-    BABY("baby", Type.BOOLEAN),
+	BABY("baby", Type.BOOLEAN),
 	BLACK("black", Type.COLOUR, Type.CAT, Type.HORSE_COLOR, Type.RABBIT_TYPE),
     BLACK_AND_WHITE("blackandwhite", Type.RABBIT_TYPE),
 	BLACKSMITH("blacksmith", Type.PROF, Type.ZOMBIE_PROFESSION),
@@ -66,7 +66,7 @@ public enum PetData {
     RED("red", Type.CAT, Type.COLOUR),
     SADDLE("saddle", Type.BOOLEAN),
     SALT_AND_PEPPER("saltandpepper", Type.RABBIT_TYPE),
-    SCREAMING("screaming", Type.BOOLEAN),
+	SCREAMING("screaming", Type.BOOLEAN),
 	SHEARED("sheared", Type.BOOLEAN),
     SHIELD("shield", Type.BOOLEAN),
     SIAMESE("siamese", Type.CAT),
@@ -82,7 +82,8 @@ public enum PetData {
     WILD("wild", Type.CAT),
     WITHER("wither", Type.BOOLEAN),
     YELLOW("yellow", Type.COLOUR),
-	UNDEAD_HORSE("zombie", Type.HORSE_VARIANT);
+	UNDEAD_HORSE("zombie", Type.HORSE_VARIANT),
+	STANDING_UP("standingup", Type.BOOLEAN);
 
 
     private String configOptionString;

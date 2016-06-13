@@ -21,6 +21,7 @@ import org.bukkit.entity.Player;
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
+import com.dsh105.echopet.compat.api.entity.type.nms.IEntityPolarBearPet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IPolarBearPet;
 
 /**
@@ -32,7 +33,7 @@ import com.dsh105.echopet.compat.api.entity.type.pet.IPolarBearPet;
 @EntityPetType(petType = PetType.POLARBEAR)
 public class PolarBearPet extends Pet implements IPolarBearPet{
 
-	boolean baby;
+	boolean baby, standingUp;
 
 	public PolarBearPet(Player owner){
 		super(owner);
@@ -40,11 +41,23 @@ public class PolarBearPet extends Pet implements IPolarBearPet{
 
 	@Override
 	public void setBaby(boolean flag){
+		((IEntityPolarBearPet) getEntityPet()).setBaby(flag);
 		baby = flag;
 	}
 
 	@Override
 	public boolean isBaby(){
 		return baby;
+	}
+
+	@Override
+	public void setStandingUp(boolean flag){
+		((IEntityPolarBearPet) getEntityPet()).setStandingUp(flag);
+		standingUp = flag;
+	}
+
+	@Override
+	public boolean isStandingUp(){
+		return standingUp;
 	}
 }

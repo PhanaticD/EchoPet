@@ -63,7 +63,7 @@ public enum PetType {
     MUSHROOMCOW("MushroomCow", 96, "Mushroom Cow Pet", 10D, 3D, "MUSHROOM_COW", PetData.BABY),
     OCELOT("Ocelot", 98, "Ocelot Pet", 10D, 4D, "OCELOT", PetData.BABY, PetData.BLACK, PetData.RED, PetData.SIAMESE, PetData.WILD),
     PIG("Pig", 90, "Pig Pet", 10D, 3D, "PIG", PetData.BABY, PetData.SADDLE),
-	POLARBEAR("PolarBear", 102, "Polar Bear Pet", 30D, 9D, "POLAR_BEAR"),
+	POLARBEAR("PolarBear", 102, "Polar Bear Pet", 30D, 9D, "POLAR_BEAR", PetData.BABY, PetData.STANDING_UP),
     RABBIT("Rabbit", 101, "Rabbit Pet", 8D, 3D, "RABBIT", PetData.BABY, PetData.BROWN, PetData.WHITE, PetData.BLACK, PetData.BLACK_AND_WHITE, PetData.SALT_AND_PEPPER, PetData.THE_KILLER_BUNNY),
 	SHEEP("Sheep", 91, "Sheep Pet", 8D, 3D, "SHEEP", PetData.BABY, PetData.SHEARED,
           PetData.BLACK, PetData.BLUE, PetData.BROWN,

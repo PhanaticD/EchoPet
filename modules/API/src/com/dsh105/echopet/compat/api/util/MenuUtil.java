@@ -78,6 +78,10 @@ public class MenuUtil {
             options.add(new MenuOption(i++, MenuItem.BABY));
             options.add(new MenuOption(i++, MenuItem.SADDLE));
         }
+		if(pt == PetType.POLARBEAR){
+			options.add(new MenuOption(i++, MenuItem.BABY));
+			options.add(new MenuOption(i++, MenuItem.STANDING_UP));
+		}
 		if(pt == PetType.SHEEP || pt == PetType.SNOWMAN){
 			if(pt == PetType.SHEEP){
 				options.add(new MenuOption(i++, MenuItem.BABY));

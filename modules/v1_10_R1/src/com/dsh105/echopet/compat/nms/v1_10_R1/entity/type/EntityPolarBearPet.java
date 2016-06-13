@@ -17,6 +17,7 @@
 package com.dsh105.echopet.compat.nms.v1_10_R1.entity.type;
 
 import com.dsh105.echopet.compat.api.entity.IPet;
+import com.dsh105.echopet.compat.api.entity.SizeCategory;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityPolarBearPet;
 import com.dsh105.echopet.compat.nms.v1_10_R1.entity.EntityAgeablePet;
 
@@ -46,5 +47,13 @@ public class EntityPolarBearPet extends EntityAgeablePet implements IEntityPolar
 	protected void initDatawatcher(){
 		super.initDatawatcher();
 		this.datawatcher.register(STANDING_UP, false);
+	}
+
+	public void setStandingUp(boolean flag){
+		datawatcher.set(STANDING_UP, flag);
+	}
+
+	public SizeCategory getSizeCategory(){
+		return SizeCategory.REGULAR;
 	}
 }

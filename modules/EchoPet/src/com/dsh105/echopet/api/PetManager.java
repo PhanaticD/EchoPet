@@ -556,6 +556,9 @@ public class PetManager implements IPetManager {
             if (pd.isType(PetData.Type.RABBIT_TYPE) && petType == PetType.RABBIT) {
                 ((IRabbitPet) pet).setRabbitType(Rabbit.Type.valueOf(pd.toString()));
             }
+			if(pd == PetData.STANDING_UP){
+				((IPolarBearPet) pet).setStandingUp(b);
+			}
 
             if (petType == PetType.HORSE) {
                 if (pd == PetData.CHESTED) {
