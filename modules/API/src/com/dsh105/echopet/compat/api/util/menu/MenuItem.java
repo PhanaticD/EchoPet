@@ -48,12 +48,12 @@ public enum MenuItem {
     CAT_TYPE("RAW_FISH", 1, (short) 0, DataMenuType.CAT_TYPE, "Cat Type", "Ocelot"),
     ANGRY("BONE", 1, (short) 0, DataMenuType.BOOLEAN, "Angry", "Wolf"),
     TAMED("BONE", 1, (short) 0, DataMenuType.BOOLEAN, "Tamed", "Wolf"),
-    WITHER("SKULL_ITEM", 1, (short) 1, DataMenuType.BOOLEAN, "Wither", "Skeleton"),
 	ZOMBIE_PROFESSION("EMERALD", 1, (short) 0, DataMenuType.ZOMBIE_PROFESSION, "Profession", "Zombie"),
     ELDER("SEA_LANTERN", 1, (short) 0, DataMenuType.BOOLEAN, "Elder", "Guardian"),
     COLOR("WOOL", 1, (short) 0, DataMenuType.COLOR, "Color", "Sheep", "Wolf"),
 	PROFESSION("IRON_AXE", 1, (short) 0, DataMenuType.PROFESSION, "Profession", "Villager", "Zombie"),
-	STANDING_UP("RAW_FISH", 1, (short) 0, DataMenuType.BOOLEAN, "PolarBear"),
+	STANDING_UP("RAW_FISH", 1, (short) 0, DataMenuType.BOOLEAN, "Standing Up", "PolarBear"),
+	SKELETON_TYPE("BONE", 1, (short) 0, DataMenuType.SKELETON_TYPE, "Skeleton Type", "Skeleton"),
     RIDE("CARROT_STICK", 1, (short) 0, DataMenuType.BOOLEAN, "Ride Pet", "Control your pet."),
     HAT("IRON_HELMET", 1, (short) 0, DataMenuType.BOOLEAN, "Hat Pet", "Wear your pet on your head.");
 

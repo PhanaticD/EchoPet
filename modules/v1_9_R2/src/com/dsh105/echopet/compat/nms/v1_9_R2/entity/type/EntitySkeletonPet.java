@@ -17,6 +17,8 @@
 
 package com.dsh105.echopet.compat.nms.v1_9_R2.entity.type;
 
+import org.bukkit.entity.Skeleton.SkeletonType;
+
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySkeletonPet;
 import com.dsh105.echopet.compat.nms.v1_9_R2.entity.EntityPet;
@@ -53,8 +55,8 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
     }
 
     @Override
-    public void setWither(boolean flag) {
-		this.datawatcher.set(TYPE, flag ? 1 : 0);
+	public void setSkeletonType(SkeletonType type){
+		this.datawatcher.set(TYPE, type.ordinal());
 		/*if (flag) {
 			setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
 		} else {

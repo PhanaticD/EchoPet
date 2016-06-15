@@ -27,6 +27,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Villager.Profession;
 
 import com.dsh105.commodus.GeneralUtil;
@@ -517,8 +518,9 @@ public class PetManager implements IPetManager {
                 }
             }
 
-            if (pd == PetData.WITHER) {
-                ((ISkeletonPet) pet).setWither(b);
+			if(pd.isType(PetData.Type.SKELETON_TYPE)){
+				SkeletonType skeletonType = SkeletonType.valueOf(pd.toString());
+				((ISkeletonPet) pet).setSkeletonType(skeletonType);
             }
 
             if (pd == PetData.FIRE) {

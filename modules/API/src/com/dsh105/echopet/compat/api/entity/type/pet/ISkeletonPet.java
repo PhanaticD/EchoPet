@@ -17,11 +17,13 @@
 
 package com.dsh105.echopet.compat.api.entity.type.pet;
 
+import org.bukkit.entity.Skeleton.SkeletonType;
+
 import com.dsh105.echopet.compat.api.entity.IPet;
 
 public interface ISkeletonPet extends IPet {
 
-    public void setWither(boolean flag);
+	public void setSkeletonType(SkeletonType type);
 
-    public boolean isWither();
+	public SkeletonType getSkeletonType();
 }

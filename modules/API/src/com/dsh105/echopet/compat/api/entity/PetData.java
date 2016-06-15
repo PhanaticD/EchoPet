@@ -80,10 +80,12 @@ public enum PetData {
 	WHITE_SOCKS("whiteSocks", Type.HORSE_STYLE),
 	WHITE("white", Type.COLOUR, Type.HORSE_COLOR, Type.RABBIT_TYPE),
     WILD("wild", Type.CAT),
-    WITHER("wither", Type.BOOLEAN),
     YELLOW("yellow", Type.COLOUR),
 	UNDEAD_HORSE("zombie", Type.HORSE_VARIANT),
-	STANDING_UP("standingup", Type.BOOLEAN);
+	STANDING_UP("standingup", Type.BOOLEAN),
+	NORMAL("normal", Type.SKELETON_TYPE),
+	WITHER("wither", Type.SKELETON_TYPE),
+	STRAY("stray", Type.SKELETON_TYPE);
 
 
     private String configOptionString;
@@ -117,6 +119,7 @@ public enum PetData {
 		HORSE_COLOR,
 		HORSE_STYLE,
 		HORSE_ARMOUR,
-		RABBIT_TYPE
+		RABBIT_TYPE,
+		SKELETON_TYPE
     }
 }

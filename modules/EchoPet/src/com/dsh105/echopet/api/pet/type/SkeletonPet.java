@@ -17,31 +17,33 @@
 
 package com.dsh105.echopet.api.pet.type;
 
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton.SkeletonType;
+
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySkeletonPet;
 import com.dsh105.echopet.compat.api.entity.type.pet.ISkeletonPet;
-import org.bukkit.entity.Player;
 
 @EntityPetType(petType = PetType.SKELETON)
 public class SkeletonPet extends Pet implements ISkeletonPet {
 
-    boolean wither;
+	SkeletonType skeletonType;
 
     public SkeletonPet(Player owner) {
         super(owner);
     }
 
     @Override
-    public void setWither(boolean flag) {
-        ((IEntitySkeletonPet) getEntityPet()).setWither(flag);
-        this.wither = flag;
+	public void setSkeletonType(SkeletonType type){
+		((IEntitySkeletonPet) getEntityPet()).setSkeletonType(type);
+		this.skeletonType = type;
     }
 
     @Override
-    public boolean isWither() {
-        return this.wither;
+	public SkeletonType getSkeletonType(){
+		return this.skeletonType;
     }
 
 }

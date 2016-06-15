@@ -75,6 +75,7 @@ public class DataMenu {
         HORSE_VARIANT,
         HORSE_MARKING,
 		HORSE_ARMOUR,
-		RABBIT_TYPE
+		RABBIT_TYPE,
+		SKELETON_TYPE
     }
 }

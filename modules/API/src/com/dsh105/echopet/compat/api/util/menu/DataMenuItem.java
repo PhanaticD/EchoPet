@@ -97,6 +97,10 @@ public enum DataMenuItem {
     SALT_AND_PEPPER_RABBIT(DataMenuType.RABBIT_TYPE, PetData.SALT_AND_PEPPER, Material.WOOL, 1, (short) 4, "Salt and Pepper", "Bunny type"),
     KILLER_BUNNY(DataMenuType.RABBIT_TYPE, PetData.THE_KILLER_BUNNY, Material.WOOL, 1, (short) 14, "Killer Bunny", "Bunny type"),
 
+	SKELETON_NORMAL(DataMenuType.SKELETON_TYPE, PetData.NORMAL, Material.BONE, 1, (short) 0, "Normal", "Skeleton Type"),
+	WITHER(DataMenuType.SKELETON_TYPE, PetData.WITHER, Material.SKULL_ITEM, 1, (short) 1, "Wither", "Skeleton Type"),
+	STRAY(DataMenuType.SKELETON_TYPE, PetData.STRAY, Material.TIPPED_ARROW, 1, (short) 0, "Stray", "Skeleton Type"),
+
     BACK(DataMenuType.OTHER, null, Material.BOOK, 1, (short) 0, "Back", "Return to the main menu."),
     CLOSE(DataMenuType.OTHER, null, Material.BOOK, 1, (short) 0, "Close", "Close the Pet Menu");
 

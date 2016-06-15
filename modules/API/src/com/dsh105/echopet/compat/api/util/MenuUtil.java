@@ -46,7 +46,7 @@ public class MenuUtil {
             options.add(new MenuOption(i++, MenuItem.BABY));
         }
         if (pt == PetType.SKELETON) {
-            options.add(new MenuOption(i++, MenuItem.WITHER));
+			options.add(new MenuOption(i++, MenuItem.SKELETON_TYPE));
         }
         if (pt == PetType.SLIME) {
             options.add(new MenuOption(i++, MenuItem.SIZE));

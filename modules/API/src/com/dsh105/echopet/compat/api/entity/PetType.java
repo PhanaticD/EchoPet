@@ -43,7 +43,7 @@ public enum PetType {
     PIGZOMBIE("PigZombie", 57, "Pig Zombie Pet", 20D, 6D, "PIG_ZOMBIE", PetData.BABY),
 	// SHULKER("Shulker", 69, "Shulker Pet", 30D, 4D, "SHULKER"),
     SILVERFISH("Silverfish", 60, "Silverfish Pet", 8D, 4D, "SILVERFISH"),
-    SKELETON("Skeleton", 51, "Skeleton Pet", 20D, 5D, "SKELETON", PetData.WITHER),
+	SKELETON("Skeleton", 51, "Skeleton Pet", 20D, 5D, "SKELETON", PetData.NORMAL, PetData.WITHER, PetData.STRAY),
     SLIME("Slime", 55, "Slime Pet", 20D, 4D, "SLIME", PetData.SMALL, PetData.MEDIUM, PetData.LARGE),
     SPIDER("Spider", 52, "Spider Pet", 16D, 5D, "SPIDER"),
     WITCH("Witch", 66, "Witch Pet", 26D, 5D, "WITCH"),

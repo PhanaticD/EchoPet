@@ -17,9 +17,11 @@
 
 package com.dsh105.echopet.compat.api.entity.type.nms;
 
+import org.bukkit.entity.Skeleton.SkeletonType;
+
 import com.dsh105.echopet.compat.api.entity.IEntityPet;
 
 public interface IEntitySkeletonPet extends IEntityPet {
 
-    public void setWither(boolean flag);
+	public void setSkeletonType(SkeletonType type);
 }

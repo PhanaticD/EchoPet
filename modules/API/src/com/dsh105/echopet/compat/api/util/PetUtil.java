@@ -313,7 +313,7 @@ public class PetUtil {
         }
 
         if (pt.getPetType() == PetType.SKELETON) {
-            info.add(ChatColor.GOLD + " - Wither: " + ChatColor.YELLOW + ((ISkeletonPet) pt).isWither());
+			info.add(ChatColor.GOLD + " - Skeleton Type: " + ChatColor.YELLOW + StringUtil.capitalise(((ISkeletonPet) pt).getSkeletonType().toString().replace("_", " ")));
         }
 
         if (pt.getPetType() == PetType.WITHER) {

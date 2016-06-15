@@ -16,6 +16,8 @@
  */
 package com.dsh105.echopet.compat.nms.v1_10_R1.entity.type;
 
+import org.bukkit.entity.Skeleton.SkeletonType;
+
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySkeletonPet;
 import com.dsh105.echopet.compat.nms.v1_10_R1.entity.EntityPet;
@@ -52,8 +54,8 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet{
 	}
 
 	@Override
-	public void setWither(boolean flag){
-		this.datawatcher.set(TYPE, flag ? 1 : 0);
+	public void setSkeletonType(SkeletonType type){
+		this.datawatcher.set(TYPE, type.ordinal());
 		/*if (flag) {
 			setEquipment(EnumItemSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
 		} else {
@@ -61,8 +63,8 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet{
 		}*/
 	}
 
-	public int getSkeletonType(){
-		return ((Integer) this.datawatcher.get(TYPE)).intValue();
+	public SkeletonType getSkeletonType(){
+		return SkeletonType.values()[this.datawatcher.get(TYPE)];
 	}
 
 	@Override
@@ -72,9 +74,53 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet{
 		this.datawatcher.register(b, Boolean.valueOf(false));
 	}
 
+	protected String getIdleSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.ambient";
+			case STRAY:
+				return "entity.stray.ambient";
+			default:
+				return "entity.skeleton.ambient";
+		}
+	}
+
+	protected String getHurtSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.hurt";
+			case STRAY:
+				return "entity.stray.hurt";
+			default:
+				return "entity.skeleton.hurt";
+		}
+	}
+
+	protected String getDeathSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.death";
+			case STRAY:
+				return "entity.stray.death";
+			default:
+				return "entity.skeleton.death";
+		}
+	}
+
+	protected String getStepSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.step";
+			case STRAY:
+				return "entity.stray.step";
+			default:
+				return "entity.skeleton.step";
+		}
+	}
+
 	@Override
 	public SizeCategory getSizeCategory(){
-		if(this.getSkeletonType() == 1){
+		if(this.getSkeletonType() == SkeletonType.WITHER){
 			return SizeCategory.LARGE;
 		}else{
 			return SizeCategory.REGULAR;
