@@ -64,23 +64,59 @@ public class EntitySkeletonPet extends EntityPet implements IEntitySkeletonPet {
 		}*/
     }
 
-    public int getSkeletonType() {
-		return ((Integer) this.datawatcher.get(TYPE)).intValue();
-    }
+	public SkeletonType getSkeletonType(){
+		return SkeletonType.values()[this.datawatcher.get(TYPE)];
+	}
 
-    @Override
-    protected void initDatawatcher() {
-        super.initDatawatcher();
+	@Override
+	protected void initDatawatcher(){
+		super.initDatawatcher();
 		this.datawatcher.register(TYPE, Integer.valueOf(0));
 		this.datawatcher.register(b, Boolean.valueOf(false));
-    }
+	}
 
-    @Override
-    public SizeCategory getSizeCategory() {
-        if (this.getSkeletonType() == 1) {
-            return SizeCategory.LARGE;
-        } else {
-            return SizeCategory.REGULAR;
-        }
-    }
+	protected String getIdleSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.ambient";
+			default:
+				return "entity.skeleton.ambient";
+		}
+	}
+
+	protected String getHurtSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.hurt";
+			default:
+				return "entity.skeleton.hurt";
+		}
+	}
+
+	protected String getDeathSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.death";
+			default:
+				return "entity.skeleton.death";
+		}
+	}
+
+	protected String getStepSound(){
+		switch (getSkeletonType()){
+			case WITHER:
+				return "entity.wither_skeleton.step";
+			default:
+				return "entity.skeleton.step";
+		}
+	}
+
+	@Override
+	public SizeCategory getSizeCategory(){
+		if(this.getSkeletonType() == SkeletonType.WITHER){
+			return SizeCategory.LARGE;
+		}else{
+			return SizeCategory.REGULAR;
+		}
+	}
 }
