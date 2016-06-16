@@ -39,6 +39,7 @@ public class SpawnUtil implements ISpawnUtil{
 
 	public IEntityPet spawn(IPet pet, Player owner){
 		Location l = owner.getLocation();
+		if(EchoPet.getPlugin().getVanishProvider().isVanished(owner)) return null;
 		PetPreSpawnEvent spawnEvent = new PetPreSpawnEvent(pet, l);
 		EchoPet.getPlugin().getServer().getPluginManager().callEvent(spawnEvent);
 		if(spawnEvent.isCancelled()){

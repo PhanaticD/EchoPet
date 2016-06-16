@@ -17,12 +17,13 @@
 
 package com.dsh105.echopet.api.pet.type;
 
+import org.bukkit.entity.Player;
+
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityBatPet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IBatPet;
-import org.bukkit.entity.Player;
 
 @EntityPetType(petType = PetType.BAT)
 public class BatPet extends Pet implements IBatPet {
@@ -35,7 +36,7 @@ public class BatPet extends Pet implements IBatPet {
 
     @Override
     public void setHanging(boolean flag) {
-        ((IEntityBatPet) getEntityPet()).setHanging(flag);
+		((IEntityBatPet) getEntityPet()).setHanging(flag);
         this.hanging = flag;
     }
 

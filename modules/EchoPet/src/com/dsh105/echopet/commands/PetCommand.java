@@ -59,7 +59,7 @@ public class PetCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String cmdLabel, String[] args) {
-        if (args.length == 0) {
+		if(args.length == 0){
             if (Perm.BASE.hasPerm(sender, true, true)) {
                 Lang.sendTo(sender, Lang.HELP.toString().replace("%cmd%", "pet help"));
                 return true;

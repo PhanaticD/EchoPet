@@ -23,6 +23,4 @@ import org.kitteh.vanish.VanishPlugin;
 public interface IVanishProvider extends IPluginDependencyProvider<VanishPlugin> {
 
     public boolean isVanished(Player player);
-
-    public boolean isVanished(String player);
 }

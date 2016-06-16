@@ -17,12 +17,13 @@
 
 package com.dsh105.echopet.listeners;
 
-import com.dsh105.echopet.compat.api.entity.IPet;
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.kitteh.vanish.event.VanishStatusChangeEvent;
+
+import com.dsh105.echopet.compat.api.entity.IPet;
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
 
 
 public class VanishListener implements Listener {
@@ -32,8 +33,14 @@ public class VanishListener implements Listener {
         Player p = event.getPlayer();
         IPet pet = EchoPet.getManager().getPet(p);
         if (pet != null) {
-            pet.getEntityPet().setShouldVanish(event.isVanishing());
-            pet.getEntityPet().setInvisible(event.isVanishing());
+			if(!event.isVanishing()) pet.spawnPet(p);
+			else{
+				EchoPet.getManager().saveFileData("autosave", pet);
+				EchoPet.getSqlManager().saveToDatabase(pet, false);
+				pet.removePet(false, false);
+			}
+			// pet.getEntityPet().setShouldVanish(event.isVanishing());
+			// pet.getEntityPet().setInvisible(event.isVanishing());
         }
     }
 }

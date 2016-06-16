@@ -27,6 +27,8 @@ import org.bukkit.inventory.InventoryView;
 
 public interface IPet{
 
+	public IEntityPet spawnPet(Player owner);
+
     public IEntityPet getEntityPet();
 
     public Creature getCraftPet();
@@ -59,11 +61,11 @@ public interface IPet{
 
     public boolean setPetName(String name, boolean sendFailMessage);
 
-    public ArrayList<PetData> getPetData();
+	public ArrayList<PetData> getPetData();
 
     public void removeRider();
 
-    public void removePet(boolean makeSound);
+	public void removePet(boolean makeSound, boolean makeParticles);
 
     public boolean teleportToOwner();
 
@@ -82,4 +84,5 @@ public interface IPet{
 	public InventoryView getInventoryView();
 
 	public void setInventoryView(InventoryView dataMenu);
+
 }

@@ -62,11 +62,7 @@ public abstract class Pet implements IPet{
             this.ownerIdentification = UUIDMigration.getIdentificationFor(owner);
             this.setPetType();
             this.setPetName(this.getPetType().getDefaultName(this.getNameOfOwner()));
-            this.entityPet = EchoPet.getPlugin().getSpawnUtil().spawn(this, owner);
-            if (this.entityPet != null) {
-                this.applyPetName();
-                this.teleportToOwner();
-            }
+			spawnPet(owner);
         }
     }
 
@@ -76,6 +72,18 @@ public abstract class Pet implements IPet{
             this.petType = entityPetType.petType();
         }
     }
+
+	public IEntityPet spawnPet(Player owner){
+		if(entityPet != null) return entityPet;
+		this.entityPet = EchoPet.getPlugin().getSpawnUtil().spawn(this, owner);
+		if(this.entityPet != null){
+			this.applyPetName();
+			this.teleportToOwner();
+			for(PetData pd : getPetData())
+				EchoPet.getManager().setData(this, pd, true);
+		}
+		return entityPet;
+	}
 
     @Override
     public IEntityPet getEntityPet() {
@@ -201,34 +209,35 @@ public abstract class Pet implements IPet{
     }
 
     @Override
-    public ArrayList<PetData> getPetData() {
+	public ArrayList<PetData> getPetData(){
         return this.petData;
     }
 
     @Override
     public void removeRider() {
         if (rider != null) {
-            rider.removePet(true);
+			rider.removePet(true, true);
 			rider = null;
         }
     }
 
     @Override
-    public void removePet(boolean makeSound) {
-        if (this.getCraftPet() != null) {
+	public void removePet(boolean makeSound, boolean makeParticles){
+		if(getEntityPet() != null && this.getCraftPet() != null && makeParticles){
             Particle.CLOUD.builder().at(getLocation()).show();
             Particle.LAVA_SPARK.builder().at(getLocation()).show();
         }
         removeRider();
         if (this.getEntityPet() != null) {
             this.getEntityPet().remove(makeSound);
+			this.entityPet = null;
         }
     }
 
     @Override
     public boolean teleportToOwner() {
         if (this.getOwner() == null || this.getOwner().getLocation() == null) {
-            this.removePet(false);
+			this.removePet(false, true);
             return false;
         }
 		Pet rider = getRider();
@@ -305,7 +314,7 @@ public abstract class Pet implements IPet{
         } else {
 			method = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_MOUNT.getName(), ReflectionUtil.getNMSClass("Entity"), boolean.class);
 			if(getRider() != null){
-				getRider().removePet(false);
+				getRider().removePet(false, true);
             }
             new BukkitRunnable() {
                 @Override
@@ -391,10 +400,10 @@ public abstract class Pet implements IPet{
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (getCraftPet() != null) {
-                    getCraftPet().setPassenger(Pet.this.getRider().getCraftPet());
+				if(getEntityPet() != null && getCraftPet() != null){
+					getCraftPet().setPassenger(getRider().getCraftPet());
                 }
-                EchoPet.getSqlManager().saveToDatabase(Pet.this.rider, true);
+				EchoPet.getSqlManager().saveToDatabase(rider, true);
             }
         }.runTaskLater(EchoPet.getPlugin(), 5L);
 

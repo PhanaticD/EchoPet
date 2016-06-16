@@ -176,27 +176,20 @@ public class PetOwnerListener implements Listener {
             @Override
             public void run() {
                 if (p != null && p.isOnline()) {
-                    IPet pet = EchoPet.getManager().loadPets(p, true, sendMessage, false);
-                    if (pet != null) {
-                        if (EchoPet.getPlugin().getVanishProvider().isVanished(p)) {
-                            pet.getEntityPet().setShouldVanish(true);
-                            pet.getEntityPet().setInvisible(true);
-                        }
-                    }
+					EchoPet.getManager().loadPets(p, true, sendMessage, false);
+					Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
+					while(i.hasNext()){
+						IPet p = i.next();
+						if(p.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) p.getEntityPet()).hasInititiated()){
+							if(GeometryUtil.getNearbyEntities(event.getPlayer().getLocation(), 50).contains(p)){
+								((IEntityPacketPet) p.getEntityPet()).updatePosition();
+							}
+						}
+					}
                 }
             }
 
-        }.runTaskLater(EchoPet.getPlugin(), 20);
-
-        Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
-        while (i.hasNext()) {
-            IPet pet = i.next();
-            if (pet.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) pet.getEntityPet()).hasInititiated()) {
-                if (GeometryUtil.getNearbyEntities(event.getPlayer().getLocation(), 50).contains(pet)) {
-                    ((IEntityPacketPet) pet.getEntityPet()).updatePosition();
-                }
-            }
-        }
+		}.runTaskLater(EchoPet.getPlugin(), 20);
     }
 
     @EventHandler

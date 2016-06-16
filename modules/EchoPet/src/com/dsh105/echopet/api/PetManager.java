@@ -95,7 +95,7 @@ public class PetManager implements IPetManager {
             IPet p = i.next();
             saveFileData("autosave", p);
             EchoPet.getSqlManager().saveToDatabase(p, false);
-            p.removePet(true);
+			p.removePet(true, true);
             i.remove();
         }
     }
@@ -291,7 +291,7 @@ public class PetManager implements IPetManager {
                 if (riderPetType == null) return;
                 if (EchoPet.getOptions().allowRidersFor(pet.getPetType())) {
                     IPet rider = pet.createRider(riderPetType, true);
-                    if (rider != null && rider.getEntityPet() != null) {
+					if(rider != null && rider.getEntityPet() != null){
                         rider.setPetName(riderName);
                         ArrayList<PetData> riderData = new ArrayList<PetData>();
                         ConfigurationSection mcs = EchoPet.getConfig(EchoPet.ConfigType.DATA).getConfigurationSection(path + ".rider.data");
@@ -320,7 +320,7 @@ public class PetManager implements IPetManager {
         while (i.hasNext()) {
             IPet p = i.next();
             if (UUIDMigration.getIdentificationFor(player).equals(p.getOwnerIdentification())) {
-                p.removePet(makeDeathSound);
+				p.removePet(makeDeathSound, true);
                 i.remove();
             }
         }
@@ -328,7 +328,7 @@ public class PetManager implements IPetManager {
 
     @Override
     public void removePet(IPet pi, boolean makeDeathSound) {
-        pi.removePet(makeDeathSound);
+		pi.removePet(makeDeathSound, true);
         pets.remove(pi);
     }
 
@@ -441,214 +441,192 @@ public class PetManager implements IPetManager {
 
     @Override
     public void setData(IPet pet, PetData pd, boolean b) {
-        PetType petType = pet.getPetType();
-        if (petType.isDataAllowed(pd)) {
-            if (pd == PetData.BABY) {
-                if (petType == PetType.ZOMBIE) {
-                    ((IZombiePet) pet).setBaby(b);
-                } else if (petType == PetType.PIGZOMBIE) {
-                    ((IPigZombiePet) pet).setBaby(b);
-                } else {
-                    ((IAgeablePet) pet).setBaby(b);
-                }
-            }
-
-            if (pd == PetData.POWER) {
-                ((ICreeperPet) pet).setPowered(b);
-            }
-
-            if (pd.isType(PetData.Type.SIZE)) {
-                int i = 1;
-                if (pd == PetData.MEDIUM) {
-                    i = 2;
-                } else if (pd == PetData.LARGE) {
-                    i = 4;
-                }
-                if (petType == PetType.SLIME) {
-                    ((ISlimePet) pet).setSize(i);
-                }
-                if (petType == PetType.MAGMACUBE) {
-                    ((IMagmaCubePet) pet).setSize(i);
-                }
-            }
-
-            if (pd.isType(PetData.Type.CAT) && petType == PetType.OCELOT) {
-                try {
-                    org.bukkit.entity.Ocelot.Type t = org.bukkit.entity.Ocelot.Type.valueOf(pd.toString() + (pd == PetData.WILD ? "_OCELOT" : "_CAT"));
-                    if (t != null) {
-                        ((IOcelotPet) pet).setCatType(t);
-                    }
-                } catch (Exception e) {
-                    Logger.log(Logger.LogLevel.SEVERE, "Encountered exception whilst attempting to convert PetData to Ocelot.Type.", e, true);
-                }
-            }
-
-            if (pd == PetData.ANGRY) {
-                ((IWolfPet) pet).setAngry(b);
-            }
-
-            if (pd == PetData.TAMED) {
-                ((IWolfPet) pet).setTamed(b);
-            }
-
-			if(pd.isType(PetData.Type.PROF) || pd.isType(PetData.Type.ZOMBIE_PROFESSION)){
-                Profession p = Profession.valueOf(pd.toString());
-                if (p != null) {
+		if(pet.getEntityPet() != null){
+			PetType petType = pet.getPetType();
+			if(petType.isDataAllowed(pd)){
+				if(pd == PetData.BABY){
 					if(petType == PetType.ZOMBIE){
-						((IZombiePet) pet).setVillagerProfession(p);
+						((IZombiePet) pet).setBaby(b);
+					}else if(petType == PetType.PIGZOMBIE){
+						((IPigZombiePet) pet).setBaby(b);
 					}else{
-						((IVillagerPet) pet).setProfession(p);
+						((IAgeablePet) pet).setBaby(b);
 					}
-                }
-            }
-
-            if (pd.isType(PetData.Type.COLOUR) && (petType == PetType.SHEEP || petType == PetType.WOLF)) {
-                String s = pd == PetData.LIGHTBLUE ? "LIGHT_BLUE" : pd.toString();
-                try {
-                    DyeColor dc = DyeColor.valueOf(s);
-                    if (dc != null) {
-                        if (petType == PetType.SHEEP) {
-                            ((ISheepPet) pet).setColor(dc);
-                        } else if (petType == PetType.WOLF) {
-                            ((IWolfPet) pet).setCollarColor(dc);
-                        }
-                    }
-                } catch (Exception e) {
-                    Logger.log(Logger.LogLevel.SEVERE, "Encountered exception whilst attempting to convert PetData to DyeColor.", e, true);
-                }
-            }
-
-			if(pd.isType(PetData.Type.SKELETON_TYPE)){
-				SkeletonType skeletonType = SkeletonType.valueOf(pd.toString());
-				((ISkeletonPet) pet).setSkeletonType(skeletonType);
-            }
-
-            if (pd == PetData.FIRE) {
-                ((IBlazePet) pet).setOnFire(b);
-            }
-
-            if (pd == PetData.SADDLE) {
-                if (petType == PetType.PIG) {
-                    ((IPigPet) pet).setSaddle(b);
-                } else if (petType == PetType.HORSE) {
-                    ((IHorsePet) pet).setSaddled(b);
-                }
-            }
-
-            if (pd == PetData.SHEARED) {
-				if(petType == PetType.SHEEP){
-					((ISheepPet) pet).setSheared(b);
-				}else{
-					((ISnowmanPet) pet).setSheared(b);
 				}
-            }
-
-            if (pd == PetData.SCREAMING) {
-                ((IEndermanPet) pet).setScreaming(b);
-            }
-
-            if (pd == PetData.SHIELD) {
-                ((IWitherPet) pet).setShielded(b);
-            }
-            
-            if (pd == PetData.ELDER) {
-                ((IGuardianPet) pet).setElder(b);
-            }
-
-            if (pd.isType(PetData.Type.RABBIT_TYPE) && petType == PetType.RABBIT) {
-                ((IRabbitPet) pet).setRabbitType(Rabbit.Type.valueOf(pd.toString()));
-            }
-			if(pd == PetData.STANDING_UP){
-				((IPolarBearPet) pet).setStandingUp(b);
-			}
-
-            if (petType == PetType.HORSE) {
-                if (pd == PetData.CHESTED) {
-                    ((IHorsePet) pet).setChested(b);
-                }
-
-				if(pd.isType(PetData.Type.HORSE_VARIANT)){
-                    try {
-						Horse.Variant h = Horse.Variant.valueOf(pd.toString());
-                        if (h != null) {
-							((IHorsePet) pet).setVariant(h);
-                        }
-                    } catch (Exception e) {
-                        Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Type.", e, true);
-                    }
-                }
-
-				if(pd.isType(PetData.Type.HORSE_COLOR)){
-                    try {
-						Horse.Color v = Horse.Color.valueOf(pd.toString());
-                        if (v != null) {
-							((IHorsePet) pet).setColor(v);
-                        }
-                    } catch (Exception e) {
-                        Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Variant.", e, true);
-                    }
-                }
-
-				if(pd.isType(PetData.Type.HORSE_STYLE)){
-                    try {
-						Horse.Style m;
-						if(pd.equals(PetData.WHITE_SOCKS)){
-							m = Horse.Style.WHITE;
-						}else{
-							m = Horse.Style.valueOf(pd.toString());
+				if(pd == PetData.POWER){
+					((ICreeperPet) pet).setPowered(b);
+				}
+				if(pd.isType(PetData.Type.SIZE)){
+					int i = 1;
+					if(pd == PetData.MEDIUM){
+						i = 2;
+					}else if(pd == PetData.LARGE){
+						i = 4;
+					}
+					if(petType == PetType.SLIME){
+						((ISlimePet) pet).setSize(i);
+					}
+					if(petType == PetType.MAGMACUBE){
+						((IMagmaCubePet) pet).setSize(i);
+					}
+				}
+				if(pd.isType(PetData.Type.CAT) && petType == PetType.OCELOT){
+					try{
+						org.bukkit.entity.Ocelot.Type t = org.bukkit.entity.Ocelot.Type.valueOf(pd.toString() + (pd == PetData.WILD ? "_OCELOT" : "_CAT"));
+						if(t != null){
+							((IOcelotPet) pet).setCatType(t);
 						}
-                        if (m != null) {
-							((IHorsePet) pet).setStyle(m);
-                        }
-                    } catch (Exception e) {
-                        Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Marking.", e, true);
-                    }
-                }
-
-                if (pd.isType(PetData.Type.HORSE_ARMOUR)) {
-                    try {
-                        HorseArmour a;
-                        if (pd == PetData.NOARMOUR) {
-                            a = HorseArmour.NONE;
-                        } else {
-                            a = HorseArmour.valueOf(pd.toString());
-                        }
-                        if (a != null) {
-                            ((IHorsePet) pet).setArmour(a);
-                        }
-                    } catch (Exception e) {
-                        Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Armour.", e, true);
-                    }
-                }
-            }
+					}catch(Exception e){
+						Logger.log(Logger.LogLevel.SEVERE, "Encountered exception whilst attempting to convert PetData to Ocelot.Type.", e, true);
+					}
+				}
+				if(pd == PetData.ANGRY){
+					((IWolfPet) pet).setAngry(b);
+				}
+				if(pd == PetData.TAMED){
+					((IWolfPet) pet).setTamed(b);
+				}
+				if(pd.isType(PetData.Type.PROF) || pd.isType(PetData.Type.ZOMBIE_PROFESSION)){
+					Profession p = Profession.valueOf(pd.toString());
+					if(p != null){
+						if(petType == PetType.ZOMBIE){
+							((IZombiePet) pet).setVillagerProfession(p);
+						}else{
+							((IVillagerPet) pet).setProfession(p);
+						}
+					}
+				}
+				if(pd.isType(PetData.Type.COLOUR) && (petType == PetType.SHEEP || petType == PetType.WOLF)){
+					String s = pd == PetData.LIGHTBLUE ? "LIGHT_BLUE" : pd.toString();
+					try{
+						DyeColor dc = DyeColor.valueOf(s);
+						if(dc != null){
+							if(petType == PetType.SHEEP){
+								((ISheepPet) pet).setColor(dc);
+							}else if(petType == PetType.WOLF){
+								((IWolfPet) pet).setCollarColor(dc);
+							}
+						}
+					}catch(Exception e){
+						Logger.log(Logger.LogLevel.SEVERE, "Encountered exception whilst attempting to convert PetData to DyeColor.", e, true);
+					}
+				}
+				if(pd.isType(PetData.Type.SKELETON_TYPE)){
+					SkeletonType skeletonType = SkeletonType.valueOf(pd.toString());
+					((ISkeletonPet) pet).setSkeletonType(skeletonType);
+				}
+				if(pd == PetData.FIRE){
+					((IBlazePet) pet).setOnFire(b);
+				}
+				if(pd == PetData.SADDLE){
+					if(petType == PetType.PIG){
+						((IPigPet) pet).setSaddle(b);
+					}else if(petType == PetType.HORSE){
+						((IHorsePet) pet).setSaddled(b);
+					}
+				}
+				if(pd == PetData.SHEARED){
+					if(petType == PetType.SHEEP){
+						((ISheepPet) pet).setSheared(b);
+					}else{
+						((ISnowmanPet) pet).setSheared(b);
+					}
+				}
+				if(pd == PetData.SCREAMING){
+					((IEndermanPet) pet).setScreaming(b);
+				}
+				if(pd == PetData.SHIELD){
+					((IWitherPet) pet).setShielded(b);
+				}
+				if(pd == PetData.ELDER){
+					((IGuardianPet) pet).setElder(b);
+				}
+				if(pd.isType(PetData.Type.RABBIT_TYPE) && petType == PetType.RABBIT){
+					((IRabbitPet) pet).setRabbitType(Rabbit.Type.valueOf(pd.toString()));
+				}
+				if(pd == PetData.STANDING_UP){
+					((IPolarBearPet) pet).setStandingUp(b);
+				}
+				if(petType == PetType.HORSE){
+					if(pd == PetData.CHESTED){
+						((IHorsePet) pet).setChested(b);
+					}
+					if(pd.isType(PetData.Type.HORSE_VARIANT)){
+						try{
+							Horse.Variant h = Horse.Variant.valueOf(pd.toString());
+							if(h != null){
+								((IHorsePet) pet).setVariant(h);
+							}
+						}catch(Exception e){
+							Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Type.", e, true);
+						}
+					}
+					if(pd.isType(PetData.Type.HORSE_COLOR)){
+						try{
+							Horse.Color v = Horse.Color.valueOf(pd.toString());
+							if(v != null){
+								((IHorsePet) pet).setColor(v);
+							}
+						}catch(Exception e){
+							Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Variant.", e, true);
+						}
+					}
+					if(pd.isType(PetData.Type.HORSE_STYLE)){
+						try{
+							Horse.Style m;
+							if(pd.equals(PetData.WHITE_SOCKS)){
+								m = Horse.Style.WHITE;
+							}else{
+								m = Horse.Style.valueOf(pd.toString());
+							}
+							if(m != null){
+								((IHorsePet) pet).setStyle(m);
+							}
+						}catch(Exception e){
+							Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Marking.", e, true);
+						}
+					}
+					if(pd.isType(PetData.Type.HORSE_ARMOUR)){
+						try{
+							HorseArmour a;
+							if(pd == PetData.NOARMOUR){
+								a = HorseArmour.NONE;
+							}else{
+								a = HorseArmour.valueOf(pd.toString());
+							}
+							if(a != null){
+								((IHorsePet) pet).setArmour(a);
+							}
+						}catch(Exception e){
+							Logger.log(Logger.LogLevel.WARNING, "Encountered exception whilst attempting to convert PetData to Horse.Armour.", e, true);
+						}
+					}
+				}
+			}
+		}
             
-            if (petType == PetType.GUARDIAN) {
-                
-            }
-            
-            ListIterator<PetData> i = pet.getPetData().listIterator();
-            while (i.hasNext()) {
-                PetData petData = i.next();
-                if (petData != pd) {
-                    ListIterator<PetData.Type> i2 = pd.getTypes().listIterator();
-                    while (i2.hasNext()) {
-                        PetData.Type type = i2.next();
-                        if (type != PetData.Type.BOOLEAN && petData.isType(type)) {
-                            i.remove();
-                            break;
-                        }
+		ListIterator<PetData> i = pet.getPetData().listIterator();
+		while(i.hasNext()){
+			PetData petData = i.next();
+			if(petData != pd){
+				ListIterator<PetData.Type> i2 = pd.getTypes().listIterator();
+				while(i2.hasNext()){
+					PetData.Type type = i2.next();
+					if(type != PetData.Type.BOOLEAN && petData.isType(type)){
+						i.remove();
+						break;
                     }
                 }
             }
+		}
 
-            if (b) {
-                if (!pet.getPetData().contains(pd)) {
-                    pet.getPetData().add(pd);
-                }
-            } else {
-                if (pet.getPetData().contains(pd)) {
-                    pet.getPetData().remove(pd);
-                }
+		if(b){
+			if(!pet.getPetData().contains(pd)){
+				pet.getPetData().add(pd);
+			}
+		}else{
+			if(pet.getPetData().contains(pd)){
+				pet.getPetData().remove(pd);
             }
         }
     }
