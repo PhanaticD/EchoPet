@@ -148,7 +148,7 @@ public class MenuListener implements Listener {
                 } else if (title.startsWith("EchoPet DataMenu - ")) {
                     if (currentlyInSlot.equals(DataMenuItem.BACK.getItem())) {
 						size = pet.getPetType() == PetType.HORSE ? 18 : 9;
-						PetMenu menu = new PetMenu(pet, MenuUtil.createOptionList(pet.getPetType()), size);
+						PetMenu menu = new PetMenu(pet, MenuUtil.createOptionList(pet), size);
 						menu.open(false);
                         return;
                     }

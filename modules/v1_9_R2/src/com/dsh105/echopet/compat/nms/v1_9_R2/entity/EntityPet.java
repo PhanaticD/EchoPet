@@ -249,7 +249,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 		if(p.getUniqueId().equals(getPlayerOwner().getUniqueId())){
 			// if (IdentUtil.areIdentical(p, getPlayerOwner())) {
             if (EchoPet.getConfig().getBoolean("pets." + this.getPet().getPetType().toString().toLowerCase().replace("_", " ") + ".interactMenu", true) && Perm.BASE_MENU.hasPerm(this.getPlayerOwner(), false, false)) {
-                ArrayList<MenuOption> options = MenuUtil.createOptionList(getPet().getPetType());
+				ArrayList<MenuOption> options = MenuUtil.createOptionList(getPet());
                 int size = this.getPet().getPetType() == PetType.HORSE ? 18 : 9;
                 PetMenu menu = new PetMenu(getPet(), options, size);
                 menu.open(false);

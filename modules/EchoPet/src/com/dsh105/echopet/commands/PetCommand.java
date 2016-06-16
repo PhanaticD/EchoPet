@@ -227,7 +227,7 @@ public class PetCommand implements CommandExecutor {
                         Lang.sendTo(sender, Lang.NO_PET.toString());
                         return true;
                     }
-                    ArrayList<MenuOption> options = MenuUtil.createOptionList(p.getPetType());
+					ArrayList<MenuOption> options = MenuUtil.createOptionList(p);
                     int size = p.getPetType() == PetType.HORSE ? 18 : 9;
                     PetMenu menu = new PetMenu(p, options, size);
                     menu.open(false);

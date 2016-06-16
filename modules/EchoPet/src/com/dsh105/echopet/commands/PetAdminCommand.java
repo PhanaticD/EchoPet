@@ -17,6 +17,16 @@
 
 package com.dsh105.echopet.commands;
 
+import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.conversations.Conversable;
+import org.bukkit.entity.Player;
+
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.StringUtil;
 import com.dsh105.echopet.compat.api.entity.IPet;
@@ -33,15 +43,6 @@ import com.dsh105.echopet.compat.api.util.menu.MenuOption;
 import com.dsh105.echopet.compat.api.util.menu.PetMenu;
 import com.dsh105.echopet.compat.api.util.menu.SelectorLayout;
 import com.dsh105.echopet.conversation.NameFactory;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.conversations.Conversable;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
 
 public class PetAdminCommand implements CommandExecutor {
 
@@ -190,7 +191,7 @@ public class PetAdminCommand implements CommandExecutor {
                         Lang.sendTo(sender, Lang.ADMIN_NO_PET.toString().replace("%player%", target.getName()));
                         return true;
                     }
-                    ArrayList<MenuOption> options = MenuUtil.createOptionList(pet.getPetType());
+					ArrayList<MenuOption> options = MenuUtil.createOptionList(pet);
                     int size = pet.getPetType() == PetType.HORSE ? 18 : 9;
                     PetMenu menu = new PetMenu(pet, options, size);
                     menu.open(false);

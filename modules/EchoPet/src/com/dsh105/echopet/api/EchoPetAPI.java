@@ -242,7 +242,7 @@ public class EchoPetAPI {
         if (pet == null) {
             return;
         }
-        ArrayList<MenuOption> options = MenuUtil.createOptionList(pet.getPetType());
+		ArrayList<MenuOption> options = MenuUtil.createOptionList(pet);
         PetMenu menu = new PetMenu(pet, options, pet.getPetType() == PetType.HORSE ? 18 : 9);
         menu.open(sendMessage);
     }

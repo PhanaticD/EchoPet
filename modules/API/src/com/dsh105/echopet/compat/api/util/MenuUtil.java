@@ -19,13 +19,18 @@ package com.dsh105.echopet.compat.api.util;
 
 import java.util.ArrayList;
 
+import org.bukkit.entity.Horse;
+
+import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.entity.PetType;
+import com.dsh105.echopet.compat.api.entity.type.pet.IHorsePet;
 import com.dsh105.echopet.compat.api.util.menu.MenuItem;
 import com.dsh105.echopet.compat.api.util.menu.MenuOption;
 
 public class MenuUtil {
 
-    public static ArrayList<MenuOption> createOptionList(PetType pt) {
+	public static ArrayList<MenuOption> createOptionList(IPet pet){
+		PetType pt = pet.getPetType();
         ArrayList<MenuOption> options = new ArrayList<MenuOption>();
         int i = 0;
         options.add(new MenuOption(i++, MenuItem.HAT));
@@ -101,7 +106,9 @@ public class MenuUtil {
         }
         if (pt == PetType.HORSE) {
             options.add(new MenuOption(i++, MenuItem.BABY));
-            options.add(new MenuOption(i++, MenuItem.CHESTED));
+			if(((IHorsePet) pet).getVariant() == Horse.Variant.DONKEY || ((IHorsePet) pet).getVariant() == Horse.Variant.MULE){
+				options.add(new MenuOption(i++, MenuItem.CHESTED));
+			}
             options.add(new MenuOption(i++, MenuItem.SADDLE));
             options.add(new MenuOption(i++, MenuItem.HORSE_TYPE));
             options.add(new MenuOption(i++, MenuItem.HORSE_ARMOUR));
