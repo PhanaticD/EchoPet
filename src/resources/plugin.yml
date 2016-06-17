@@ -462,6 +462,10 @@ permissions:
         default: op
     echopet.pet.type.pigzombie.villager:
         default: op
+    echopet.pet.type.polarbear.baby:
+        default: op
+    echopet.pet.type.polarbear.standingup:
+        default: op
     echopet.pet.type.rabbit.baby:
         default: op
     echopet.pet.type.rabbit.brown:
@@ -512,7 +516,11 @@ permissions:
         default: op
     echopet.pet.type.sheep.yellow:
         default: op
+    echopet.pet.type.skeleton.normal:
+        default: op
     echopet.pet.type.skeleton.wither:
+        default: op
+    echopet.pet.type.skeleton.stray:
         default: op
     echopet.pet.type.slime.small:
         default: op
@@ -1331,6 +1339,7 @@ permissions:
         description: 'All polarbear pet data permissions'
         children:
             echopet.pet.type.polarbear.baby: true
+            echopet.pet.type.polarbear.standingup: true
     echopet.pet.type.rabbit.*:
         default: op
         description: 'All rabbit pet data permissions'
@@ -1368,7 +1377,9 @@ permissions:
         default: op
         description: 'All skeleton pet data permissions'
         children:
+            echopet.pet.type.skeleton.normal: true
             echopet.pet.type.skeleton.wither: true
+            echopet.pet.type.skeleton.stray: true
     echopet.pet.type.slime.*:
         default: op
         description: 'All slime pet data permissions'
@@ -1440,6 +1451,7 @@ permissions:
             echopet.pet.type.ocelot.*: true
             echopet.pet.type.pig.*: true
             echopet.pet.type.pigzombie.*: true
+            echopet.pet.type.polarbear.*: true
             echopet.pet.type.sheep.*: true
             echopet.pet.type.skeleton.*: true
             echopet.pet.type.slime.*: true
