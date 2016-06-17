@@ -254,8 +254,9 @@ public abstract class Pet implements IPet{
         if (this.getEntityPet() == null || this.getEntityPet().isDead()) {
             EchoPet.getManager().saveFileData("autosave", this);
             EchoPet.getSqlManager().saveToDatabase(this, false);
-            EchoPet.getManager().removePet(this, false);
-            EchoPet.getManager().createPetFromFile("autosave", this.getOwner());
+			// EchoPet.getManager().removePet(this, false);
+			removePet(false, false);
+			spawnPet(getOwner());
             return false;
         }
         PetTeleportEvent teleportEvent = new PetTeleportEvent(this, this.getLocation(), to);
