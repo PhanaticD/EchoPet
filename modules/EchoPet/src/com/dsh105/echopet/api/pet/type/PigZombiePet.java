@@ -18,12 +18,11 @@
 package com.dsh105.echopet.api.pet.type;
 
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Villager.Profession;
 
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
+import com.dsh105.echopet.compat.api.entity.Profession;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityPigZombiePet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IPigZombiePet;
 
@@ -50,10 +49,10 @@ public class PigZombiePet extends Pet implements IPigZombiePet {
     }
 
 	@Override
-	public void setVillagerProfession(Villager.Profession profession){}
+	public void setVillagerProfession(Profession profession){}
 
 	@Override
-	public Villager.Profession getVillagerProfession(){
+	public Profession getVillagerProfession(){
 		return Profession.NORMAL;
 	}
 }

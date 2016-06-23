@@ -17,14 +17,15 @@
 
 package com.dsh105.echopet.compat.api.entity.type.pet;
 
+
 import com.dsh105.echopet.compat.api.entity.IAgeablePet;
-import org.bukkit.entity.Villager;
+import com.dsh105.echopet.compat.api.entity.Profession;
 
 public interface IVillagerPet extends IAgeablePet {
 
-    public Villager.Profession getProfession();
+	public Profession getProfession();
 
     public int getProfessionId();
 
-    public void setProfession(Villager.Profession prof);
+	public void setProfession(Profession prof);
 }

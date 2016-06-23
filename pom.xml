@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.10-R0.1-SNAPSHOT</version>
+            <version>1.9-R0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.captainbern</groupId>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.kitteh</groupId>
             <artifactId>VanishNoPacket</artifactId>
-            <version>3.20</version>
+            <version>3.19.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -110,6 +110,10 @@
         	<id>sk89q-repo</id>
         	<url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
+		<repository>
+			<id>kitteh-repo</id>
+			<url>http://repo.kitteh.org/content/groups/public</url>
+		</repository>
     </repositories>
 
     <build>

@@ -17,13 +17,12 @@
 
 package com.dsh105.echopet.compat.api.entity.type.nms;
 
-import org.bukkit.entity.Villager;
-
 import com.dsh105.echopet.compat.api.entity.IEntityAgeablePet;
+import com.dsh105.echopet.compat.api.entity.Profession;
 
 public interface IEntityZombiePet extends IEntityAgeablePet {
 
     public void setBaby(boolean flag);
 
-	public void setVillagerProfession(Villager.Profession profession);
+	public void setVillagerProfession(Profession profession);
 }

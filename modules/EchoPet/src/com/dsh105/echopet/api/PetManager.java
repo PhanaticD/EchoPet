@@ -28,7 +28,6 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Skeleton.SkeletonType;
-import org.bukkit.entity.Villager.Profession;
 
 import com.dsh105.commodus.GeneralUtil;
 import com.dsh105.commodus.StringUtil;
