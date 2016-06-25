@@ -17,13 +17,14 @@
 
 package com.dsh105.echopet.hook;
 
+import org.bukkit.plugin.Plugin;
+
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.plugin.hook.IWorldGuardProvider;
 import com.dsh105.echopet.compat.api.plugin.hook.PluginDependencyProvider;
 import com.dsh105.echopet.compat.api.util.Version;
 import com.dsh105.echopet.listeners.RegionListener;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import org.bukkit.plugin.Plugin;
 
 public class WorldGuardProvider extends PluginDependencyProvider<WorldGuardPlugin> implements IWorldGuardProvider {
 
@@ -33,7 +34,7 @@ public class WorldGuardProvider extends PluginDependencyProvider<WorldGuardPlugi
 
     @Override
     public void onHook() {
-        if (new Version(getDependency().getDescription().getVersion()).isCompatible("6.0")) {
+		if(new Version("6.0").isCompatible(getDependency().getDescription().getVersion())){
             if (EchoPet.getPlugin().getMainConfig().getBoolean("worldguard.regionEnterCheck", true)) {
                 this.getHandlingPlugin().getServer().getPluginManager().registerEvents(new RegionListener(), this.getHandlingPlugin());
             }
