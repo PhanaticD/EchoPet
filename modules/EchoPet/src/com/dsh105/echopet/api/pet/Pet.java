@@ -62,7 +62,7 @@ public abstract class Pet implements IPet{
             this.ownerIdentification = UUIDMigration.getIdentificationFor(owner);
             this.setPetType();
             this.setPetName(this.getPetType().getDefaultName(this.getNameOfOwner()));
-			spawnPet(owner);
+			this.spawnPet(owner);
         }
     }
 
@@ -75,12 +75,19 @@ public abstract class Pet implements IPet{
 
 	public IEntityPet spawnPet(Player owner){
 		if(entityPet != null) return entityPet;
-		this.entityPet = EchoPet.getPlugin().getSpawnUtil().spawn(this, owner);
-		if(this.entityPet != null){
-			this.applyPetName();
-			this.teleportToOwner();
-			for(PetData pd : getPetData())
-				EchoPet.getManager().setData(this, pd, true);
+		if(owner != null){
+			this.entityPet = EchoPet.getPlugin().getSpawnUtil().spawn(this, owner);
+			if(this.entityPet != null){
+				this.applyPetName();
+				this.teleportToOwner();
+				for(PetData pd : getPetData())
+					EchoPet.getManager().setData(this, pd, true);
+			}
+		}else{
+			EchoPet.getManager().saveFileData("autosave", this);
+			EchoPet.getSqlManager().saveToDatabase(this, false);
+			EchoPet.getManager().removePet(this, false);
+			removePet(false, false);
 		}
 		return entityPet;
 	}
