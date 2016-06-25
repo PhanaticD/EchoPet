@@ -26,6 +26,7 @@ import com.dsh105.commodus.StringUtil;
 import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.event.PetMenuOpenEvent;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.util.Version;
 
 public class DataMenu {
 
@@ -56,8 +57,10 @@ public class DataMenu {
         int i = 0;
         for (DataMenuItem mi : DataMenuItem.values()) {
 			if(mi.getTypes().contains(type)){
-                this.inv.setItem(i, mi.getItem());
-                i++;
+				if(mi.getDataLink().getVersion().isCompatible(new Version())){
+					this.inv.setItem(i, mi.getItem());
+					i++;
+				}
             }
         }
         this.inv.setItem((size - 1), DataMenuItem.BACK.getItem());

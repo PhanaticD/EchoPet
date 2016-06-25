@@ -19,6 +19,8 @@ package com.dsh105.echopet.compat.api.entity;
 
 import java.util.List;
 
+import com.dsh105.echopet.compat.api.util.ReflectionUtil;
+import com.dsh105.echopet.compat.api.util.Version;
 import com.google.common.collect.ImmutableList;
 
 public enum PetData {
@@ -45,7 +47,7 @@ public enum PetData {
 	GRAY("gray", Type.COLOUR, Type.HORSE_COLOR),
     GREEN("green", Type.COLOUR),
     GOLD("gold", Type.HORSE_ARMOUR),
-	HUSK("husk", Type.ZOMBIE_PROFESSION),
+	HUSK("husk", new Version("1.10-R1"), Type.ZOMBIE_PROFESSION),
     IRON("iron", Type.HORSE_ARMOUR),
     THE_KILLER_BUNNY("killerbunny", Type.RABBIT_TYPE),
     LARGE("large", Type.SIZE),
@@ -85,15 +87,21 @@ public enum PetData {
 	STANDING_UP("standingup", Type.BOOLEAN),
 	NORMAL("normal", Type.SKELETON_TYPE),
 	WITHER("wither", Type.SKELETON_TYPE),
-	STRAY("stray", Type.SKELETON_TYPE);
+	STRAY("stray", new Version("1.10-R1"), Type.SKELETON_TYPE);
 
 
     private String configOptionString;
     private List<Type> t;
+	private Version version;
 
-    PetData(String configOptionString, Type... t) {
+	private PetData(String configOptionString, Type... t){
+		this(configOptionString, new Version(ReflectionUtil.getServerVersion()), t);
+	}
+
+	private PetData(String configOptionString, Version version, Type... t){
         this.configOptionString = configOptionString;
         this.t = ImmutableList.copyOf(t);
+		this.version = version;
     }
 
     public String getConfigOptionString() {
@@ -107,6 +115,10 @@ public enum PetData {
     public boolean isType(Type t) {
         return this.t.contains(t);
     }
+
+	public Version getVersion(){
+		return version;
+	}
 
     public enum Type {
 		BOOLEAN,

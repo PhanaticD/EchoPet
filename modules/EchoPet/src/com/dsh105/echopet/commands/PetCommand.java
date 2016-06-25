@@ -43,10 +43,10 @@ import com.dsh105.powermessage.core.PowerMessage;
 
 public class PetCommand implements CommandExecutor {
 
-    private String cmdLabel;
+	// private String cmdLabel;
 
     public PetCommand(String commandLabel) {
-        this.cmdLabel = commandLabel;
+		// this.cmdLabel = commandLabel;
     }
 
     private Paginator<PowerMessage> getHelp(CommandSender sender) {
@@ -87,7 +87,7 @@ public class PetCommand implements CommandExecutor {
 					if(args.length == 2){
 						NameFactory.askForName(p, pet.getRider(), false);
 					}else{
-						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(2, args, " "));
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineArray(2, " ", args));
 						if(name.length() > 32){
 							Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
 							return true;
@@ -100,7 +100,7 @@ public class PetCommand implements CommandExecutor {
 					if(args.length == 1){
 						NameFactory.askForName(p, pet, false);
 					}else{
-						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(1, args, " "));
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineArray(1, " ", args));
 						if(name.length() > 32){
 							Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
 							return true;
@@ -302,7 +302,7 @@ public class PetCommand implements CommandExecutor {
             // List of all pet types
             else if (args[0].equalsIgnoreCase("list")) {
                 if (Perm.LIST.hasPerm(sender, true, true)) {
-                    boolean is1dot7 = new Version("1.7").isSupported();
+					boolean is1dot7 = new Version("1.7").isSupported(new Version());
                     boolean inline = !(sender instanceof Player && is1dot7);
 
                     PowerMessage message = new PowerMessage(Lang.VALID_PET_TYPES.toString() + " ");
@@ -388,7 +388,7 @@ public class PetCommand implements CommandExecutor {
             } else {
                 if (!(sender instanceof Player)) {
                     Lang.sendTo(sender, Lang.IN_GAME_ONLY.toString()
-                            .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+					        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
                     return true;
                 }
 
@@ -454,7 +454,7 @@ public class PetCommand implements CommandExecutor {
                 } else {
                     if (!(sender instanceof Player)) {
                         Lang.sendTo(sender, Lang.IN_GAME_ONLY.toString()
-                                .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+						        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
                         return true;
                     }
 
@@ -703,7 +703,7 @@ public class PetCommand implements CommandExecutor {
         // Send them a message with the exact command to make sure
         if (!HelpPage.sendRelevantHelpMessage(sender, args)) {
             Lang.sendTo(sender, Lang.COMMAND_ERROR.toString()
-                    .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+			        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
         }
         return true;
     }
