@@ -101,7 +101,7 @@ public class PetAttackEvent extends Event implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return this.handlers;
+		return handlers;
     }
 
     public static HandlerList getHandlerList() {

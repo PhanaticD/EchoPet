@@ -93,7 +93,8 @@ public enum PetType {
     private List<PetData> allowedData;
     private int id;
 
-    PetType(String classIdentifier, int registrationId, String defaultName, double maxHealth, double attackDamage, String entityTypeName, PetData... allowedData) {
+	@SuppressWarnings("unchecked")
+	PetType(String classIdentifier, int registrationId, String defaultName, double maxHealth, double attackDamage, String entityTypeName, PetData... allowedData){
 		this.classIdentifier = classIdentifier;
 		try{
             this.entityClass = (Class<? extends IEntityPet>) Class.forName(ReflectionUtil.COMPAT_NMS_PATH + ".entity.type.Entity" + classIdentifier + "Pet");

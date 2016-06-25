@@ -27,12 +27,12 @@ import com.dsh105.echopet.compat.api.entity.PetData;
 import com.dsh105.echopet.compat.api.util.menu.DataMenu.DataMenuType;
 
 public enum DataMenuItem{
-	BOOLEAN_TRUE(DataMenuType.BOOLEAN, null, Material.getMaterial(76), 1, (short) 0, "True", "Turns the feature on."),
-	BOOLEAN_FALSE(DataMenuType.BOOLEAN, null, Material.getMaterial(75), 1, (short) 0, "False", "Turns the feature off."),
-	BLACK_CAT(DataMenuType.CAT_TYPE, PetData.BLACK, Material.getMaterial(351), 1, (short) 0, "Black", "Cat Type"),
-	RED_CAT(DataMenuType.CAT_TYPE, PetData.RED, Material.getMaterial(351), 1, (short) 1, "Red", "Cat Type"),
-	SIAMESE_CAT(DataMenuType.CAT_TYPE, PetData.SIAMESE, Material.getMaterial(351), 1, (short) 7, "Siamese", "Cat Type"),
-	WILD_CAT(DataMenuType.CAT_TYPE, PetData.WILD, Material.getMaterial(351), 1, (short) 14, "Wild", "Cat Type"),
+	BOOLEAN_TRUE(DataMenuType.BOOLEAN, null, Material.REDSTONE_TORCH_ON, 1, (short) 0, "True", "Turns the feature on."),
+	BOOLEAN_FALSE(DataMenuType.BOOLEAN, null, Material.REDSTONE_TORCH_OFF, 1, (short) 0, "False", "Turns the feature off."),
+	BLACK_CAT(DataMenuType.CAT_TYPE, PetData.BLACK, Material.INK_SACK, 1, (short) 0, "Black", "Cat Type"),
+	RED_CAT(DataMenuType.CAT_TYPE, PetData.RED, Material.INK_SACK, 1, (short) 1, "Red", "Cat Type"),
+	SIAMESE_CAT(DataMenuType.CAT_TYPE, PetData.SIAMESE, Material.INK_SACK, 1, (short) 7, "Siamese", "Cat Type"),
+	WILD_CAT(DataMenuType.CAT_TYPE, PetData.WILD, Material.INK_SACK, 1, (short) 14, "Wild", "Cat Type"),
 	SMALL(DataMenuType.SIZE, PetData.SMALL, Material.SLIME_BALL, 1, (short) 0, "Small", "Slime Size"),
 	MEDIUM(DataMenuType.SIZE, PetData.MEDIUM, Material.SLIME_BALL, 2, (short) 0, "Medium", "Slime Size"),
 	LARGE(DataMenuType.SIZE, PetData.LARGE, Material.SLIME_BALL, 4, (short) 0, "Large", "Slime Size"),

@@ -17,8 +17,10 @@
 
 package com.dsh105.echopet.compat.api.entity.type.pet;
 
-import com.dsh105.echopet.compat.api.entity.IAgeablePet;
+import org.bukkit.Color;
 import org.bukkit.DyeColor;
+
+import com.dsh105.echopet.compat.api.entity.IAgeablePet;
 
 public interface ISheepPet extends IAgeablePet {
 
@@ -26,11 +28,11 @@ public interface ISheepPet extends IAgeablePet {
 
     public boolean isSheared();
 
-    public DyeColor getColor();
+	public DyeColor getDyeColor();
 
-    public byte getColorByte();
+	public Color getColor();
 
-    public void setColor(DyeColor c);
+	public void setDyeColor(DyeColor c);
 
-    public void setColor(byte b);
+	public void setColor(Color b);
 }

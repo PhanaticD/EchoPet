@@ -30,12 +30,13 @@ public class CBClassTemplate extends ClassTemplate<Object> {
         setCBClass(className);
     }
 
-    protected void setCBClass(String name) {
-        Class clazz = ReflectionUtil.getCBCClass(name);
+	@SuppressWarnings("unchecked")
+	protected void setCBClass(String name){
+		Class<?> clazz = ReflectionUtil.getCBCClass(name);
         if (clazz == null) {
             EchoPet.LOG.warning("Failed to find a matching class with name: " + name);
         }
-        setClass(clazz);
+		setClass((Class<Object>) clazz);
     }
 
     public static CBClassTemplate create(String className) {

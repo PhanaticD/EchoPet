@@ -34,13 +34,11 @@ import com.dsh105.echopet.compat.api.util.Version;
 public class PetMenu{
 
 	Inventory inv;
-	private int size;
 	private IPet pet;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 
 	public PetMenu(IPet pet, ArrayList<MenuOption> options, int size){
 		this.pet = pet;
-		this.size = size;
 		this.inv = Bukkit.createInventory(pet.getOwner(), size, "EchoPet DataMenu");
 		this.options = options;
 		int incompatible = 0;

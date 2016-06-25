@@ -17,18 +17,20 @@
 
 package com.dsh105.echopet.compat.api.util;
 
-import com.dsh105.commodus.config.YAMLConfig;
-import com.dsh105.echopet.compat.api.config.ConfigOptions;
-import com.dsh105.echopet.compat.api.entity.IPet;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
-
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
+
+import com.dsh105.commodus.config.YAMLConfig;
+import com.dsh105.echopet.compat.api.config.ConfigOptions;
+import com.dsh105.echopet.compat.api.entity.IPet;
+
 public class PetNames {
 
-    public static boolean allow(String input, IPet pet) {
+	@SuppressWarnings("unchecked")
+	public static boolean allow(String input, IPet pet){
         YAMLConfig config = ConfigOptions.instance.getConfig();
         String nameToCheck = ChatColor.stripColor(input);
         ConfigurationSection cs = config.getConfigurationSection("petNames");

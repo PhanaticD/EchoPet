@@ -91,7 +91,7 @@ public class PetRideJumpEvent extends Event implements Cancellable {
 
 
     public HandlerList getHandlers() {
-        return this.handlers;
+		return handlers;
     }
 
     public static HandlerList getHandlerList() {

@@ -19,6 +19,8 @@ package com.dsh105.echopet.compat.api.exceptions;
 
 public class FancyMessageFailedException extends RuntimeException {
 
-    public FancyMessageFailedException() {
+	private static final long serialVersionUID = 1L;
+
+	public FancyMessageFailedException(){
     }
 }

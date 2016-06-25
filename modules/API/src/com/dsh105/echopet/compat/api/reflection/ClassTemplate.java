@@ -17,15 +17,16 @@
 
 package com.dsh105.echopet.compat.api.reflection;
 
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import com.dsh105.echopet.compat.api.util.ReflectionUtil;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.util.ReflectionUtil;
+
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class ClassTemplate<T> {
 
     private Class<T> type;
@@ -86,16 +87,16 @@ public class ClassTemplate<T> {
         return this.type;
     }
 
-    public static ClassTemplate<?> create(Class<?> type) {
+	public static ClassTemplate<?> create(Class<?> type){
         if (type == null) {
             EchoPet.LOG.warning("Cannot create a ClassTemplate with a null type!");
             return null;
         }
-        return new ClassTemplate(type);
+		return new ClassTemplate(type);
     }
 
     public static ClassTemplate<?> create(String className) {
-        Class clazz = ReflectionUtil.getClass(className);
+		Class<Object> clazz = (Class<Object>) ReflectionUtil.getClass(className);
 
         if (clazz == null) {
             EchoPet.LOG.warning("Failed to find a matching class with name: " + className);

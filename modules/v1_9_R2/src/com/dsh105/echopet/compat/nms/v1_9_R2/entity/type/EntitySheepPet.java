@@ -17,6 +17,8 @@
 
 package com.dsh105.echopet.compat.nms.v1_9_R2.entity.type;
 
+import org.bukkit.DyeColor;
+
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.EntitySize;
 import com.dsh105.echopet.compat.api.entity.IPet;
@@ -48,9 +50,9 @@ public class EntitySheepPet extends EntityAgeablePet implements IEntitySheepPet 
     }
 
     @Override
-    public void setColor(int i) {
+	public void setDyeColor(DyeColor color){
 		byte b0 = ((Byte) this.datawatcher.get(COLOR_SHEARED)).byteValue();
-		this.datawatcher.set(COLOR_SHEARED, Byte.valueOf((byte) (b0 & 0xF0 | i & 0xF)));
+		this.datawatcher.set(COLOR_SHEARED, Byte.valueOf((byte) (b0 & 0xF0 | color.ordinal() & 0xF)));
     }
 
     public boolean isSheared() {

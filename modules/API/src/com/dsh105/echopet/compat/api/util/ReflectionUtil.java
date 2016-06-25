@@ -17,17 +17,19 @@
 
 package com.dsh105.echopet.compat.api.util;
 
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import com.dsh105.echopet.compat.api.reflection.utility.CommonReflection;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.reflection.utility.CommonReflection;
+
+@SuppressWarnings("unchecked")
 public class ReflectionUtil {
 
     public static String COMPAT_NMS_PATH = prepareCompatNmsPath();
@@ -92,7 +94,8 @@ public class ReflectionUtil {
      * Class stuff
      */
 
-    public static Class getClass(String name) {
+	@SuppressWarnings("rawtypes")
+	public static Class getClass(String name){
         try {
             return Class.forName(name);
         } catch (ClassNotFoundException e) {
@@ -102,19 +105,19 @@ public class ReflectionUtil {
         }
     }
 
-    public static Class getVersionedClass(String classPath) {
+	public static Class<?> getVersionedClass(String classPath){
         return getClass(COMPAT_NMS_PATH + "." + classPath);
     }
 
-    public static Class getPetNMSClass(String classIdentifier) {
+	public static Class<?> getPetNMSClass(String classIdentifier){
         return getVersionedClass("entity.type.Entity" + classIdentifier + "Pet");
     }
 
-    public static Class getNMSClass(String className) {
+	public static Class<?> getNMSClass(String className){
         return CommonReflection.getMinecraftClass(className);
     }
 
-    public static Class getCBCClass(String className) {
+	public static Class<?> getCBCClass(String className){
         return CommonReflection.getCraftBukkitClass(className);
     }
 
@@ -138,7 +141,7 @@ public class ReflectionUtil {
         }
     }
 
-    public static <T> T getField(Class<?> clazz, String fieldName, Object instance) {
+	public static <T> T getField(Class<?> clazz, String fieldName, Object instance){
         try {
             return (T) getField(clazz, fieldName).get(instance);
         } catch (IllegalAccessException e) {

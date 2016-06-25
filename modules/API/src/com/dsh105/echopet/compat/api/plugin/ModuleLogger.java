@@ -17,15 +17,16 @@
 
 package com.dsh105.echopet.compat.api.plugin;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
-
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
+
+@SuppressWarnings("unchecked")
 public class ModuleLogger extends Logger {
 
     private final String[] modulePath;
@@ -65,7 +66,7 @@ public class ModuleLogger extends Logger {
         return collection == null || collection.isEmpty();
     }
 
-    protected static <T> T[] createArray(Class<T> type, int length) {
+	protected static <T> T[] createArray(Class<T> type, int length){
         return (T[]) Array.newInstance(type, length);
     }
 

@@ -19,7 +19,9 @@ package com.dsh105.echopet.compat.api.registration;
 
 public class PetRegistrationException extends RuntimeException {
 
-    public PetRegistrationException() {
+	private static final long serialVersionUID = 1L;
+
+	public PetRegistrationException(){
     }
 
     public PetRegistrationException(String message) {

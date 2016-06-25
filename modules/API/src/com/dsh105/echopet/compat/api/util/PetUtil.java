@@ -41,7 +41,6 @@ public class PetUtil {
     }
 
     public static PetStorage formPetFromArgs(CommandSender sender, String s, boolean petAdmin) {
-        String admin = petAdmin ? "admin" : "";
         String petString = s;
         String dataString = "";
         PetData singlePetData = null;

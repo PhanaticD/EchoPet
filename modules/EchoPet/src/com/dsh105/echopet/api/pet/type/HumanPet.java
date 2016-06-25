@@ -17,15 +17,16 @@
 
 package com.dsh105.echopet.api.pet.type;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+
 import com.dsh105.echopet.api.pet.PacketPet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntityHumanPet;
 import com.dsh105.echopet.compat.api.entity.type.pet.IHumanPet;
 import com.dsh105.echopet.compat.api.util.wrapper.WrappedGameProfile;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
 @EntityPetType(petType = PetType.HUMAN)
 public class HumanPet extends PacketPet implements IHumanPet {
@@ -36,12 +37,12 @@ public class HumanPet extends PacketPet implements IHumanPet {
 
     @Override
     public void setEquipment(Material material) {
-        ((IEntityHumanPet) this.getEntityPet()).setEquipmentId(material.getId());
+		((IEntityHumanPet) this.getEntityPet()).setEquipment(material);
     }
 
     @Override
     public Material getEquipment() {
-        return Material.getMaterial(((IEntityHumanPet) this.getEntityPet()).getEquipmentId());
+		return ((IEntityHumanPet) this.getEntityPet()).getEquipment();
     }
 
     @Override

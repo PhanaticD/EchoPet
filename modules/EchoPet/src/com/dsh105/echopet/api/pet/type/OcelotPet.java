@@ -55,13 +55,13 @@ public class OcelotPet extends Pet implements IOcelotPet {
 
     @Override
     public void setCatType(Type t) {
-        setCatType(t.getId());
+		setCatType(t.ordinal());
         this.type = t;
     }
 
     @Override
     public void setCatType(int i) {
         ((IEntityOcelotPet) getEntityPet()).setCatType(i);
-        this.type = Type.getType(i);
+		this.type = Type.values()[i];
     }
 }

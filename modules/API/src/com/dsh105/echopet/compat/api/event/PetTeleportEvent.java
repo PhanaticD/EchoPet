@@ -17,9 +17,10 @@
 
 package com.dsh105.echopet.compat.api.event;
 
-import com.dsh105.echopet.compat.api.entity.IPet;
 import org.bukkit.Location;
 import org.bukkit.event.HandlerList;
+
+import com.dsh105.echopet.compat.api.entity.IPet;
 
 /**
  * Called when a {@link com.dsh105.echopet.api.pet.Pet} teleports
@@ -58,7 +59,7 @@ public class PetTeleportEvent extends PetMoveEvent {
 
     @Override
     public HandlerList getHandlers() {
-        return this.handlers;
+		return handlers;
     }
 
     public static HandlerList getHandlerList() {

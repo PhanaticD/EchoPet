@@ -501,7 +501,7 @@ public class PetManager implements IPetManager {
 						DyeColor dc = DyeColor.valueOf(s);
 						if(dc != null){
 							if(petType == PetType.SHEEP){
-								((ISheepPet) pet).setColor(dc);
+								((ISheepPet) pet).setDyeColor(dc);
 							}else if(petType == PetType.WOLF){
 								((IWolfPet) pet).setCollarColor(dc);
 							}

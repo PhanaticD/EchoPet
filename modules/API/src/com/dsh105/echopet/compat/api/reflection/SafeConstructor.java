@@ -17,38 +17,39 @@
 
 package com.dsh105.echopet.compat.api.reflection;
 
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+
+@SuppressWarnings("unchecked")
 public class SafeConstructor<T> {
 
     private Constructor<T> constructor;
-    private Class[] params;
+	// private Class<?>[] params;
 
-    public SafeConstructor(Constructor constructor) {
+	public SafeConstructor(Constructor<T> constructor){
         setConstructor(constructor);
     }
 
-    public SafeConstructor(Class<?> coreClass, Class<?>... params) {
+	public SafeConstructor(Class<?> coreClass, Class<?>... params){
         try {
-            Constructor constructor = coreClass.getConstructor(params);
+			Constructor<T> constructor = (Constructor<T>) coreClass.getConstructor(params);
             setConstructor(constructor);
         } catch (NoSuchMethodException e) {
             EchoPet.LOG.warning("No such constructor!");
         }
     }
 
-    protected void setConstructor(Constructor constructor) {
+	protected void setConstructor(Constructor<T> constructor){
         if (constructor == null) {
             throw new UnsupportedOperationException("Cannot create a new constructor!");
         }
         this.constructor = constructor;
-        this.params = constructor.getParameterTypes();
+		// this.params = constructor.getParameterTypes();
     }
 
-    public Constructor getConstructor() {
+	public Constructor<?> getConstructor(){
         return this.constructor;
     }
 

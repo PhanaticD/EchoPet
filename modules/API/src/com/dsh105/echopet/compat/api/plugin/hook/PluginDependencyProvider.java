@@ -39,7 +39,8 @@ public abstract class PluginDependencyProvider<T extends Plugin> implements IPlu
 
     // TODO: add more utils, plugin stuff mostly.
 
-    public PluginDependencyProvider(Plugin myPluginInstance, String dependencyName) {
+	@SuppressWarnings("unchecked")
+	public PluginDependencyProvider(Plugin myPluginInstance, String dependencyName){
         this.instance = this;
         this.myPluginInstance = myPluginInstance;
         this.dependencyName = dependencyName;

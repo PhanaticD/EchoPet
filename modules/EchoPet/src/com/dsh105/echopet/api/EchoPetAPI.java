@@ -217,7 +217,7 @@ public class EchoPetAPI {
      */
     public void openPetSelector(Player player, boolean sendMessage) {
         SelectorLayout.getSelectorMenu().showTo(player);
-        if (false) {
+		if(sendMessage){
             Lang.sendTo(player, Lang.OPEN_SELECTOR.toString());
         }
     }

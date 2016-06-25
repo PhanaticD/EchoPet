@@ -34,14 +34,15 @@
 
 package com.dsh105.echopet.compat.api.reflection.utility;
 
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import com.dsh105.echopet.compat.api.reflection.*;
-import com.google.common.base.Strings;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.reflection.*;
+import com.google.common.base.Strings;
 
 /**
  * Allows us to access several classes and yet be compatible with MCPC+, Bukkit and Spigot
@@ -152,7 +153,7 @@ public class CommonReflection {
                     try {
                         if (VERSION_TAG == null || VERSION_TAG == "") {
                             if (getClass("org.bukkit.plugin.java.PluginClassLoader") != null) {
-                                ClassTemplate pluginClassLoader = ClassTemplate.create(getClass("org.bukkit.plugin.java.PluginClassLoader"));
+								ClassTemplate<?> pluginClassLoader = ClassTemplate.create(getClass("org.bukkit.plugin.java.PluginClassLoader"));
                                 MethodAccessor<String> getNativeVersion = pluginClassLoader.getMethod("getNativeVersion");
                                 if (getNativeVersion != null) {
                                     VERSION_TAG = getNativeVersion.invoke(null);

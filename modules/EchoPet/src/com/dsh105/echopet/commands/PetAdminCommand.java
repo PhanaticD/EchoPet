@@ -121,10 +121,10 @@ public class PetAdminCommand implements CommandExecutor {
                             NameFactory.askForName((Conversable) sender, pet.getRider(), true);
                         } else {
                             Lang.sendTo(sender, Lang.IN_GAME_ONLY.toString()
-                                    .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+							        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
                         }
                     } else {
-                        String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(3, args, " "));
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineArray(3, " ", args));
                         if (name.length() > 32) {
                             Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
                             return true;
@@ -155,10 +155,10 @@ public class PetAdminCommand implements CommandExecutor {
                             NameFactory.askForName((Conversable) sender, pet, true);
                         } else {
                             Lang.sendTo(sender, Lang.IN_GAME_ONLY.toString()
-                                    .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+							        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
                         }
                     } else {
-                        String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineSplit(2, args, " "));
+						String name = ChatColor.translateAlternateColorCodes('&', StringUtil.combineArray(2, " ", args));
                         if (name.length() > 32) {
                             Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
                             return true;
@@ -747,7 +747,7 @@ public class PetAdminCommand implements CommandExecutor {
         // Send them a message with the exact command to make sure
         if (!AdminHelpPage.sendRelevantHelpMessage(sender, args)) {
             Lang.sendTo(sender, Lang.ADMIN_COMMAND_ERROR.toString()
-                    .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineSplit(0, args, " "))));
+			        .replace("%cmd%", "/" + cmd.getLabel() + " " + (args.length == 0 ? "" : StringUtil.combineArray(0, " ", args))));
         }
         return true;
     }

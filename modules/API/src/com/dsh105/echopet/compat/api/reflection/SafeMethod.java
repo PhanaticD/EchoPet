@@ -26,7 +26,7 @@ import com.dsh105.echopet.compat.api.plugin.EchoPet;
 public class SafeMethod<T> implements MethodAccessor<T> {
 
     private Method method;
-    private Class[] params;
+	private Class<?>[] params;
     private boolean isStatic;
 
     public SafeMethod() {
@@ -59,7 +59,8 @@ public class SafeMethod<T> implements MethodAccessor<T> {
     }
 
 
-    public T invoke(Object instance, Object... args) {
+	@SuppressWarnings("unchecked")
+	public T invoke(Object instance, Object... args){
         if (this.method != null) {
 
             //check if the instance is right
@@ -93,7 +94,7 @@ public class SafeMethod<T> implements MethodAccessor<T> {
     }
 
 
-    public Class[] getArguments() {
+	public Class<?>[] getArguments(){
         if (this.method == null) {
             throw new RuntimeException("Method handle is NULL!");
         }

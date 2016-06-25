@@ -20,7 +20,8 @@ package com.dsh105.echopet.compat.api.reflection;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.util.ReflectionUtil;
 
-public class NMSClassTemplate extends ClassTemplate {
+@SuppressWarnings("rawtypes")
+public class NMSClassTemplate extends ClassTemplate{
 
     protected NMSClassTemplate() {
         setNMSClass(getClass().getSimpleName());
@@ -30,8 +31,9 @@ public class NMSClassTemplate extends ClassTemplate {
         setNMSClass(className);
     }
 
-    protected void setNMSClass(String name) {
-        Class clazz = ReflectionUtil.getNMSClass(name);
+	@SuppressWarnings("unchecked")
+	protected void setNMSClass(String name){
+		Class clazz = ReflectionUtil.getNMSClass(name);
         if (clazz == null) {
             EchoPet.LOG.warning("Failed to find a matching class with name: " + name);
         }

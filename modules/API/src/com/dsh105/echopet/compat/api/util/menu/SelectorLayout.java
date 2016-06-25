@@ -42,13 +42,13 @@ public class SelectorLayout {
     public static ItemStack getSelectorItem() {
         YAMLConfig config = ConfigOptions.instance.getConfig();
         String name = config.getString("petSelector.item.name", "&aPets");
-        int materialId = config.getInt("petSelector.item.materialId", Material.BONE.getId());
+		String material = config.getString("petSelector.item.material", Material.BONE.name());
         int materialData = config.getInt("petSelector.item.materialData", 0);
         List<String> lore = config.config().getStringList("petSelector.item.lore");
         if (lore == null) {
             lore = new ArrayList<String>();
         }
-        ItemStack i = new ItemStack(materialId, 1, (short) materialData);
+		ItemStack i = new ItemStack(Material.valueOf(material), 1, (short) materialData);
         ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
         ArrayList<String> loreList = new ArrayList<String>();
@@ -64,7 +64,8 @@ public class SelectorLayout {
         return i;
     }
 
-    public static void loadLayout() {
+	@SuppressWarnings("deprecation")
+	public static void loadLayout(){
         if (selectorMenu != null) {
             HandlerList.unregisterAll(selectorMenu);
         }
@@ -91,7 +92,7 @@ public class SelectorLayout {
 			if(data > 0){
 				EntityType et = EntityType.fromId(data);
 				if(et != null){
-					entityTag = et.getName();
+					entityTag = et.name();
 				}
 			}else{
 				entityTag = config.getString(s + ".slot-" + i + ".entityName", "Pig");
@@ -139,7 +140,7 @@ public class SelectorLayout {
         ArrayList<SelectorIcon> layout = new ArrayList<SelectorIcon>();
         int count = 0;
         for (PetItem item : PetItem.values()) {
-			if(item.getPetType() != null && !item.getPetType().equals(PetType.HUMAN) && !(item.getMaterialData() > 0)) layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), item.getPetType().getEntityType().getName(), item.getName()));
+			if(item.getPetType() != null && !item.getPetType().equals(PetType.HUMAN) && !(item.getMaterialData() > 0)) layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), item.getPetType().getEntityType().name(), item.getName()));
 			else layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), item.getMaterialData(), item.getName()));
 			count++;
         }

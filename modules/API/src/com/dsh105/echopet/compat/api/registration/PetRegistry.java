@@ -38,6 +38,7 @@ import com.google.common.base.Preconditions;
  * <p/>
  * NOTE: This class is a modified version of the registry used in EchoPet v3.
  */
+@SuppressWarnings("unchecked")
 public class PetRegistry {
 
     private static final EntityMapModifier<Class<?>, String> CLASS_TO_NAME_MODIFIER;

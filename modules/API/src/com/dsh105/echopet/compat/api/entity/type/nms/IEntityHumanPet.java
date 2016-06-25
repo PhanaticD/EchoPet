@@ -17,14 +17,16 @@
 
 package com.dsh105.echopet.compat.api.entity.type.nms;
 
+import org.bukkit.Material;
+
 import com.dsh105.echopet.compat.api.entity.IEntityPacketPet;
 import com.dsh105.echopet.compat.api.util.wrapper.WrappedGameProfile;
 
 public interface IEntityHumanPet extends IEntityPacketPet {
 
-    public void setEquipmentId(int id);
+	public void setEquipment(Material material);
 
-    public int getEquipmentId();
+	public Material getEquipment();
 
     public WrappedGameProfile getGameProfile();
 

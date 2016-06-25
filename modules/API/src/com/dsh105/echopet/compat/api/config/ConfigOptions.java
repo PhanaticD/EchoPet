@@ -19,6 +19,8 @@ package com.dsh105.echopet.compat.api.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,6 +30,7 @@ import com.dsh105.commodus.config.Options;
 import com.dsh105.commodus.config.YAMLConfig;
 import com.dsh105.echopet.compat.api.entity.PetData;
 import com.dsh105.echopet.compat.api.entity.PetType;
+import com.dsh105.echopet.compat.api.util.StringUtil;
 import com.dsh105.echopet.compat.api.util.menu.SelectorIcon;
 import com.dsh105.echopet.compat.api.util.menu.SelectorLayout;
 
@@ -110,15 +113,11 @@ public class ConfigOptions extends Options {
 
         set("petNames.My Pet", "allow");
         set("petNamesRegexMatching", true);
-        set("petNamesRegex", new ArrayList<HashMap<String, String>>() {
-            {
-                add(new HashMap<String, String>() {
-                    {
-                        put(".*administrator.*", "deny");
-                    }
-                });
-            }
-        });
+		List<HashMap<String, String>> petNamesRegex = new ArrayList<>();
+		Map<String, String> nameRegex = new HashMap<>();
+		nameRegex.put(".*administrator.*", "deny");
+		set("petNamesRegex", petNamesRegex);
+
         set("stripDiacriticsFromNames", true);
 
         set("enableHumanSkinFixing", true, "Connects to Mojang session servers to attempt to fix human skins");
@@ -159,7 +158,7 @@ public class ConfigOptions extends Options {
                 set("petSelector.menu.slot-" + friendlySlot + ".petType", icon.getPetType() == null ? "" : icon.getPetType().toString());
 				set("petSelector.menu.slot-" + friendlySlot + ".material", icon.getMaterial().name());
 				if(icon.getPetType() == null || icon.getPetType().equals(PetType.HUMAN) || icon.getMaterialData() > 0) set("petSelector.menu.slot-" + friendlySlot + ".materialData", icon.getMaterialData());
-				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", icon.getPetType().getEntityType().getName());
+				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", StringUtil.makeEnumHumanReadable(icon.getPetType().getEntityType().name()));
                 set("petSelector.menu.slot-" + friendlySlot + ".name", (icon.getName() == null ? "" : icon.getName()).replace(ChatColor.COLOR_CHAR, '&'));
                 ArrayList<String> lore = new ArrayList<String>();
                 for (String s : icon.getLore()) {

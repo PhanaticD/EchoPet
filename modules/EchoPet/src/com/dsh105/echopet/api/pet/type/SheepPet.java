@@ -17,20 +17,22 @@
 
 package com.dsh105.echopet.api.pet.type;
 
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
+import org.bukkit.entity.Player;
+
 import com.dsh105.echopet.api.pet.Pet;
 import com.dsh105.echopet.compat.api.entity.EntityPetType;
 import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.entity.type.nms.IEntitySheepPet;
 import com.dsh105.echopet.compat.api.entity.type.pet.ISheepPet;
-import org.bukkit.DyeColor;
-import org.bukkit.entity.Player;
 
 @EntityPetType(petType = PetType.SHEEP)
 public class SheepPet extends Pet implements ISheepPet {
 
     boolean baby;
     boolean sheared;
-    byte color;
+	Color color;
 
     public SheepPet(Player owner) {
         super(owner);
@@ -59,25 +61,25 @@ public class SheepPet extends Pet implements ISheepPet {
     }
 
     @Override
-    public DyeColor getColor() {
-        return org.bukkit.DyeColor.getByWoolData(color);
+	public DyeColor getDyeColor(){
+		return DyeColor.getByColor(color);
     }
 
     @Override
-    public byte getColorByte() {
+	public Color getColor(){
         return color;
     }
 
     @Override
-    public void setColor(DyeColor c) {
-        ((IEntitySheepPet) getEntityPet()).setColor(c.getWoolData());
-        this.color = c.getWoolData();
+	public void setDyeColor(DyeColor c){
+		((IEntitySheepPet) getEntityPet()).setDyeColor(c);
+		this.color = c.getColor();
     }
 
     @Override
-    public void setColor(byte b) {
-        ((IEntitySheepPet) getEntityPet()).setColor(b);
-        this.color = b;
+	public void setColor(Color c){
+		this.color = c;
+		((IEntitySheepPet) getEntityPet()).setDyeColor(getDyeColor());
     }
 
 }

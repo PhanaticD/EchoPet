@@ -17,14 +17,15 @@
 
 package com.dsh105.echopet.commands.util;
 
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.*;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Arrays;
-import java.util.List;
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
 
 public class DynamicPluginCommand extends Command implements PluginIdentifiableCommand {
 
@@ -78,7 +79,6 @@ public class DynamicPluginCommand extends Command implements PluginIdentifiableC
         return owningPlugin;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean testPermissionSilent(CommandSender sender) {
         if (permissions == null || permissions.length == 0) {

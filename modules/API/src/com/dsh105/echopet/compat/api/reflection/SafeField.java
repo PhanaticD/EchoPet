@@ -77,7 +77,8 @@ public class SafeField<T> implements FieldAccessor<T> {
     }
 
 
-    public T get(Object instance) {
+	@SuppressWarnings("unchecked")
+	public T get(Object instance){
         if (!isStatic && instance == null) {
             throw new UnsupportedOperationException("Non-static fields require a valid instance passed in!");
         }

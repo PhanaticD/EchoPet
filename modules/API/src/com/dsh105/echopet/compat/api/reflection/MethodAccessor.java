@@ -23,5 +23,5 @@ public interface MethodAccessor<T> {
 
     public Class<?> getReturnType();
 
-    public Class[] getArguments();
+	public Class<?>[] getArguments();
 }
