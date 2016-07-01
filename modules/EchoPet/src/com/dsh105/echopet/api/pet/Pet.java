@@ -337,7 +337,7 @@ public abstract class Pet implements IPet{
             new BukkitRunnable() {
                 @Override
                 public void run() {
-					getCraftPet().setPassenger(getOwner());
+					getCraftPet().setPassenger(getOwner());// Can't do nms method here due to requiring a 2nd update which I don't feel lik doing.
                     ownerIsMounting = false;
                     if (getEntityPet() instanceof IEntityNoClipPet) {
                         ((IEntityNoClipPet) getEntityPet()).noClip(false);
@@ -364,13 +364,17 @@ public abstract class Pet implements IPet{
         }
         this.teleportToOwner();
 
+		// The fact forcefully setting the passenger requires an update still baffles me.
+		// Why do I still develop for this game..
 		WrappedPacket packet = new WrappedPacket(PacketType.Play.Server.MOUNT);
 		packet.getIntegers().write(0, getOwner().getEntityId());
         if (!flag) {
-			getOwner().eject();
+			EchoPet.getPlugin().getSpawnUtil().removePassenger(getOwner());// This nms method isn't needed here.. but I've lost all hope in mojang so its a safeguard.
+			// getOwner().eject();
 			packet.getIntegerArrays().write(0, new int[1]);
         } else {
-			getOwner().setPassenger(getCraftPet());
+			EchoPet.getPlugin().getSpawnUtil().setPassenger(0, getOwner(), getCraftPet());
+			// getOwner().setPassenger(getCraftPet());
 			int[] passengers = {getEntityPet().getBukkitEntity().getEntityId()};
 			packet.getIntegerArrays().write(0, passengers);
         }
@@ -410,17 +414,13 @@ public abstract class Pet implements IPet{
             }
             return null;
         }
+		newRider.spawnPet(getOwner());
         this.rider = (Pet) newRider;
         this.rider.setRider();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-				if(getEntityPet() != null && getCraftPet() != null){
-					getCraftPet().setPassenger(getRider().getCraftPet());
-                }
-				EchoPet.getSqlManager().saveToDatabase(rider, true);
-            }
-        }.runTaskLater(EchoPet.getPlugin(), 5L);
+		if(getEntityPet() != null && getCraftPet() != null){
+			EchoPet.getPlugin().getSpawnUtil().setPassenger(0, getCraftPet(), newRider.getCraftPet());
+		}
+		EchoPet.getSqlManager().saveToDatabase(rider, true);
 
         return this.rider;
     }

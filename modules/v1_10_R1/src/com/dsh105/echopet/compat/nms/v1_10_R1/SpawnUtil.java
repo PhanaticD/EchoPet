@@ -19,6 +19,7 @@ package com.dsh105.echopet.compat.nms.v1_10_R1;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_10_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -72,5 +73,13 @@ public class SpawnUtil implements ISpawnUtil{
 		if(!nbt.hasKey("EntityTag")) nbt.set("EntityTag", new NBTTagCompound());
 		nbt.getCompound("EntityTag").setString("id", entityTag);
 		return CraftItemStack.asCraftMirror(is);
+	}
+
+	public void setPassenger(int pos, org.bukkit.entity.LivingEntity entity, org.bukkit.entity.LivingEntity passenger){
+		((CraftLivingEntity) entity).getHandle().passengers.add(pos, ((CraftLivingEntity) passenger).getHandle());
+	}
+
+	public void removePassenger(org.bukkit.entity.LivingEntity entity){
+		((CraftLivingEntity) entity).getHandle().passengers.clear();
 	}
 }

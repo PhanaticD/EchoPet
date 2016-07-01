@@ -28,4 +28,8 @@ public interface ISpawnUtil {
 	public IEntityPet spawn(IPet pet, Player owner);
 
 	public ItemStack getSpawnEgg(ItemStack i, String entityTag);
+
+	public void setPassenger(int pos, org.bukkit.entity.LivingEntity entity, org.bukkit.entity.LivingEntity passenger);
+
+	public void removePassenger(org.bukkit.entity.LivingEntity entity);
 }
