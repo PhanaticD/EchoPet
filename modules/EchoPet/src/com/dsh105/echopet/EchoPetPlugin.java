@@ -174,7 +174,10 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
     }
 
     private void loadConfiguration() {
-        String[] header = {"EchoPet By DSH105", "---------------------",
+        String[] header = {"EchoPet By DSH105",
+        		"Updated by Borlea",
+        		"& NobleProductions <3",
+        		"---------------------",
                 "Configuration for EchoPet 2",
                 "See the EchoPet Wiki before editing this file"};
         try {
@@ -202,7 +205,10 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
             mainConfig.saveConfig();
         }
 
-        String[] langHeader = {"EchoPet By DSH105", "---------------------",
+        String[] langHeader = {"EchoPet By DSH105",
+        		"Updated by Borlea",
+        		"& NobleProductions <3",
+        		"---------------------",
                 "Language Configuration File"};
         try {
             langConfig = this.configManager.getNewConfig("language.yml", langHeader);

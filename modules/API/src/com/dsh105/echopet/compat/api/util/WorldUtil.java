@@ -17,13 +17,14 @@
 
 package com.dsh105.echopet.compat.api.util;
 
+import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
+
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
 
 public class WorldUtil {
 
@@ -55,6 +56,7 @@ public class WorldUtil {
             boolean def = EchoPet.getPlugin().getMainConfig().getBoolean("worldguard.regions.allowByDefault", true);
 
             ConfigurationSection cs = EchoPet.getPlugin().getMainConfig().getConfigurationSection("worldguard.regions");
+
             for (ProtectedRegion region : set) {
                 for (String key : cs.getKeys(false)) {
                     if (!key.equalsIgnoreCase("allowByDefault") && !key.equalsIgnoreCase("regionEnterCheck")) {

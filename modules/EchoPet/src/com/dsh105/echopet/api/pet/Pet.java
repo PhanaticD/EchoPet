@@ -36,9 +36,10 @@ import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.event.PetTeleportEvent;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.plugin.uuid.UUIDMigration;
-import com.dsh105.echopet.compat.api.reflection.ReflectionConstants;
-import com.dsh105.echopet.compat.api.reflection.SafeMethod;
-import com.dsh105.echopet.compat.api.util.*;
+import com.dsh105.echopet.compat.api.util.Lang;
+import com.dsh105.echopet.compat.api.util.PetNames;
+import com.dsh105.echopet.compat.api.util.PlayerUtil;
+import com.dsh105.echopet.compat.api.util.StringSimplifier;
 
 public abstract class Pet implements IPet{
 
@@ -296,7 +297,6 @@ public abstract class Pet implements IPet{
         return this.isHat;
     }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
     public void ownerRidePet(boolean flag) {
         if (this.ownerRiding == flag) {
@@ -309,25 +309,20 @@ public abstract class Pet implements IPet{
             this.setAsHat(false);
         }
 
-		final SafeMethod method;
-
         if (!flag) {
-			method = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_UNMOUNT.getName());
-			method.invoke(PlayerUtil.playerToEntityPlayer(this.getOwner()));
-            //((CraftPlayer) this.getOwner()).getHandle().mount(null);
+			getCraftPet().eject();
             if (this.getEntityPet() instanceof IEntityNoClipPet) {
                 ((IEntityNoClipPet) this.getEntityPet()).noClip(true);
             }
             ownerIsMounting = false;
         } else {
-			method = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_MOUNT.getName(), ReflectionUtil.getNMSClass("Entity"), boolean.class);
 			if(getRider() != null){
 				getRider().removePet(false, true);
             }
             new BukkitRunnable() {
                 @Override
                 public void run() {
-					method.invoke(PlayerUtil.playerToEntityPlayer(getOwner()), getEntityPet(), false);
+					getCraftPet().setPassenger(getOwner());
                     ownerIsMounting = false;
                     if (getEntityPet() instanceof IEntityNoClipPet) {
                         ((IEntityNoClipPet) getEntityPet()).noClip(false);
@@ -344,7 +339,6 @@ public abstract class Pet implements IPet{
         Particle.BLOCK_DUST.builder().ofBlockType(l.getBlock().getType()).at(getLocation()).show();
     }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public void setAsHat(boolean flag){
 		if(isHat == flag){
@@ -354,16 +348,14 @@ public abstract class Pet implements IPet{
 			ownerRidePet(false);
         }
         this.teleportToOwner();
-		SafeMethod mount = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_MOUNT.getName(), ReflectionUtil.getNMSClass("Entity"), boolean.class);
-		SafeMethod unmount = new SafeMethod(ReflectionUtil.getNMSClass("Entity"), ReflectionConstants.ENTITY_FUNC_UNMOUNT.getName());
 
 		WrappedPacket packet = new WrappedPacket(PacketType.Play.Server.MOUNT);
 		packet.getIntegers().write(0, getOwner().getEntityId());
         if (!flag) {
-			unmount.invoke(getEntityPet());
+			getOwner().eject();
 			packet.getIntegerArrays().write(0, new int[1]);
         } else {
-			mount.invoke(getEntityPet(), PlayerUtil.playerToEntityPlayer(this.getOwner()), false);
+			getOwner().setPassenger(getCraftPet());
 			int[] passengers = {getEntityPet().getBukkitEntity().getEntityId()};
 			packet.getIntegerArrays().write(0, passengers);
         }
