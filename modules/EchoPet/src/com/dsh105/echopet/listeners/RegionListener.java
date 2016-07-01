@@ -38,7 +38,9 @@ public class RegionListener implements Listener {
         IPet pet = EchoPet.getManager().getPet(p);
         if (pet != null) {
             if (!WorldUtil.allowRegion(event.getTo())) {
-                EchoPet.getManager().removePet(pet, true);
+				EchoPet.getManager().saveFileData("autosave", pet);
+				EchoPet.getSqlManager().saveToDatabase(pet, false);
+				EchoPet.getManager().removePet(pet, false);
                 Lang.sendTo(p, Lang.ENTER_PET_DISABLED_REGION.toString());
             }
         }
@@ -50,7 +52,9 @@ public class RegionListener implements Listener {
 		if(pet != null){
 			if(!WorldUtil.allowRegion(pet.getLocation())){
 				pet.ownerRidePet(false);
-				EchoPet.getManager().removePet(pet, true);
+				EchoPet.getManager().saveFileData("autosave", pet);
+				EchoPet.getSqlManager().saveToDatabase(pet, false);
+				EchoPet.getManager().removePet(pet, false);
 				Lang.sendTo(pet.getOwner(), Lang.ENTER_PET_DISABLED_REGION.toString());
 			}
 		}

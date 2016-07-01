@@ -81,7 +81,7 @@ public abstract class Pet implements IPet{
 			if(this.entityPet != null){
 				this.applyPetName();
 				this.teleportToOwner();
-				for(PetData pd : getPetData())
+				for(PetData pd : getPetData())// hrrm..
 					EchoPet.getManager().setData(this, pd, true);
 			}
 		}else{
@@ -245,9 +245,18 @@ public abstract class Pet implements IPet{
     @Override
     public boolean teleportToOwner() {
         if (this.getOwner() == null || this.getOwner().getLocation() == null) {
-			this.removePet(false, true);
+			EchoPet.getManager().saveFileData("autosave", this);
+			EchoPet.getSqlManager().saveToDatabase(this, false);
+			EchoPet.getManager().removePet(this, false);
+			removePet(false, true);
             return false;
         }
+		if(this.getEntityPet() == null || this.getEntityPet().isDead()){
+			EchoPet.getManager().saveFileData("autosave", this);
+			EchoPet.getSqlManager().saveToDatabase(this, false);
+			removePet(false, false);
+			return false;
+		}
 		Pet rider = getRider();
 		removeRider();
 		boolean tele = teleport(this.getOwner().getLocation());
@@ -259,10 +268,16 @@ public abstract class Pet implements IPet{
 
     @Override
     public boolean teleport(Location to) {
+		if(this.getOwner() == null || this.getOwner().getLocation() == null){
+			EchoPet.getManager().saveFileData("autosave", this);
+			EchoPet.getSqlManager().saveToDatabase(this, false);
+			EchoPet.getManager().removePet(this, false);
+			this.removePet(false, true);
+			return false;
+		}
         if (this.getEntityPet() == null || this.getEntityPet().isDead()) {
             EchoPet.getManager().saveFileData("autosave", this);
             EchoPet.getSqlManager().saveToDatabase(this, false);
-			// EchoPet.getManager().removePet(this, false);
 			removePet(false, false);
 			spawnPet(getOwner());
             return false;

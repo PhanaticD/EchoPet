@@ -28,6 +28,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,14 +97,16 @@ public class PetOwnerListener implements Listener {
     public void onPlayerTeleport(final PlayerTeleportEvent event) {
         final Player p = event.getPlayer();
         final IPet pi = EchoPet.getManager().getPet(p);
-        Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
-        while (i.hasNext()) {
-            IPet pet = i.next();
-            if (pet.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) pet.getEntityPet()).hasInititiated()) {
-                if (GeometryUtil.getNearbyEntities(event.getTo(), 50).contains(pet)) {
-                    ((IEntityPacketPet) pet.getEntityPet()).updatePosition();
-                }
-            }
+		if(!event.isCancelled()){// No need to update unless we actually teleported.
+			Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
+			while(i.hasNext()){
+				IPet pet = i.next();
+				if(pet.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) pet.getEntityPet()).hasInititiated()){
+					if(GeometryUtil.getNearbyEntities(event.getTo(), 50).contains(pet)){
+						((IEntityPacketPet) pet.getEntityPet()).updatePosition();
+					}
+				}
+			}
         }
         if (pi != null) {
             if (!WorldUtil.allowPets(event.getTo())) {
@@ -111,6 +114,11 @@ public class PetOwnerListener implements Listener {
                 EchoPet.getManager().saveFileData("autosave", pi);
                 EchoPet.getSqlManager().saveToDatabase(pi, false);
                 EchoPet.getManager().removePet(pi, false);
+			}else{
+				if(event.getCause() != TeleportCause.UNKNOWN){// This will probably cause issues.. I don't know why more causes don't exist.
+					pi.ownerRidePet(false);
+					pi.teleport(event.getTo());
+				}
             }
         }
     }
@@ -120,7 +128,6 @@ public class PetOwnerListener implements Listener {
         Player p = event.getPlayer();
         IPet pi = EchoPet.getManager().getPet(p);
         if (pi != null) {
-            //ec.PH.saveFileData("autosave", pi);
             EchoPet.getManager().saveFileData("autosave", pi);
             EchoPet.getSqlManager().saveToDatabase(pi, false);
             EchoPet.getManager().removePet(pi, true);
@@ -211,7 +218,8 @@ public class PetOwnerListener implements Listener {
 
             @Override
             public void run() {
-                EchoPet.getManager().loadPets(p, true, false, true);
+				IPet pet = EchoPet.getManager().loadPets(p, true, false, true);
+				if(pet != null) pet.spawnPet(p);
             }
 
         }.runTaskLater(EchoPet.getPlugin(), 20L);
@@ -229,7 +237,8 @@ public class PetOwnerListener implements Listener {
 
                 @Override
                 public void run() {
-                    EchoPet.getManager().loadPets(p, false, false, false);
+					IPet pet = EchoPet.getManager().loadPets(p, true, false, false);
+					if(pet != null) pet.spawnPet(p);
                 }
 
             }.runTaskLater(EchoPet.getPlugin(), 20L);
