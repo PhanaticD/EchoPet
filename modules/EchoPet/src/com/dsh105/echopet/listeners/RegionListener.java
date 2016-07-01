@@ -17,15 +17,17 @@
 
 package com.dsh105.echopet.listeners;
 
-import com.dsh105.echopet.compat.api.entity.IPet;
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import com.dsh105.echopet.compat.api.util.Lang;
-import com.dsh105.echopet.compat.api.util.WorldUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+
+import com.dsh105.echopet.compat.api.entity.IPet;
+import com.dsh105.echopet.compat.api.event.PetRideMoveEvent;
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.util.Lang;
+import com.dsh105.echopet.compat.api.util.WorldUtil;
 
 
 public class RegionListener implements Listener {
@@ -41,4 +43,16 @@ public class RegionListener implements Listener {
             }
         }
     }
+
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onPetMove(PetRideMoveEvent event){
+		IPet pet = event.getPet();
+		if(pet != null){
+			if(!WorldUtil.allowRegion(pet.getLocation())){
+				pet.ownerRidePet(false);
+				EchoPet.getManager().removePet(pet, true);
+				Lang.sendTo(pet.getOwner(), Lang.ENTER_PET_DISABLED_REGION.toString());
+			}
+		}
+	}
 }
