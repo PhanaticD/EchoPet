@@ -179,7 +179,7 @@ public abstract class EntityPet extends EntityCreature implements IAnimal, IEnti
 	public void setPathfinding(){
 		try{
 			NMSEntityUtil.clearGoals(this);
-			this.petGoalSelector = new PetGoalSelector();
+			petGoalSelector = new PetGoalSelector();
 			petGoalSelector.addGoal(new PetGoalFloat(this), 0);
 			petGoalSelector.addGoal(new PetGoalFollowOwner(this, this.getSizeCategory().getStartWalk(getPet().getPetType()), this.getSizeCategory().getStopWalk(getPet().getPetType()), this.getSizeCategory().getTeleport(getPet().getPetType())), 1);
 			petGoalSelector.addGoal(new PetGoalLookAtPlayer(this, EntityHuman.class), 2);
