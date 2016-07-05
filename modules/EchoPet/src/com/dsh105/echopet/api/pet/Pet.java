@@ -222,9 +222,9 @@ public abstract class Pet implements IPet{
     }
 
     @Override
-    public void removeRider() {
+	public void removeRider(boolean makeSound, boolean makeParticles){
         if (rider != null) {
-			rider.removePet(true, true);
+			rider.removePet(makeSound, makeParticles);
 			rider = null;
 			EchoPet.getPlugin().getSpawnUtil().removePassenger(getCraftPet());
         }
@@ -236,7 +236,7 @@ public abstract class Pet implements IPet{
             Particle.CLOUD.builder().at(getLocation()).show();
             Particle.LAVA_SPARK.builder().at(getLocation()).show();
         }
-        removeRider();
+		removeRider(makeSound, makeParticles);
         if (this.getEntityPet() != null) {
             this.getEntityPet().remove(makeSound);
 			this.entityPet = null;
@@ -259,7 +259,7 @@ public abstract class Pet implements IPet{
 			return false;
 		}
 		Pet rider = getRider();
-		removeRider();
+		removeRider(false, false);
 		boolean tele = teleport(this.getOwner().getLocation());
 		if(tele && rider != null){
 			createRider(rider.getPetType(), false);
@@ -406,7 +406,7 @@ public abstract class Pet implements IPet{
             this.ownerRidePet(false);
         }
         if (this.rider != null) {
-            this.removeRider();
+			this.removeRider(true, true);
         }
         IPet newRider = pt.getNewPetInstance(this.getOwner());
         if (newRider == null) {

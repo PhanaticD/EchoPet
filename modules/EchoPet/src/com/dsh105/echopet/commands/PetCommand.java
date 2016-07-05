@@ -443,7 +443,7 @@ public class PetCommand implements CommandExecutor {
                             Lang.sendTo(sender, Lang.NO_RIDER.toString());
                             return true;
                         }
-                        pi.removeRider();
+						pi.removeRider(true, true);
                         EchoPet.getManager().saveFileData("autosave", pi);
                         EchoPet.getSqlManager().saveToDatabase(pi, false);
                         Lang.sendTo(sender, Lang.REMOVE_RIDER.toString());

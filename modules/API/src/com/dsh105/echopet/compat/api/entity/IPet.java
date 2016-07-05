@@ -63,7 +63,7 @@ public interface IPet{
 
 	public ArrayList<PetData> getPetData();
 
-    public void removeRider();
+	public void removeRider(boolean makeSound, boolean makeParticles);
 
 	public void removePet(boolean makeSound, boolean makeParticles);
 
