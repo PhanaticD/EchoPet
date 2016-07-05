@@ -221,6 +221,7 @@ public abstract class Pet implements IPet{
         return this.petData;
     }
 
+	@Override
 	public void removeRider(boolean makeSound, boolean makeParticles){
         if (rider != null) {
 			rider.removePet(makeSound, makeParticles);

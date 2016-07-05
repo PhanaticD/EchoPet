@@ -608,10 +608,10 @@ public class PetCommand implements CommandExecutor {
                     }
                     if (UMD.petName != null && !UMD.petName.equalsIgnoreCase("")) {
                         if (Perm.BASE_NAME.hasPerm(sender, true, false)) {
-                            if (UPD.petName.length() > 32) {
+							if(UMD.petName.length() > 32){
                                 Lang.sendTo(sender, Lang.PET_NAME_TOO_LONG.toString());
                             } else {
-                                pi.getRider().setPetName(UPD.petName);
+								pi.getRider().setPetName(UMD.petName);
                             }
                         }
                     }
