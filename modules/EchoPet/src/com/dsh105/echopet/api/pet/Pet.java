@@ -226,6 +226,7 @@ public abstract class Pet implements IPet{
         if (rider != null) {
 			rider.removePet(true, true);
 			rider = null;
+			EchoPet.getPlugin().getSpawnUtil().removePassenger(getCraftPet());
         }
     }
 
