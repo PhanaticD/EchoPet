@@ -221,7 +221,6 @@ public abstract class Pet implements IPet{
         return this.petData;
     }
 
-    @Override
 	public void removeRider(boolean makeSound, boolean makeParticles){
         if (rider != null) {
 			rider.removePet(makeSound, makeParticles);
@@ -262,7 +261,10 @@ public abstract class Pet implements IPet{
 		removeRider(false, false);
 		boolean tele = teleport(this.getOwner().getLocation());
 		if(tele && rider != null){
-			createRider(rider.getPetType(), false);
+			this.rider = rider;
+			this.rider.spawnPet(getOwner());
+			EchoPet.getPlugin().getSpawnUtil().setPassenger(0, getCraftPet(), rider.getCraftPet());
+			EchoPet.getSqlManager().saveToDatabase(rider, true);
 		}
 		return tele;
     }
