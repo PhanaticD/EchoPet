@@ -115,6 +115,7 @@ public class PetOwnerListener implements Listener {
                 EchoPet.getSqlManager().saveToDatabase(pi, false);
                 EchoPet.getManager().removePet(pi, false);
 			}else{
+				pi.setAsHat(false);
 				if(event.getCause() != TeleportCause.UNKNOWN){// This will probably cause issues.. I don't know why more causes don't exist.
 					pi.ownerRidePet(false);
 					pi.teleport(event.getTo());
