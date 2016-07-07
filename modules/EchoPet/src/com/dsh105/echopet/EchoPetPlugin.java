@@ -156,7 +156,6 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
         } catch (IOException e) {
             // Failed to submit the stats :(
         }
-
         this.checkUpdates();
     }
 

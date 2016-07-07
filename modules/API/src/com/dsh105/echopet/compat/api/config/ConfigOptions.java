@@ -96,7 +96,8 @@ public class ConfigOptions extends Options {
         return false;
     }
 
-    @Override
+	@SuppressWarnings("deprecation")
+	@Override
     public void setDefaults() {
         set("commandString", "pet");
 
@@ -158,7 +159,7 @@ public class ConfigOptions extends Options {
                 set("petSelector.menu.slot-" + friendlySlot + ".petType", icon.getPetType() == null ? "" : icon.getPetType().toString());
 				set("petSelector.menu.slot-" + friendlySlot + ".material", icon.getMaterial().name());
 				if(icon.getPetType() == null || icon.getPetType().equals(PetType.HUMAN) || icon.getMaterialData() > 0) set("petSelector.menu.slot-" + friendlySlot + ".materialData", icon.getMaterialData());
-				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", StringUtil.makeEnumHumanReadable(icon.getPetType().getEntityType().name()));
+				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", StringUtil.makeEnumHumanReadable(icon.getPetType().getEntityType().getName()));// why the fuck is this deprecated
                 set("petSelector.menu.slot-" + friendlySlot + ".name", (icon.getName() == null ? "" : icon.getName()).replace(ChatColor.COLOR_CHAR, '&'));
                 ArrayList<String> lore = new ArrayList<String>();
                 for (String s : icon.getLore()) {
