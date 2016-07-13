@@ -140,7 +140,10 @@ public class SelectorLayout {
         ArrayList<SelectorIcon> layout = new ArrayList<SelectorIcon>();
         int count = 0;
         for (PetItem item : PetItem.values()) {
-			if(item.getPetType() != null && !item.getPetType().equals(PetType.HUMAN) && !(item.getMaterialData() > 0)) layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), item.getPetType().getEntityType().name(), item.getName()));
+			if(item.getPetType() != null && !item.getPetType().equals(PetType.HUMAN) && !(item.getMaterialData() > 0)){
+				String entityTypeName = item.getPetType().getEntityTypeName();
+				if(entityTypeName != null) layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), entityTypeName, item.getName()));
+			}
 			else layout.add(new SelectorIcon(count, item.getCommand(), item.petType, item.getMat(), item.getMaterialData(), item.getName()));
 			count++;
         }
