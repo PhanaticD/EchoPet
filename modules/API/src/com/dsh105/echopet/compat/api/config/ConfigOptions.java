@@ -30,7 +30,6 @@ import com.dsh105.commodus.config.Options;
 import com.dsh105.commodus.config.YAMLConfig;
 import com.dsh105.echopet.compat.api.entity.PetData;
 import com.dsh105.echopet.compat.api.entity.PetType;
-import com.dsh105.echopet.compat.api.util.StringUtil;
 import com.dsh105.echopet.compat.api.util.menu.SelectorIcon;
 import com.dsh105.echopet.compat.api.util.menu.SelectorLayout;
 
@@ -158,7 +157,7 @@ public class ConfigOptions extends Options {
                 set("petSelector.menu.slot-" + friendlySlot + ".petType", icon.getPetType() == null ? "" : icon.getPetType().toString());
 				set("petSelector.menu.slot-" + friendlySlot + ".material", icon.getMaterial().name());
 				if(icon.getPetType() == null || icon.getPetType().equals(PetType.HUMAN) || icon.getMaterialData() > 0) set("petSelector.menu.slot-" + friendlySlot + ".materialData", icon.getMaterialData());
-				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", StringUtil.makeEnumHumanReadable(icon.getPetType().getEntityTypeFixedName()));
+				else set("petSelector.menu.slot-" + friendlySlot + ".entityName", icon.getPetType().getEntityTypeFixedName());
                 set("petSelector.menu.slot-" + friendlySlot + ".name", (icon.getName() == null ? "" : icon.getName()).replace(ChatColor.COLOR_CHAR, '&'));
                 ArrayList<String> lore = new ArrayList<String>();
                 for (String s : icon.getLore()) {
