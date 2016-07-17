@@ -86,9 +86,11 @@ public class PetOwnerListener implements Listener {
             Player p = (Player) event.getEntity();
             if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 IPet pet = EchoPet.getManager().getPet(p);
-                if (pet != null && pet.isOwnerRiding()) {
-                    event.setCancelled(true);
-                }
+				if(pet != null && pet.isOwnerRiding()){
+					if(EchoPet.getOptions().canIgnoreFallDamage(pet.getPetType())){
+						event.setCancelled(true);
+					}
+				}
             }
         }
     }

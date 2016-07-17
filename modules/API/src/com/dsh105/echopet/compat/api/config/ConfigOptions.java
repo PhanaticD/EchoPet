@@ -67,10 +67,14 @@ public class ConfigOptions extends Options {
                                               + ".force." + data.getConfigOptionString(), false);
     }
 
-    public boolean canFly(PetType petType) {
+	public boolean canFly(PetType petType) {
         return this.config.getBoolean("pets." + petType.toString().toLowerCase().replace("_", " ")
                                               + ".canFly", false);
     }
+
+	public boolean canIgnoreFallDamage(PetType petType){
+		return this.config.getBoolean("pets." + petType.toString().toLowerCase().replace("_", " ") + ".ignoreFallDamage", true);
+	}
 
     public String getCommandString() {
         return this.config.getString("commandString", "pet");
@@ -100,7 +104,7 @@ public class ConfigOptions extends Options {
         set("commandString", "pet");
 
         set("autoUpdate", false, "If set to true, EchoPet will automatically download and install", "new updates.");
-        set("checkForUpdates", true, "If -autoUpdate- is set to false, EchoPet will notify certain", "players of new updates if they are available (if set to true).");
+		set("checkForUpdates", false, "If -autoUpdate- is set to false, EchoPet will notify certain", "players of new updates if they are available (if set to true).");
 
         set("sql.overrideFile", true, "If true, Pets saved to a MySQL Database will override", "those saved to a file (Default and AutoSave Pets)");
         set("sql.use", false);
@@ -185,6 +189,8 @@ public class ConfigOptions extends Options {
 
             set("pets." + petType.toString().toLowerCase().replace("_", " ") + ".rideSpeed", 0.2D);
             set("pets." + petType.toString().toLowerCase().replace("_", " ") + ".jumpHeight", 0.6D);
+
+			set("pets." + petType.toString().toLowerCase().replace("_", " ") + ".ignoreFallDamage", true);
 
             if (petType != PetType.ENDERDRAGON) {
                 boolean canFly = (petType == PetType.BAT || petType == PetType.BLAZE || petType == PetType.GHAST || petType == PetType.SQUID || petType == PetType.WITHER);
