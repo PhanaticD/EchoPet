@@ -52,7 +52,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 		if(this.onGround){
 			if(!this.onGroundLastTick){
 				k(false);
-				dj();
+				reset();
 			}
 			ControllerJumpRabbit jumpController = (ControllerJumpRabbit) this.g;
 			if(!jumpController.c()){
@@ -61,7 +61,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 					if(pathentity != null && pathentity.e() < pathentity.d()){
 						Vec3D vec3d = pathentity.a(this);
 						a(vec3d.x, vec3d.z);
-						cZ();
+						da();
 					}
 				}
 			}else if(!jumpController.d()){
@@ -79,13 +79,18 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 	}
 
 	protected void ci(){// has movecontroller in it, 4 above datawtcher register
-		super.ch();
+		super.ci();
 		this.world.broadcastEntityEffect(this, (byte) 1);// Does leg jump animation I think
 	}
 
-	private void dj(){
-		delay = 10;
+	private void reset(){
+		resetDelay();
 		((ControllerJumpRabbit) g).a(false);
+	}
+
+	private void resetDelay(){
+		if(moveController.b() < 2.2D) delay = 10;
+		else delay = 1;
 	}
 
 	public void da(){// Above datawatcher register
@@ -116,7 +121,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 
 		public void b(){
 			if(this.a){
-				this.c.cZ();
+				this.c.da();
 				this.a = false;
 			}
 		}

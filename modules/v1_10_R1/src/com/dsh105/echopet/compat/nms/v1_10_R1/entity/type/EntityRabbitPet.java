@@ -51,8 +51,8 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 		super.onLive();
 		if(this.onGround){
 			if(!this.onGroundLastTick){
-				k(false);
-				dj();
+				l(false);
+				reset();// do_ in 1.10
 			}
 			ControllerJumpRabbit jumpController = (ControllerJumpRabbit) this.g;
 			if(!jumpController.c()){
@@ -61,7 +61,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 					if(pathentity != null && pathentity.e() < pathentity.d()){
 						Vec3D vec3d = pathentity.a(this);
 						a(vec3d.x, vec3d.z);
-						cZ();
+						de();
 					}
 				}
 			}else if(!jumpController.d()){
@@ -72,6 +72,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 	}
 
 	public void M(){// Should we use m()? Idk difference.. M() is called on doTick in EntityInsentient
+		// Under datawatcher register
 		super.M();
 		if(this.delay > 0){
 			this.delay -= 1;
@@ -79,17 +80,22 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 	}
 
 	protected void cl(){// has movecontroller in it, 4 above datawatcher register
-		super.ch();
+		super.cl();
 		this.world.broadcastEntityEffect(this, (byte) 1);// Does leg jump animation I think
 	}
 
-	private void dj(){
-		delay = 10;
-		((ControllerJumpRabbit) g).a(false);
+	private void reset(){
+		resetDelay();// dn method
+		((ControllerJumpRabbit) g).a(false);// dm() method
+	}
+
+	private void resetDelay(){
+		if(moveController.b() < 2.2D) delay = 10;
+		else delay = 1;
 	}
 
 	public void de(){// Above datawatcher register
-		k(true);// Figure out the point of this
+		l(true);// Plays ambient sound if true, does super.l(flag);
 	}
 
 	public class ControllerJumpRabbit extends ControllerJump{// Copied from EntityRabbit
@@ -116,7 +122,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 
 		public void b(){
 			if(this.a){
-				this.c.cZ();
+				this.c.de();
 				this.a = false;
 			}
 		}

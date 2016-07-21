@@ -52,7 +52,7 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 		if(this.onGround){
 			if(!this.onGroundLastTick){
 				k(false);
-				dj();
+				reset();
 			}
 			ControllerJumpRabbit jumpController = (ControllerJumpRabbit) this.g;
 			if(!jumpController.c()){
@@ -83,9 +83,14 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 		this.world.broadcastEntityEffect(this, (byte) 1);// Does leg jump animation I think
 	}
 
-	private void dj(){
-		delay = 10;
+	private void reset(){
+		resetDelay();
 		((ControllerJumpRabbit) g).a(false);
+	}
+
+	private void resetDelay(){
+		if(moveController.b() < 2.2D) delay = 10;
+		else delay = 1;
 	}
 
 	public void cZ(){
