@@ -145,6 +145,7 @@ public class ConfigOptions extends Options {
         		"Interval - Time in ticks to display the particle",
         		"Count - Amount of particles to display",
         		"X, Y, Z - Offset from the pets location. Particle will display on that point",
+		        "X, Y, Z Offset - From the pets location to the x,y,z offset the particle will display."};
 		set("trails.test.particleName", "FLAME", trailInfo);
 		set("trails.test.permission", "echopet.pet.trail.test");
 		set("trails.test.interval", 1);
