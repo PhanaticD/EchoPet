@@ -32,6 +32,7 @@ import com.dsh105.commodus.paginator.Paginator;
 import com.dsh105.echopet.compat.api.entity.IPet;
 import com.dsh105.echopet.compat.api.entity.PetData;
 import com.dsh105.echopet.compat.api.entity.PetType;
+import com.dsh105.echopet.compat.api.particle.Trail;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.plugin.PetStorage;
 import com.dsh105.echopet.compat.api.util.*;
@@ -508,6 +509,32 @@ public class PetCommand implements CommandExecutor {
                         return true;
                     }
                 }
+			}else if(args[0].equalsIgnoreCase("trail")){
+				String trailName = args[1];
+				Trail trail = EchoPet.getPlugin().getTrailManager().getTrailByName(trailName).clone();
+				if(trail == null){
+					Lang.sendTo(sender, Lang.INVALID_PARTICLETRAIL.toString().replace("%trail%", trailName));
+					return true;
+				}
+				if(sender.hasPermission(trail.getPermission())){
+					IPet pi = EchoPet.getManager().getPet((Player) sender);
+					if(pi == null){
+						Lang.sendTo(sender, Lang.NO_PET.toString());
+						return true;
+					}
+					for(Trail t : pi.getTrails()){
+						if(t.getName().equals(trail.getName())){
+							t.cancel();
+							pi.removeTrail(t);
+							Lang.sendTo(sender, Lang.DEACTIVATE_PARTICLETRAIL.toString().replace("%trail%", trail.getName()));
+							return true;
+						}
+					}
+					trail.run(pi);
+					pi.addTrail(trail);
+					Lang.sendTo(sender, Lang.ACTIVATE_PARTICLETRAIL.toString().replace("%trail%", trail.getName()));
+				}
+				return true;
             }
 
             // Help pages 1 through to 3

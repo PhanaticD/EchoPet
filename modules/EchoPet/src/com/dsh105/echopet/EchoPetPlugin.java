@@ -34,12 +34,14 @@ import com.dsh105.commodus.config.YAMLConfigManager;
 import com.dsh105.commodus.data.Metrics;
 import com.dsh105.echopet.api.PetManager;
 import com.dsh105.echopet.api.SqlPetManager;
+import com.dsh105.echopet.api.pet.particle.TrailManager;
 import com.dsh105.echopet.commands.CommandComplete;
 import com.dsh105.echopet.commands.PetAdminCommand;
 import com.dsh105.echopet.commands.PetCommand;
 import com.dsh105.echopet.commands.util.CommandManager;
 import com.dsh105.echopet.commands.util.DynamicPluginCommand;
 import com.dsh105.echopet.compat.api.config.ConfigOptions;
+import com.dsh105.echopet.compat.api.particle.Trails;
 import com.dsh105.echopet.compat.api.plugin.*;
 import com.dsh105.echopet.compat.api.plugin.uuid.UUIDMigration;
 import com.dsh105.echopet.compat.api.reflection.SafeConstructor;
@@ -67,6 +69,7 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
 
     private PetRegistry petRegistry;
+	private TrailManager trailManager;
 
     private CommandManager COMMAND_MANAGER;
     private YAMLConfigManager configManager;
@@ -120,6 +123,8 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
         SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(ReflectionUtil.getVersionedClass("SpawnUtil")).newInstance();
 
         this.loadConfiguration();
+
+		trailManager = new TrailManager(OPTIONS.getConfig());
 
         PluginManager manager = getServer().getPluginManager();
 
@@ -439,4 +444,8 @@ public class EchoPetPlugin extends JavaPlugin implements IEchoPetPlugin {
     public long getUpdateSize() {
         return size;
     }
+
+	public Trails getTrailManager(){
+		return trailManager;
+	}
 }

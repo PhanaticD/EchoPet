@@ -139,6 +139,25 @@ public class ConfigOptions extends Options {
         set("worldguard.regions.allowByDefault", true);
         set("worldguard.regionEnterCheck", true);
 
+        String[] trailInfo = {
+        		"Test is the particle trail name", 
+        		"ParticleName is the name of the particle to display.",
+        		"Interval - Time in ticks to display the particle",
+        		"Count - Amount of particles to display",
+        		"X, Y, Z - Offset from the pets location. Particle will display on that point",
+		set("trails.test.particleName", "FLAME", trailInfo);
+		set("trails.test.permission", "echopet.pet.trail.test");
+		set("trails.test.interval", 1);
+		set("trails.test.speed", 0);
+		set("trails.test.count", 2);
+		set("trails.test.speed", 0);
+		set("trails.test.x", 0);
+		set("trails.test.y", 0);
+		set("trails.test.z", 0);
+		set("trails.test.xOffset", 0);
+		set("trails.test.yOffset", 0);
+		set("trails.test.zOffset", 0);
+
         set("petSelector.allowDrop", true);
         set("petSelector.showDisabledPets", true);
         set("petSelector.giveOnJoin.enable", false);

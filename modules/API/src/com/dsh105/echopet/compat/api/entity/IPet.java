@@ -18,12 +18,15 @@
 package com.dsh105.echopet.compat.api.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
+
+import com.dsh105.echopet.compat.api.particle.Trail;
 
 public interface IPet{
 
@@ -85,4 +88,9 @@ public interface IPet{
 
 	public void setInventoryView(InventoryView dataMenu);
 
+	public List<Trail> getTrails();
+
+	public void addTrail(Trail trail);
+
+	public void removeTrail(Trail trail);
 }

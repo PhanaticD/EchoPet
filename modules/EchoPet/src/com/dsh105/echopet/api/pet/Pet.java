@@ -18,6 +18,7 @@
 package com.dsh105.echopet.api.pet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -34,12 +35,14 @@ import com.dsh105.commodus.StringUtil;
 import com.dsh105.commodus.particle.Particle;
 import com.dsh105.echopet.compat.api.entity.*;
 import com.dsh105.echopet.compat.api.event.PetTeleportEvent;
+import com.dsh105.echopet.compat.api.particle.Trail;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.plugin.uuid.UUIDMigration;
 import com.dsh105.echopet.compat.api.util.Lang;
 import com.dsh105.echopet.compat.api.util.PetNames;
 import com.dsh105.echopet.compat.api.util.PlayerUtil;
 import com.dsh105.echopet.compat.api.util.StringSimplifier;
+import com.google.common.collect.Lists;
 
 public abstract class Pet implements IPet{
 
@@ -51,6 +54,7 @@ public abstract class Pet implements IPet{
     private String name;
     private ArrayList<PetData> petData = new ArrayList<PetData>();
 	private InventoryView dataMenu;
+	private List<com.dsh105.echopet.compat.api.particle.Trail> trails = Lists.newArrayList();
 
     private boolean isRider = false;
 
@@ -83,6 +87,9 @@ public abstract class Pet implements IPet{
 				this.teleportToOwner();
 				for(PetData pd : getPetData())// hrrm..
 					EchoPet.getManager().setData(this, pd, true);
+				for(Trail t : trails){
+					t.run(this);
+				}
 			}
 		}else{
 			EchoPet.getManager().saveFileData("autosave", this);
@@ -237,6 +244,9 @@ public abstract class Pet implements IPet{
             Particle.LAVA_SPARK.builder().at(getLocation()).show();
         }
 		removeRider(makeSound, makeParticles);
+		for(com.dsh105.echopet.compat.api.particle.Trail trail : trails){
+			trail.cancel();
+		}
         if (this.getEntityPet() != null) {
             this.getEntityPet().remove(makeSound);
 			this.entityPet = null;
@@ -435,5 +445,17 @@ public abstract class Pet implements IPet{
 
 	public void setInventoryView(InventoryView dataMenu){
 		this.dataMenu = dataMenu;
+	}
+
+	public List<com.dsh105.echopet.compat.api.particle.Trail> getTrails(){
+		return this.trails;
+	}
+
+	public void addTrail(com.dsh105.echopet.compat.api.particle.Trail trail){
+		trails.add(trail);
+	}
+
+	public void removeTrail(com.dsh105.echopet.compat.api.particle.Trail trail){
+		trails.remove(trail);
 	}
 }

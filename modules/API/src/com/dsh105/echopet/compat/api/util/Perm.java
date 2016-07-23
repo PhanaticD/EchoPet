@@ -17,10 +17,11 @@
 
 package com.dsh105.echopet.compat.api.util;
 
-import com.dsh105.echopet.compat.api.entity.PetData;
-import com.dsh105.echopet.compat.api.entity.PetType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.dsh105.echopet.compat.api.entity.PetData;
+import com.dsh105.echopet.compat.api.entity.PetType;
 
 public enum Perm {
 
@@ -59,7 +60,7 @@ public enum Perm {
     BASE_SHOW("echopet.pet.show"),
     BASE_SELECT("echopet.pet.select"),
     BASE_SELECTOR("echopet.pet.selector"),
-    BASE_TOGGLE("echopet.pet.toggle");
+	BASE_TOGGLE("echopet.pet.toggle");
 
     String perm;
 
