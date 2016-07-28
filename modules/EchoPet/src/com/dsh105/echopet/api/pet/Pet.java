@@ -338,6 +338,12 @@ public abstract class Pet implements IPet{
             this.setAsHat(false);
         }
 
+		if(getEntityPet() == null || getCraftPet() == null){
+			removePet(false, false);
+			this.ownerIsMounting = false;
+			return;
+		}
+
         if (!flag) {
 			getCraftPet().eject();
             if (this.getEntityPet() instanceof IEntityNoClipPet) {
@@ -376,6 +382,12 @@ public abstract class Pet implements IPet{
 		if(ownerRiding){
 			ownerRidePet(false);
         }
+
+		if(getEntityPet() == null || getCraftPet() == null){
+			removePet(false, false);
+			return;
+		}
+
         this.teleportToOwner();
 
 		// The fact forcefully setting the passenger requires an update still baffles me.
@@ -384,12 +396,10 @@ public abstract class Pet implements IPet{
 		packet.getIntegers().write(0, getOwner().getEntityId());
         if (!flag) {
 			EchoPet.getPlugin().getSpawnUtil().removePassenger(getOwner());// This nms method isn't needed here.. but I've lost all hope in mojang so its a safeguard.
-			// getOwner().eject();
 			packet.getIntegerArrays().write(0, new int[1]);
         } else {
 			EchoPet.getPlugin().getSpawnUtil().setPassenger(0, getOwner(), getCraftPet());
-			// getOwner().setPassenger(getCraftPet());
-			int[] passengers = {getEntityPet().getBukkitEntity().getEntityId()};
+			int[] passengers = {getCraftPet().getEntityId()};
 			packet.getIntegerArrays().write(0, passengers);
         }
 		PlayerUtil.sendPacket(getOwner(), packet.getHandle());
