@@ -476,6 +476,8 @@ permissions:
         default: op
     echopet.pet.type.rabbit.blackandwhite:
         default: op
+    echopet.pet.type.rabbit.gold:
+        default: op
     echopet.pet.type.rabbit.saltandpepper:
         default: op
     echopet.pet.type.rabbit.killerbunny:
@@ -1349,6 +1351,7 @@ permissions:
             echopet.pet.type.rabbit.white: true
             echopet.pet.type.rabbit.black: true
             echopet.pet.type.rabbit.blackandwhite: true
+            echopet.pet.type.rabbit.gold: true
             echopet.pet.type.rabbit.saltandpepper: true
             echopet.pet.type.rabbit.killerbunny: true
     echopet.pet.type.sheep.*:

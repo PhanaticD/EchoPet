@@ -46,7 +46,7 @@ public enum PetData {
     FIRE("fire", Type.BOOLEAN),
 	GRAY("gray", Type.COLOUR, Type.HORSE_COLOR),
     GREEN("green", Type.COLOUR),
-    GOLD("gold", Type.HORSE_ARMOUR),
+	GOLD("gold", Type.HORSE_ARMOUR, Type.RABBIT_TYPE),
 	HUSK("husk", new Version("1.10-R1"), Type.ZOMBIE_PROFESSION),
     IRON("iron", Type.HORSE_ARMOUR),
     THE_KILLER_BUNNY("killerbunny", Type.RABBIT_TYPE),
