@@ -30,15 +30,15 @@ public class EntityRabbitPet extends EntityAgeablePet implements IEntityRabbitPe
 		this.g = new ControllerJumpRabbit(this);
     }
 
-    @Override
-    public Rabbit.Type getRabbitType() {
-		return TypeMapping.fromMagic(((Integer) this.datawatcher.get(TYPE)).intValue());
-    }
-    
-    @Override
-    public void setRabbitType(Rabbit.Type type) {
-		this.datawatcher.set(TYPE, Integer.valueOf(type.ordinal()));
-    }
+	@Override
+	public Rabbit.Type getRabbitType(){
+		return TypeMapping.fromMagic(this.datawatcher.get(TYPE));
+	}
+
+	@Override
+	public void setRabbitType(Rabbit.Type type){
+		this.datawatcher.set(TYPE, TypeMapping.toMagic(type));
+	}
 
     @Override
     protected void initDatawatcher() {
