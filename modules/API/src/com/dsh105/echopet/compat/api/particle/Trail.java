@@ -19,6 +19,8 @@ public interface Trail{
 
 	public String getPermission();
 
+	public boolean canToggle();
+
 	public int getTickDelay();
 
 	public float getSpeed();

@@ -139,6 +139,7 @@ public class ConfigOptions extends Options {
         String[] trailInfo = {
         		"Test is the particle trail name", 
         		"ParticleName is the name of the particle to display. Required.",
+		        "canToggle is the ability to disable toggling of the trail via command. Used for subtrails. Optional, defaults to true.",
         		"SubTrails is a list of trails which will be activate when the main one is. Optional.",
 		        "Interval - Time in ticks to display the particle. Optional, defaults to 0.",
         		"Count - Amount of particles to display",
@@ -160,6 +161,7 @@ public class ConfigOptions extends Options {
 		//
 		set("trails.test2.particleName", "splash");
 		set("trails.test2.permission", "echopet.pet.trail.test2");
+		set("trails.test2.canToggle", false);
 		set("trails.test2.interval", 2);
 		set("trails.test.speed", 1);
 		set("trails.test2.count", 5);

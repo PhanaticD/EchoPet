@@ -516,6 +516,10 @@ public class PetCommand implements CommandExecutor {
 					Lang.sendTo(sender, Lang.INVALID_PARTICLETRAIL.toString().replace("%trail%", trailName));
 					return true;
 				}
+				if(!trail.canToggle()){
+					Lang.sendTo(sender, Lang.TRAIL_TOGGLE_DISABLED.toString().replace("%trail%", trailName));
+					return true;
+				}
 				if(sender.hasPermission(trail.getPermission())){
 					trail = trail.clone();
 					IPet pi = EchoPet.getManager().getPet((Player) sender);

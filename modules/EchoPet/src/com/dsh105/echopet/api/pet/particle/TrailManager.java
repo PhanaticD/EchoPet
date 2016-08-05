@@ -34,8 +34,9 @@ public class TrailManager implements Trails{
 					System.out.println("Unknown particle effect: " + particleName);
 					return;
 				}
-				Collection<String> subTrails = config.getStringList("trails." + key + ".subtrails");
 				String permission = config.getString("trails." + key + ".permission");
+				boolean canToggle = config.getBoolean("trails." + key + ".canToggle", true);
+				Collection<String> subTrails = config.getStringList("trails." + key + ".subtrails");
 				int interval = config.getInt("trails." + key + ".interval");
 				float speed = (float) config.getDouble("trails." + key + ".speed");
 				int count = config.getInt("trails." + key + ".count");
@@ -45,7 +46,7 @@ public class TrailManager implements Trails{
 				float xOffset = (float) config.getDouble("trails." + key + ".xOffset");
 				float yOffset = (float) config.getDouble("trails." + key + ".yOffset");
 				float zOffset = (float) config.getDouble("trails." + key + ".zOffset");
-				trails.put(key.toLowerCase(), new ParticleTrail(key, particleName, permission, subTrails, interval, speed, count, x, y, z, xOffset, yOffset, zOffset));
+				trails.put(key.toLowerCase(), new ParticleTrail(key, particleName, permission, canToggle, subTrails, interval, speed, count, x, y, z, xOffset, yOffset, zOffset));
 			}
 		}
 		for(ParticleTrail trail : trails.values()){

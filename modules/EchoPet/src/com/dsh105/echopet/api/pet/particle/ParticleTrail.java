@@ -21,6 +21,7 @@ import com.dsh105.echopet.compat.api.util.ParticleEffect;
 public class ParticleTrail implements Trail{
 
 	private final String name, particleType, permission;
+	private boolean canToggle;
 	private int tickDelay;
 	private float speed;
 	private int count;
@@ -31,11 +32,12 @@ public class ParticleTrail implements Trail{
 	private Set<Trail> subTrails;
 	private BukkitTask runnable;
 
-	public ParticleTrail(String name, String particleType, String permission, Collection<String> subTrailNames, int tickDelay, float speed, int count, double x, double y, double z, float xOffset, float yOffset, float zOffset){
+	public ParticleTrail(String name, String particleType, String permission, boolean canToggle, Collection<String> subTrailNames, int tickDelay, float speed, int count, double x, double y, double z, float xOffset, float yOffset, float zOffset){
 		this.subTrails = new HashSet<>();
 		this.name = name;
 		this.particleType = particleType;
 		this.permission = permission;
+		this.canToggle = canToggle;
 		this.subTrailNames = subTrailNames;
 		this.tickDelay = tickDelay;
 		this.speed = speed;
@@ -61,6 +63,11 @@ public class ParticleTrail implements Trail{
 	@Override
 	public String getPermission(){
 		return permission;
+	}
+
+	@Override
+	public boolean canToggle(){
+		return canToggle;
 	}
 
 	@Override
@@ -182,7 +189,7 @@ public class ParticleTrail implements Trail{
 	@Override
 	public ParticleTrail clone(){
 		// We can clone the subTrailNames because it should never be modified after loading.
-		ParticleTrail clone = new ParticleTrail(name, particleType, permission, subTrailNames, tickDelay, speed, count, x, y, z, xOffset, yOffset, zOffset);
+		ParticleTrail clone = new ParticleTrail(name, particleType, permission, canToggle, subTrailNames, tickDelay, speed, count, x, y, z, xOffset, yOffset, zOffset);
 		Set<Trail> subTrailClone = new HashSet<>();
 		for(Trail trail : getSubTrails()){
 			Trail trailClone = trail.clone();
