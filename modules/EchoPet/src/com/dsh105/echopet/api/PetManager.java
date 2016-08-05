@@ -252,7 +252,7 @@ public class PetManager implements IPetManager {
 						Trail trail = EchoPet.getPlugin().getTrailManager().getTrailByName(key);
 						if(trail == null) continue;
 						Trail newTrail = trail.clone();
-						newTrail.run(pi);
+						newTrail.start(pi);
 						pi.addTrail(newTrail);
 					}
 				}

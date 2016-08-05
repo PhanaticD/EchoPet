@@ -1,6 +1,9 @@
 package com.dsh105.echopet.api.pet.particle;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -22,6 +25,7 @@ public class TrailManager implements Trails{
 	List<ParticleTrail> trails = Lists.newArrayList();
 
 	public TrailManager(YAMLConfig config){
+		Map<String, ParticleTrail> trails = new HashMap<>();
 		if(config.config().isSet("trails")){
 			ConfigurationSection cs = config.getConfigurationSection("trails");
 			for(String key : cs.getKeys(false)){
@@ -30,6 +34,7 @@ public class TrailManager implements Trails{
 					System.out.println("Unknown particle effect: " + particleName);
 					return;
 				}
+				Collection<String> subTrails = config.getStringList("trails." + key + ".subtrails");
 				String permission = config.getString("trails." + key + ".permission");
 				int interval = config.getInt("trails." + key + ".interval");
 				float speed = (float) config.getDouble("trails." + key + ".speed");
@@ -40,10 +45,25 @@ public class TrailManager implements Trails{
 				float xOffset = (float) config.getDouble("trails." + key + ".xOffset");
 				float yOffset = (float) config.getDouble("trails." + key + ".yOffset");
 				float zOffset = (float) config.getDouble("trails." + key + ".zOffset");
-				ParticleTrail particle = new ParticleTrail(key, particleName, permission, interval, speed, count, x, y, z, xOffset, yOffset, zOffset);
-				addTrail(particle);
+				trails.put(key.toLowerCase(), new ParticleTrail(key, particleName, permission, subTrails, interval, speed, count, x, y, z, xOffset, yOffset, zOffset));
 			}
 		}
+		for(ParticleTrail trail : trails.values()){
+			for(String trailName : trail.getSubTrailNames()){
+				ParticleTrail subTrail = trails.get(trailName.toLowerCase());
+				if(subTrail != null){
+					subTrail = subTrail.clone();
+					subTrail.setParentTrail(trail);
+					trail.addSubTrail(subTrail);
+				}else{
+					System.out.println("Unknown trail: " + trailName);
+					continue;
+				}
+			}
+			System.out.println("Loaded trail: " + trail.getName() + " with " + trail.getSubTrails().size() + " subtrails.");
+			addTrail(trail);
+		}
+		trails.clear();
 	}
 
 	public List<Trail> getTrails(){// should be using a set..but i wanna transform

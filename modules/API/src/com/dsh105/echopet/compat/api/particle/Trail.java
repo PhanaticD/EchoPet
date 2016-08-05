@@ -1,6 +1,7 @@
 package com.dsh105.echopet.compat.api.particle;
 
-import org.bukkit.scheduler.BukkitTask;
+import java.util.Collection;
+import java.util.Set;
 
 import com.dsh105.echopet.compat.api.entity.IPet;
 
@@ -36,9 +37,23 @@ public interface Trail{
 
 	public float getZOffset();
 
+	public Trail getParentTrail();
+
+	public void setParentTrail(Trail parentTrail);
+
+	public Collection<String> getSubTrailNames();
+
+	public Set<Trail> getSubTrails();
+
+	public void addSubTrail(Trail subTrail);
+
+	public void start(final IPet pet);
+
 	public void cancel();
 
-	public BukkitTask run(final IPet pet);
+	public boolean isRunning();
+
+	public void displayTrail(final IPet pet);
 
 	public Trail clone();
 }

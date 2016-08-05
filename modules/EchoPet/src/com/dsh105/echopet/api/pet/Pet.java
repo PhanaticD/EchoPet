@@ -88,7 +88,7 @@ public abstract class Pet implements IPet{
 				for(PetData pd : getPetData())// hrrm..
 					EchoPet.getManager().setData(this, pd, true);
 				for(Trail t : trails){
-					t.run(this);
+					t.start(this);
 				}
 			}
 		}else{

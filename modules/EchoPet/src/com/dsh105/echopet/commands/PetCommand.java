@@ -511,12 +511,13 @@ public class PetCommand implements CommandExecutor {
                 }
 			}else if(args[0].equalsIgnoreCase("trail")){
 				String trailName = args[1];
-				Trail trail = EchoPet.getPlugin().getTrailManager().getTrailByName(trailName).clone();
+				Trail trail = EchoPet.getPlugin().getTrailManager().getTrailByName(trailName);
 				if(trail == null){
 					Lang.sendTo(sender, Lang.INVALID_PARTICLETRAIL.toString().replace("%trail%", trailName));
 					return true;
 				}
 				if(sender.hasPermission(trail.getPermission())){
+					trail = trail.clone();
 					IPet pi = EchoPet.getManager().getPet((Player) sender);
 					if(pi == null){
 						Lang.sendTo(sender, Lang.NO_PET.toString());
@@ -530,7 +531,7 @@ public class PetCommand implements CommandExecutor {
 							return true;
 						}
 					}
-					trail.run(pi);
+					trail.start(pi);
 					pi.addTrail(trail);
 					Lang.sendTo(sender, Lang.ACTIVATE_PARTICLETRAIL.toString().replace("%trail%", trail.getName()));
 				}

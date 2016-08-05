@@ -17,10 +17,7 @@
 
 package com.dsh105.echopet.compat.api.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -141,13 +138,15 @@ public class ConfigOptions extends Options {
 
         String[] trailInfo = {
         		"Test is the particle trail name", 
-        		"ParticleName is the name of the particle to display.",
-        		"Interval - Time in ticks to display the particle",
+        		"ParticleName is the name of the particle to display. Required.",
+        		"SubTrails is a list of trails which will be activate when the main one is. Optional.",
+		        "Interval - Time in ticks to display the particle. Optional, defaults to 0.",
         		"Count - Amount of particles to display",
-        		"X, Y, Z - Offset from the pets location. Particle will display on that point",
-		        "X, Y, Z Offset - From the pets location to the x,y,z offset the particle will display."};
+        		"X, Y, Z - Offset from the pets location. Particle will display on that point. Optional, defaults to 0.",
+		        "X, Y, Z Offset - From the pets location to the x,y,z offset the particle will display. Optional, defaults to 0."};
 		set("trails.test.particleName", "FLAME", trailInfo);
 		set("trails.test.permission", "echopet.pet.trail.test");
+		set("trails.test.subtrails", Arrays.asList("test2"));
 		set("trails.test.interval", 1);
 		set("trails.test.speed", 0);
 		set("trails.test.count", 2);
@@ -158,6 +157,13 @@ public class ConfigOptions extends Options {
 		set("trails.test.xOffset", 0);
 		set("trails.test.yOffset", 0);
 		set("trails.test.zOffset", 0);
+		//
+		set("trails.test2.particleName", "splash");
+		set("trails.test2.permission", "echopet.pet.trail.test2");
+		set("trails.test2.interval", 2);
+		set("trails.test.speed", 1);
+		set("trails.test2.count", 5);
+		set("trails.test.y", 3);
 
         set("petSelector.allowDrop", true);
         set("petSelector.showDisabledPets", true);
