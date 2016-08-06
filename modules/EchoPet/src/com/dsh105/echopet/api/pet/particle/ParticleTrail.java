@@ -1,8 +1,6 @@
 package com.dsh105.echopet.api.pet.particle;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -30,7 +28,9 @@ public class ParticleTrail implements Trail{
 	private Trail parentTrail;
 	private Collection<String> subTrailNames;
 	private Set<Trail> subTrails;
-	private BukkitTask runnable;
+	// private BukkitTask runnable;
+	private Map<Integer, Set<Trail>> trailDelays = new HashMap<>();
+	private Map<Integer, BukkitTask> trailRunnables = new HashMap<>();
 
 	public ParticleTrail(String name, String particleType, String permission, boolean canToggle, Collection<String> subTrailNames, int tickDelay, float speed, int count, double x, double y, double z, float xOffset, float yOffset, float zOffset){
 		this.subTrails = new HashSet<>();
@@ -140,63 +140,72 @@ public class ParticleTrail implements Trail{
 		subTrails.add(subTrail);
 	}
 
+	@Override
 	public void start(final IPet pet){
 		cancel();
-		runnable = new BukkitRunnable(){
+		
+		collectTrails(this);
+		
+		for(int delay : trailDelays.keySet()){
+			final Set<Trail> trails = trailDelays.get(delay);
+			trailRunnables.put(delay, new BukkitRunnable(){
 
-			public void run(){
-				if(pet == null || pet.getOwner() == null || pet.getCraftPet() == null || pet.getCraftPet().getLocation() == null){
-					cancel();
-					return;
+				public void run(){
+					if(pet == null || pet.getOwner() == null || pet.getCraftPet() == null || pet.getCraftPet().getLocation() == null){
+						cancel();
+						return;
+					}
+					for(Trail trail : trails){
+						trail.displayTrail(pet);
+					}
 				}
-				displayTrail(pet);
-			}
-		}.runTaskTimer(EchoPet.getPlugin(), tickDelay, tickDelay);
-		for(Trail trail : subTrails){
-			if(trail.getTickDelay() != getTickDelay()){
-				trail.start(pet);
-				// TODO: Make it search other subTrails for another trail with the same tick delay.
-				// With that you can save a few bukkit runnables.
-			}
+			}.runTaskTimer(EchoPet.getPlugin(), delay, delay));
+		}
+	}
+
+	private void collectTrails(Trail trail){
+		Set<Trail> trails = trailDelays.get(trail.getTickDelay());
+		if(trails == null) trails = new HashSet<>();
+		trails.add(trail);
+		trailDelays.put(trail.getTickDelay(), trails);
+		for(Trail t : trail.getSubTrails()){
+			collectTrails(t);
 		}
 	}
 
 	@Override
 	public void cancel(){
-		if(runnable != null){
+		for(BukkitTask runnable : trailRunnables.values()){
 			runnable.cancel();
-			runnable = null;
 		}
+		trailDelays.clear();
+		trailRunnables.clear();
 		for(Trail trail : subTrails){
 			trail.cancel();
 		}
 	}
 
-	public boolean isRunning(){
-		return runnable != null;
-	}
-
 	@Override
 	public void displayTrail(final IPet pet){
 		ParticleEffect.fromName(particleType).display(xOffset, yOffset, zOffset, speed, count, pet.getLocation().add(x, y, z), 256D);
-		for(Trail trail : subTrails){
-			if(trail.getTickDelay() == getTickDelay()){
-				trail.displayTrail(pet);
-			}
-		}
 	}
 
 	@Override
 	public ParticleTrail clone(){
 		// We can clone the subTrailNames because it should never be modified after loading.
 		ParticleTrail clone = new ParticleTrail(name, particleType, permission, canToggle, subTrailNames, tickDelay, speed, count, x, y, z, xOffset, yOffset, zOffset);
+		collectSubTrailClones(this, clone);
+		return clone;
+	}
+
+	private void collectSubTrailClones(Trail parentTrail, Trail parentTrailCloned){
 		Set<Trail> subTrailClone = new HashSet<>();
-		for(Trail trail : getSubTrails()){
+		for(Trail trail : parentTrail.getSubTrails()){
 			Trail trailClone = trail.clone();
-			trailClone.setParentTrail(clone);
+			trailClone.setParentTrail(parentTrailCloned);
+			collectSubTrailClones(trail, trailClone);
 			subTrailClone.add(trailClone);
 		}
-		clone.getSubTrails().addAll(subTrailClone);
-		return clone;
+		parentTrailCloned.getSubTrails().addAll(subTrailClone);
 	}
 }

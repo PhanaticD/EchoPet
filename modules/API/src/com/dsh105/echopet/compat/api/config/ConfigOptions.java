@@ -163,9 +163,9 @@ public class ConfigOptions extends Options {
 		set("trails.test2.permission", "echopet.pet.trail.test2");
 		set("trails.test2.canToggle", false);
 		set("trails.test2.interval", 2);
-		set("trails.test.speed", 1);
+		set("trails.test2.speed", 1);
 		set("trails.test2.count", 5);
-		set("trails.test.y", 3);
+		set("trails.test2.y", 3);
 
         set("petSelector.allowDrop", true);
         set("petSelector.showDisabledPets", true);

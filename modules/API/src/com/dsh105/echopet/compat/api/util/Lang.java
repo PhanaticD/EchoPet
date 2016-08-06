@@ -84,8 +84,8 @@ public enum Lang {
     VALID_PET_TYPES("valid_pet_types", "&eValid pet types:"),
     PET_TYPE_NOT_COMPATIBLE("pet_type_not_compatible", "&6%type% &epet type is not compatible with this server version."),
 	INVALID_PARTICLETRAIL("invalid_particletrail", "&6%trail% &e is an invalid particle trail type."),
-	TRAIL_DISABLED("trail_disabled", "&6%trail% %e is currently disabled."),
-	TRAIL_TOGGLE_DISABLED("trail_toggle_disabled", "&6%trail% %e can not be enabled."),
+	TRAIL_DISABLED("trail_disabled", "&6%trail% &e is currently disabled."),
+	TRAIL_TOGGLE_DISABLED("trail_toggle_disabled", "&6%trail% &e can not be enabled."),
 
     NO_DEFAULT("no_default", "&eYou do not currently have a default pet set."),
     REMOVE_DEFAULT("remove_default", "&eDefault pet removed successfully."),

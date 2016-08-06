@@ -49,22 +49,38 @@ public class TrailManager implements Trails{
 				trails.put(key.toLowerCase(), new ParticleTrail(key, particleName, permission, canToggle, subTrails, interval, speed, count, x, y, z, xOffset, yOffset, zOffset));
 			}
 		}
+		Map<String, ParticleTrail> cleanedUp = new HashMap<>();
 		for(ParticleTrail trail : trails.values()){
-			for(String trailName : trail.getSubTrailNames()){
-				ParticleTrail subTrail = trails.get(trailName.toLowerCase());
-				if(subTrail != null){
+			loadSubTrails(cleanedUp, trails, trail);
+		}
+		trails.clear();
+	}
+
+	protected void loadSubTrails(Map<String, ParticleTrail> cleanedUp, Map<String, ParticleTrail> trails, ParticleTrail trail){
+		boolean newTrail = true;
+		for(String trailName : trail.getSubTrailNames()){
+			ParticleTrail subTrail = trails.get(trailName.toLowerCase());
+			if(subTrail != null){
+				if(cleanedUp.containsKey(subTrail.getName().toLowerCase())){
+					subTrail = cleanedUp.get(subTrail.getName().toLowerCase());
 					subTrail = subTrail.clone();
-					subTrail.setParentTrail(trail);
-					trail.addSubTrail(subTrail);
+					newTrail = false;
 				}else{
-					System.out.println("Unknown trail: " + trailName);
-					continue;
+					subTrail = subTrail.clone();
+					loadSubTrails(cleanedUp, trails, subTrail);
+					cleanedUp.put(subTrail.getName().toLowerCase(), subTrail);
 				}
+				subTrail.setParentTrail(trail);
+				trail.addSubTrail(subTrail);
+			}else{
+				System.out.println("Unknown trail: " + trailName);
+				continue;
 			}
+		}
+		if(newTrail){
 			System.out.println("Loaded trail: " + trail.getName() + " with " + trail.getSubTrails().size() + " subtrails.");
 			addTrail(trail);
 		}
-		trails.clear();
 	}
 
 	public List<Trail> getTrails(){// should be using a set..but i wanna transform

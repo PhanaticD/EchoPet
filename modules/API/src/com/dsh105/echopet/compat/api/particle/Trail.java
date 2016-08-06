@@ -53,8 +53,6 @@ public interface Trail{
 
 	public void cancel();
 
-	public boolean isRunning();
-
 	public void displayTrail(final IPet pet);
 
 	public Trail clone();
