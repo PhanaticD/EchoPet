@@ -155,6 +155,19 @@ public enum PetType {
 		return entityTypeFixedName;
 	}
 
+	public String getFixedSoundEffectEntityName(){
+		switch (getClassIdentifier().toLowerCase()){
+			case "polarbear":
+				return "polar_bear";
+			case "mushroomcow":
+				return "cow";
+			case "cavespider":
+				return "spider";
+			default:
+				return getClassIdentifier().toLowerCase();
+		}
+	}
+
 	public String getEntityTypeName(){
 		return entityTypeName;
 	}
