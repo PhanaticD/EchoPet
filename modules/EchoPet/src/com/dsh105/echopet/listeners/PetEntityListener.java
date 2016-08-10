@@ -74,6 +74,7 @@ public class PetEntityListener implements Listener {
         }
     }
 
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true) // Highest because we don't want to trust other plugins modifying it.
     public void onEntityDamage(EntityDamageEvent event) {
         Entity e = event.getEntity();
         if (ReflectionUtil.getEntityHandle(e) instanceof IEntityPet) {
