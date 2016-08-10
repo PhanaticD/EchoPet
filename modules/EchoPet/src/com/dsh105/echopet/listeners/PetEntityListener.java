@@ -17,12 +17,6 @@
 
 package com.dsh105.echopet.listeners;
 
-import com.dsh105.echopet.compat.api.entity.IEntityPet;
-import com.dsh105.echopet.compat.api.event.PetDamageEvent;
-import com.dsh105.echopet.compat.api.event.PetInteractEvent;
-import com.dsh105.echopet.compat.api.plugin.EchoPet;
-import com.dsh105.echopet.compat.api.util.Lang;
-import com.dsh105.echopet.compat.api.util.ReflectionUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -32,6 +26,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.EntityBlockFormEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.vehicle.VehicleExitEvent;
+
+import com.dsh105.echopet.compat.api.entity.IEntityPet;
+import com.dsh105.echopet.compat.api.event.PetDamageEvent;
+import com.dsh105.echopet.compat.api.event.PetInteractEvent;
+import com.dsh105.echopet.compat.api.plugin.EchoPet;
+import com.dsh105.echopet.compat.api.util.Lang;
+import com.dsh105.echopet.compat.api.util.ReflectionUtil;
 
 public class PetEntityListener implements Listener {
 
@@ -73,7 +74,6 @@ public class PetEntityListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEntityDamage(EntityDamageEvent event) {
         Entity e = event.getEntity();
         if (ReflectionUtil.getEntityHandle(e) instanceof IEntityPet) {
@@ -85,7 +85,7 @@ public class PetEntityListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         Entity e = event.getEntity();
         if (ReflectionUtil.getEntityHandle(e) instanceof IEntityPet) {
