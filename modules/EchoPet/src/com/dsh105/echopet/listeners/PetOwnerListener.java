@@ -39,12 +39,14 @@ import com.dsh105.echopet.compat.api.config.ConfigOptions;
 import com.dsh105.echopet.compat.api.entity.IEntityPacketPet;
 import com.dsh105.echopet.compat.api.entity.IEntityPet;
 import com.dsh105.echopet.compat.api.entity.IPet;
+import com.dsh105.echopet.compat.api.entity.PetType;
 import com.dsh105.echopet.compat.api.event.PetInteractEvent;
 import com.dsh105.echopet.compat.api.plugin.EchoPet;
 import com.dsh105.echopet.compat.api.util.Lang;
 import com.dsh105.echopet.compat.api.util.ReflectionUtil;
 import com.dsh105.echopet.compat.api.util.WorldUtil;
 import com.dsh105.echopet.compat.api.util.menu.SelectorLayout;
+import com.dsh105.echopet.compat.api.util.Perm;
 
 public class PetOwnerListener implements Listener {
 
@@ -178,28 +180,54 @@ public class PetOwnerListener implements Listener {
             }
         }
 
+        // TODO MAKE THIS ASYNC, maybe? one day?
+        // only load pets for players with permissions (otherwise RIP mysql users)
+        for (PetType type : PetType.values())
+        {
+            boolean access = Perm.hasTypePerm(p, false, Perm.BASE_PETTYPE, true, type);
 
-        final boolean sendMessage = EchoPet.getConfig().getBoolean("sendLoadMessage", true);
+            // no perms? no fun!
+            if(!access)
+                continue;
 
-        new BukkitRunnable() {
+            // delayed loading if the player has at least 1 perm
+            final boolean sendMessage = EchoPet.getConfig().getBoolean("sendLoadMessage", true);
+            new BukkitRunnable()
+            {
 
-            @Override
-            public void run() {
-                if (p != null && p.isOnline()) {
-					EchoPet.getManager().loadPets(p, true, sendMessage, false);
-					Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
-					while(i.hasNext()){
-						IPet p = i.next();
-						if(p.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) p.getEntityPet()).hasInititiated()){
-							if(GeometryUtil.getNearbyEntities(event.getPlayer().getLocation(), 50).contains(p)){
-								((IEntityPacketPet) p.getEntityPet()).updatePosition();
-							}
-						}
-					}
+                @Override
+                public void run()
+                {
+                    if (p != null && p.isOnline())
+                    {
+                        IPet pet = EchoPet.getManager().loadPets(p, true, sendMessage, false);
+                        if (pet != null)
+                        {
+                            if (EchoPet.getPlugin().getVanishProvider().isVanished(p))
+                            {
+                                pet.getEntityPet().setShouldVanish(true);
+                                pet.getEntityPet().setInvisible(true);
+                            }
+                        }
+                    }
+                }
+
+            }.runTaskLater(EchoPet.getPlugin(), 20);
+
+            // we're searching for at least 1 perm... (wouldn't want to load pet for every permission since player can have only 1 pet at the time)
+            break;
+        }
+
+        Iterator<IPet> i = EchoPet.getManager().getPets().iterator();
+        while (i.hasNext()) {
+            IPet pet = i.next();
+            if (pet.getEntityPet() instanceof IEntityPacketPet && ((IEntityPacketPet) pet.getEntityPet()).hasInititiated()) {
+                if (GeometryUtil.getNearbyEntities(event.getPlayer().getLocation(), 50).contains(pet)) {
+                    ((IEntityPacketPet) pet.getEntityPet()).updatePosition();
                 }
             }
+        }
 
-		}.runTaskLater(EchoPet.getPlugin(), 20);
     }
 
     @EventHandler
